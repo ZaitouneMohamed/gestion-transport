@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Camion;
 use App\Models\Consomation;
 use Livewire\Component;
 
@@ -19,6 +20,8 @@ class CamionStatistique extends Component
     }
     function getConsomationsProperty()
     {
-        return Consomation::where('camion_id', $this->camion)->whereBetween('date', [$this->date_debut, $this->date_fin])->get();
+        // return Consomation::where('camion_id', $this->camion)->whereBetween('date', [$this->date_debut, $this->date_fin])->get();
+        $camion = Camion::find($this->camion);
+        return Consomation::where('camion_id',$this->camion)->get();
     }
 }

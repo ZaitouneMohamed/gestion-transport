@@ -26,24 +26,33 @@
                     <th scope="col">#</th>
                     <th scope="col">camion</th>
                     <th scope="col">chaufeur</th>
-                    <th scope="col">km total</th>
-                    <th scope="col">consomation</th>
-                    <th scope="col">consomation reelle</th>
-                    <th scope="col">consomation theorique</th>
+                    <th scope="col">Trajet Compose</th>
+                    <th scope="col">KM Total</th>
+                    <th scope="col">Taux</th>
                     <th scope="col">ecart</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($this->Consomations as $item)
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
+                        <th scope="row">{{ $item->Camion->id }}</th>
                         <td>{{ $item->camion->matricule }}</td>
                         <td>{{ $item->chaufeur->full_name }}</td>
-                        <td>{{ $item->km_return - $item->km_depart }}</td>
-                        <td>{{ $item->qte_litre }}</td>
-                        <td>{{ ($item->qte_litre / ($item->km_return - $item->km_depart)) * 100 }}</td>
-                        <td>{{ (($item->km_return - $item->km_depart) / 100) * 15 }}</td>
-                        <td>{{ $item->qte_litre - (($item->km_return - $item->km_depart) / 100) * 15 }}</td>
+                        <td>
+                            @if ($item->Bons->where('nature',"gazole")->count() > 2)
+                                {{ $item->QtyLittre }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->Bons->where('nature',"gazole")->count() > 2)
+                                {{ $item->KmTotal }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->Bons->where('nature',"gazole")->count() > 2)
+                                {{ ($item->QtyLittre  / $item->KmTotal) * 100 }}
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
