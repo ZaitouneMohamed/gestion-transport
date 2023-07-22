@@ -14,6 +14,7 @@
                 <th scope="col">Trajet Compose</th>
                 <th scope="col">KM Total</th>
                 <th scope="col">Taux</th>
+                <th scope="col">camion consomation</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -43,6 +44,9 @@
                         @if ($item->Bons->where('nature',"gazole")->count() > 2)
                             {{ ($item->QtyLittre  / $item->KmTotal) * 100 }}
                         @endif
+                    </td>
+                    <td>
+                        {{ $item->Camion->consommation }}
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
