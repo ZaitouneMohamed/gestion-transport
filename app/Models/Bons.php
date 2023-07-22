@@ -12,10 +12,10 @@ class Bons extends Model
         "consomation_id",
         "date",
         "qte_litre",
+        "prix",
         "station_id",
-        "ville",
         "numero_bon",
-        "km_return",
+        "km",
         "nature"
     ];
     public function Consomation() {

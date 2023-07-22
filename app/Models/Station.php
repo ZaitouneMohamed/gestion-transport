@@ -9,7 +9,8 @@ class Station extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "name"
+        "name",
+        "ville"
     ];
     public function Consomations()
     {

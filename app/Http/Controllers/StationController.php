@@ -38,10 +38,12 @@ class StationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "name" => "required|unique:stations,name"
+            "name" => "required|unique:stations,name",
+            "ville" => "required"
         ]);
         Station::create([
-            "name" => $request->name
+            "name" => $request->name,
+            "ville" => $request->ville
         ]);
         return redirect()->route('stations.index')->with([
             "success" => "station added successfly"
@@ -82,10 +84,12 @@ class StationController extends Controller
     {
         $station = Station::find($id);
         $this->validate($request, [
-            "name" => "required"
+            "name" => "required",
+            "ville" => "required"
         ]);
         $station->update([
-            "name" => $request->name
+            "name" => $request->name,
+            "ville" => $request->ville
         ]);
         return redirect()->route('stations.index')->with([
             "success" => "station updated successfly"

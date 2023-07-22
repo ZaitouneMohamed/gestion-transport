@@ -13,15 +13,9 @@ class Consomation extends Model
         "chaufeur_id",
         "camion_id",
         "ville",
-        // "qte_litre",
-        // "date",
-        // "station_id",
-        // "km_depart",
-        // "bon",
-        // "km_return",
-        // "nature"
     ];
-    public function Bons() {
+    public function Bons()
+    {
         return $this->hasMany(Bons::class);
     }
     public function chaufeur()
@@ -35,5 +29,20 @@ class Consomation extends Model
     public function Camion()
     {
         return $this->belongsTo(Camion::class);
+    }
+    public function getQtyLittreAttribute()
+    {
+        $bons = $this->Bons()->where('nature', 'gazole');
+        $first = $bons->first()->qte_litre;
+        $qte_littre = $bons->sum('qte_litre') - $first;
+        return $qte_littre;
+    }
+    public function getKmTotalAttribute()
+    {
+        $bons = $this->Bons()->where('nature', 'gazole');
+        $kmdepart = $bons->first()->km;
+        $kmreturn = $bons->latest()->first()->km ;
+        $KmTotal = $kmreturn - $kmdepart;
+        return $KmTotal;
     }
 }

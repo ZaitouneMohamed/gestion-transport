@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     @yield('head_links')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @yield('style')
     @livewireStyles
 
@@ -119,13 +120,13 @@
         <!-- REQUIRED SCRIPTS -->
 
         <!-- jQuery -->
+            @yield('scripts')
         <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
         <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/pages/dashboard3.js') }}"></script>
-        @yield('scripts')
         @livewireScripts
 
 </body>

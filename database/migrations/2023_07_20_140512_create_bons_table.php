@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('consomation_id')->unsigned();
             $table->foreign('consomation_id')->references('id')->on('consomations')->onDelete('cascade');
-            $table->string("ville");
             $table->date("date");
             $table->string("qte_litre");
+            $table->double("prix");
             $table->foreignId('station_id')->unsigned();
             $table->foreign('station_id')->references('id')->on('stations')->onDelete('cascade');
             $table->string("numero_bon")->nullable();
-            $table->integer("km_return")->default(0);
+            $table->double("km")->default(0);
             $table->string("nature");
             $table->timestamps();
         });

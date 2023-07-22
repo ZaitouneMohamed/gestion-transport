@@ -14,7 +14,7 @@ class Camion extends Model
         "numchassis",
         "consommation"
     ];
-    public function consomation()
+    public function Consomations()
     {
         return $this->hasMany(Consomation::class);
     }

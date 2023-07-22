@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">name</th>
+                <th scope="col">ville</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->name }}</td>
+                    <td>{{ $item->ville }}</td>
                     <td class="d-flex">
                         <a href="{{ route('stations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\OrderImport;
 use App\Models\Bons;
+use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,26 +44,35 @@ class HomeController extends Controller
     {
         $this->validate($request, [
             "date" => "required",
-            "qte_litre"=>"required",
-            "station_id"=>"required",
-            "ville"=>"required",
-            "date"=>"required",
-            "numero_bon"=>"required",
-            "km_return"=>"required",
-            "nature"=>"required"
+            "qte_litre" => "required",
+            "station_id" => "required",
+            // "ville" => "required",
+            "date" => "required",
+            "numero_bon" => "required",
+            "km_return" => "required",
+            "nature" => "required"
         ]);
+        $ville = Station::find($request->station_id)->ville;
         $bons = Bons::create([
-            "consomation_id"=>$id,
-            "qte_litre"=>$request->qte_litre,
-            "station_id"=>$request->station_id,
-            "ville"=>strtoupper($request->ville),
-            "date"=>$request->date,
-            "numero_bon"=>$request->numero_bon,
-            "km_return"=>$request->km_return,
-            "nature"=>$request->nature,
+            "consomation_id" => $id,
+            "qte_litre" => $request->qte_litre,
+            "prix" => $request->prix,
+            "station_id" => $request->station_id,
+            "ville" => $ville,
+            "date" => $request->date,
+            "numero_bon" => $request->numero_bon,
+            "km" => $request->km_return,
+            "nature" => $request->nature,
         ]);
         return redirect()->route('consomations.index')->with([
-            "success"=>"bon added successfly"
+            "success" => "bon added successfly"
         ]);
+    }
+
+    public function getStations(Request $request)
+    {
+        $city = $request->city;
+        $stations = Station::where('ville', $city)->get();
+        return response()->json($stations);
     }
 }
