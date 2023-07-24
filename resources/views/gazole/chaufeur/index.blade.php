@@ -9,8 +9,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">name</th>
-                <th scope="col">phone</th>
-                <th scope="col">cin</th>
                 <th scope="col">consomation</th>
                 <th scope="col">action</th>
             </tr>
@@ -20,8 +18,6 @@
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->full_name }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->cin }}</td>
                     <td>{{ $item->Consomations->count() }}</td>
                     <td class="d-flex">
                         <a href="{{ route('chaufeur.edit', $item->id) }}" class="btn btn-warning mr-1"><i

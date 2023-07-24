@@ -9,8 +9,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">matricule</th>
-                <th scope="col">marque</th>
-                <th scope="col">num chassie</th>
                 <th scope="col">consomation theorique</th>
                 <th scope="col">consomation</th>
                 <th scope="col">action</th>
@@ -21,8 +19,6 @@
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->matricule }}</td>
-                    <td>{{ $item->marque }}</td>
-                    <td>{{ $item->numchassis }}</td>
                     <td>{{ $item->consommation }}</td>
                     <td>{{ $item->Consomations->count() }}</td>
                     <td class="d-flex">
