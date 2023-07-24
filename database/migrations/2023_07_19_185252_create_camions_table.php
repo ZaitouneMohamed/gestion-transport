@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('camions', function (Blueprint $table) {
             $table->id();
             $table->string("matricule");
-            $table->string("marque");
-            $table->string("numchassis");
             $table->string("consommation");
             $table->timestamps();
         });

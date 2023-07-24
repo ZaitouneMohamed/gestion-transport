@@ -10,8 +10,6 @@ class Camion extends Model
     use HasFactory;
     protected $fillable = [
         "matricule",
-        "marque",
-        "numchassis",
         "consommation"
     ];
     public function Consomations()

@@ -10,8 +10,6 @@ class Chaufeur extends Model
     use HasFactory;
     protected $fillable = [
         "full_name",
-        "phone",
-        "cin"
     ];
     public function Consomations()
     {

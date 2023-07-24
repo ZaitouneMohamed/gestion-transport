@@ -40,13 +40,9 @@ class CamionController extends Controller
         $this->validate($request, [
             "matricule" => "required|unique:camions,matricule",
             "consommation" => "required",
-            "marque" => "required",
-            "numchassis" => "required",
         ]);
         Camion::create([
             "matricule" => $request->matricule,
-            "marque" => $request->marque,
-            "numchassis" => $request->numchassis,
             "consommation" => $request->consommation,
         ]);
         return redirect()->route('camions.index')->with([
@@ -90,13 +86,9 @@ class CamionController extends Controller
         $this->validate($request, [
             "matricule" => "required",
             "consommation" => "required",
-            "marque" => "required",
-            "numchassis" => "required",
         ]);
         $camion->Update([
             "matricule" => $request->matricule,
-            "marque" => $request->marque,
-            "numchassis" => $request->numchassis,
             "consommation" => $request->consommation,
         ]);
         return redirect()->route('camions.index')->with([

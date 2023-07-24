@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('chaufeurs', function (Blueprint $table) {
             $table->id();
             $table->string("full_name");
-            $table->string("phone");
-            $table->string("cin");
             $table->timestamps();
         });
     }
