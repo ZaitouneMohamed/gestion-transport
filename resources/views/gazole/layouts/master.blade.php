@@ -142,20 +142,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('camion.statistiques') }}" class="nav-link">
-                                <i class="fa-solid fa-chart-line"></i>
+                            <a href="{{ route('global.search') }}" class="nav-link">
+                                <i class="fa fa-search" aria-hidden="true"></i>
                                 <p>
-                                    Camion Statistique
-                                    {{-- <span class="right badge badge-success">5</span> --}}
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('stations.statistiques') }}" class="nav-link">
-                                <i class="fa-solid fa-chart-line"></i>
-                                <p>
-                                    Station Statistique
-                                    {{-- <span class="right badge badge-success">5</span> --}}
+                                    Search
                                 </p>
                             </a>
                         </li>

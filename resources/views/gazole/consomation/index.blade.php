@@ -51,13 +51,12 @@
                         {{ $item->Camion->consommation }}
                     </td>
                     <td>
-                        <span class="badge
-                        @if ($item->statue > 0)
-                        bg-success
+                        <span
+                            class="badge
+                        @if ($item->statue > 0) bg-danger
                         @else
-                        bg-danger
-                        @endif
-                        ">{{$item->Statue}}</span>
+                        bg-success @endif
+                        ">{{ $item->Statue }}</span>
                     </td>
                     <td>
                         {{ $item->Prix }}

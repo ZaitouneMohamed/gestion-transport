@@ -20,6 +20,32 @@
 
     @if ($camion)
         <br>
+        <div class="row">
+            <ul class="list-group list-group-flush col" style="font-weight: bold">
+                <center>
+                    <li class="list-group-item">matricule : {{ \App\Models\Camion::find($camion)->matricule }}</li>
+                    <li class="list-group-item">Trajets :
+                        {{ \App\Models\Consomation::where('camion_id', $camion)->count() }}</li>
+                    <li class="list-group-item">consomation : {{ \App\Models\Camion::find($camion)->Total }}</li>
+                    <li class="list-group-item">adresse : gvuyio</li>
+                    <li class="list-group-item">products : </li>
+                    <li class="list-group-item">note : </li>
+                </center>
+            </ul>
+            <ul class="list-group list-group-flush col" style="font-weight: bold">
+                <center>
+                    <li class="list-group-item">destinataire : zfrzfze</li>
+                    <li class="list-group-item">prix : 150</li>
+                    <li class="list-group-item">ville : casablanca</li>
+                    <li class="list-group-item">adresse : gvuyio</li>
+                    <li class="list-group-item">products : </li>
+                    <li class="list-group-item">note : </li>
+                </center>
+            </ul>
+        </div>
+
+        {{-- </center> --}}
+        <br>
         <table class="table">
             <thead>
                 <tr>

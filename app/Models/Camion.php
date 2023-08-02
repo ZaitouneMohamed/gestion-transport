@@ -16,4 +16,9 @@ class Camion extends Model
     {
         return $this->hasMany(Consomation::class);
     }
+
+    public function getConsomationPrixAttribute()
+    {
+        $consomation = $this->Consomations();
+    }
 }

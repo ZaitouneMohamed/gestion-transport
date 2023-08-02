@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class CamionStatistique extends Component
 {
-    public $camion, $statistiques, $date_debut, $date_fin;
+    public $camion, $statistiques, $date_debut, $date_fin , $camion_info;
     function mount()
     {
         $this->date_debut = date('Y-m-d');
@@ -20,8 +20,8 @@ class CamionStatistique extends Component
     }
     function getConsomationsProperty()
     {
-        // return Consomation::where('camion_id', $this->camion)->whereBetween('date', [$this->date_debut, $this->date_fin])->get();
-        $camion = Camion::find($this->camion);
+        $this->camion_info = Camion::find($this->camion);
+        // $consomation = Consomation::where('camion_id',$this->camion)->get();
         return Consomation::where('camion_id',$this->camion)->get();
     }
 }

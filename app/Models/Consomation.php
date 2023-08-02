@@ -77,7 +77,7 @@ class Consomation extends Model
         if ($bons->count() > 1) {
             $taux = $this->getTauxAttribute();
             $camionconsomation = $this->Camion->consommation;
-            $statue = $camionconsomation - $taux;
+            $statue = $taux - $camionconsomation;
             return $statue;
         }
         // return '<span class="badge bg-secondary">New</span>';
