@@ -145,7 +145,7 @@
                             <a href="{{ route('global.search') }}" class="nav-link">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                                 <p>
-                                    Search
+                                    Searchh
                                 </p>
                             </a>
                         </li>
