@@ -7,6 +7,7 @@
                 @foreach (\App\Models\Chaufeur::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                 @endforeach
+                {{ $chaufeur }}
             </select>
         </div>
         <div class="col-md-4">
@@ -17,6 +18,7 @@
                     <option value="{{ $item->id }}">{{ $item->matricule }}</option>
                 @endforeach
             </select>
+            {{$camion}}
         </div>
         <div class="col-4">
             <label for="inputState" class="form-label">ville</label>
@@ -116,10 +118,10 @@
                     <td>
                         <span
                             class="badge
-                @if ($item->statue > 0) bg-success
-                @else
-                bg-danger @endif
-                ">{{ $item->Statue }}</span>
+                        @if ($item->statue > 0) bg-danger
+                        @else
+                        bg-success @endif
+                        ">{{ $item->Statue }}</span>
                     </td>
                     <td>
                         {{ $item->Prix }}
