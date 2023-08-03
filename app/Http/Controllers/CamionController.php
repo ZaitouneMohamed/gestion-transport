@@ -15,7 +15,7 @@ class CamionController extends Controller
      */
     public function index()
     {
-        $camions = Camion::latest()->paginate(5);
+        $camions = Camion::latest()->paginate(10);
         return view('gazole.camion.index', compact('camions'));
     }
 

@@ -15,7 +15,7 @@ class StationController extends Controller
      */
     public function index()
     {
-        $stations = Station::latest()->paginate(5);
+        $stations = Station::latest()->paginate(15);
         return view('gazole.station.index', compact('stations'));
     }
 

@@ -14,7 +14,7 @@ class ChaufeurController extends Controller
      */
     public function index()
     {
-        $chaufeurs = Chaufeur::latest()->paginate(5);
+        $chaufeurs = Chaufeur::latest()->paginate(10);
         return view('gazole.chaufeur.index', compact('chaufeurs'));
     }
 
