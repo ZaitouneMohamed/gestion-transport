@@ -12,6 +12,7 @@ class Bons extends Model
         "consomation_id",
         "date",
         "qte_litre",
+        "description",
         "prix",
         "station_id",
         "numero_bon",

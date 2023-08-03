@@ -7,8 +7,8 @@
                 @foreach (\App\Models\Chaufeur::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                 @endforeach
-                {{ $chaufeur }}
             </select>
+            {{ $chaufeur }}
         </div>
         <div class="col-md-4">
             <label for="inputState" class="form-label">Camion</label>
@@ -18,7 +18,7 @@
                     <option value="{{ $item->id }}">{{ $item->matricule }}</option>
                 @endforeach
             </select>
-            {{$camion}}
+            {{ $camion }}
         </div>
         <div class="col-4">
             <label for="inputState" class="form-label">ville</label>
@@ -67,11 +67,11 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model="datedebut" class="form-control" id="">{{$datedebut}}
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model="datefin" class="form-control" id="">{{$datefin}}
         </div>
     </div><br>
     <table class="table">
@@ -118,14 +118,10 @@
                     <td>
                         <span
                             class="badge
-                        @if ($item->statue > 0) bg-danger
-                        @else
-                        bg-success @endif
-                        ">{{ $item->Statue }}</span>
-                    </td>
-                    <td>
-                        {{ $item->Prix }}
-                    </td>
+                @if ($item->statue > 0) bg-success
+                @else
+                bg-danger @endif
+                ">{{ $item->Statue }}</span>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
                             class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>

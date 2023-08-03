@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-6">
             <label for="inputCity" class="form-label">Autre</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>

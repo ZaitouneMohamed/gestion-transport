@@ -66,6 +66,8 @@
                             class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
                         <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
+                        <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i
+                                class="fa fa-eye"></i></a>
                         <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                             @csrf
                             @method('delete')

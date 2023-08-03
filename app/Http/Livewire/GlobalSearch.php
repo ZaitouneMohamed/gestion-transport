@@ -20,9 +20,9 @@ class GlobalSearch extends Component
     {
         return view('livewire.global-search', [
             "trajets" => Consomation::where("camion_id", $this->camion)
-                ->Where("chaufeur_id",  $this->chaufeur)
-                ->Where("ville",  $this->destination)
-                // ->whereBetween('created_at', [$this->datedebut, $this->datefin])
+                ->orWhere("chaufeur_id",  $this->chaufeur)
+                ->orWhere("ville",  $this->destination)
+                ->whereBetween('created_at', [$this->datedebut, $this->datefin])
                 ->get()
         ]);
     }

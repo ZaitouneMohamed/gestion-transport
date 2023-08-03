@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\OrderImport;
 use App\Models\Bons;
+use App\Models\Consomation;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,6 +64,7 @@ class HomeController extends Controller
             "numero_bon" => $request->numero_bon,
             "km" => $request->km_return,
             "nature" => $request->nature,
+            "description" => $request->description,
         ]);
         return redirect()->route('consomations.index')->with([
             "success" => "bon added successfly"
@@ -74,5 +76,11 @@ class HomeController extends Controller
         $city = $request->city;
         $stations = Station::where('ville', $city)->get();
         return response()->json($stations);
+    }
+
+    public function ViewBonsOfTrajet($id)
+    {
+        $trajet = Consomation::find($id);
+        return view('gazole.bon.index',compact("trajet"));
     }
 }
