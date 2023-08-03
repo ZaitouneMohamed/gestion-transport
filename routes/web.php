@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 //     return redirect('/login');
 // });
 Route::permanentRedirect('/', 'login');
-Route::permanentRedirect('/home', 'login');
+Route::permanentRedirect('/home', 'admin');
 
 Route::prefix("bons")->middleware(["auth", 'role:bons'])->group(function () {
     Route::get('/', function () {
