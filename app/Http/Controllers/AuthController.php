@@ -15,20 +15,29 @@ class AuthController extends Controller
 
     function login(LoginRequest $request)
     {
-        if (auth()->attempt([
-            "email" => $request->email,
-            "password" => $request->password
-        ])) {
+        if (Auth::check()) {
             if (Auth::user()->hasRole('gazole')) {
                 return redirect("/admin");
-            } else{
+            } else {
                 return redirect('/bons');
             }
         } else {
-            return redirect('/login')->with([
-                "error" => "these information do not match any one of our records"
-            ]);
+            if (auth()->attempt([
+                "email" => $request->email,
+                "password" => $request->password
+            ])) {
+                if (Auth::user()->hasRole('gazole')) {
+                    return redirect("/admin");
+                } else {
+                    return redirect('/bons');
+                }
+            } else {
+                return redirect('/login')->with([
+                    "error" => "these information do not match any one of our records"
+                ]);
+            }
         }
+
     }
 
     function logout()

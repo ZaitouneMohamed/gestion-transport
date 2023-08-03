@@ -64,6 +64,6 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
 
 Route::POST("AddUser", UserController::class)->name("add.users")->middleware("auth");
 
-Route::get("login", [AuthController::class, 'Login_form'])->name('login');
+Route::get("login", [AuthController::class, 'Login_form'])->name('login')->middleware("guest");
 Route::post("login_c", [AuthController::class, 'login'])->name('login_c');
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');
