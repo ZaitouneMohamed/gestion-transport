@@ -45,8 +45,9 @@
             </div>
             <div class="col-4"></div>
         </div>
+        <h1>Bons List {{ $trajet->bons->count() }}</h1><a href="{{ route('createBon', $trajet->id) }}"
+            class="btn btn-success">Add Bon</a>
         <div class="row">
-            <h1>Bons List {{ $trajet->bons->count() }}</h1>
             @foreach ($trajet->bons as $item)
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
