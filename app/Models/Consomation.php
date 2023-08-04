@@ -63,7 +63,9 @@ class Consomation extends Model
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $qtylittre = $this->getQtyLittreAttribute();
             $KmTotal = $this->getKmTotalAttribute();
-            return number_format(($qtylittre  / $KmTotal) * 100, 2);
+            if ($KmTotal > 0) {
+                return number_format(($qtylittre  / $KmTotal) * 100, 2);
+            }
         }
     }
 
