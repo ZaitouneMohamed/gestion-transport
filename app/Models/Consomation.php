@@ -33,8 +33,8 @@ class Consomation extends Model
     public function getQtyLittreAttribute()
     {
         $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
-        $first_bon = $bons->first();
-        $last_bon = $bons->last();
+        $last_bon = $bons->first();
+        $first_bon = $bons->last();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $first = $first_bon->qte_litre;
             $qte_littre = $bons->sum('qte_litre') - $first;
@@ -64,7 +64,7 @@ class Consomation extends Model
             $qtylittre = $this->getQtyLittreAttribute();
             $KmTotal = $this->getKmTotalAttribute();
             if ($KmTotal > 0) {
-                return number_format(($qtylittre  / $KmTotal) * 100, 2);
+                return $qtylittre  / $KmTotal * 100;
             }
         }
     }
