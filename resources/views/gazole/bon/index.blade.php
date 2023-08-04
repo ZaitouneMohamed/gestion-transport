@@ -26,13 +26,13 @@
                 <div class="card">
                     <h2 class="card-title"><b>Trajet Composet : {{ $trajet->QtyLittre }}</b></h2>
                     <h2 class="card-title"><b>Km Total : {{ $trajet->KmTotal }}</b></h2>
-                    <h2 class="card-title"><b>Taux : {{ $trajet->Taux }}</b></h2>
+                    <h2 class="card-title"><b>Taux : {{ number_format($trajet->Taux, 2) }}</b></h2>
                     <h2 class="card-title"><b>Statue :</b> <span
                             class="badge
                     @if ($trajet->statue > 0) bg-danger
                     @else
                     bg-success @endif
-                    ">{{ $trajet->Statue }}</span>
+                    ">{{ number_format($trajet->Statue, 2) }}</span>
                     </h2>
                 </div>
             </div>
