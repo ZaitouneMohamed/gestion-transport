@@ -45,8 +45,8 @@ class Consomation extends Model
     public function getKmTotalAttribute()
     {
         $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
-        $first_bon = $bons->first();
-        $last_bon = $bons->last();
+        $first_bon = $bons->last();
+        $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $kmdepart = $first_bon->km;
             $kmreturn = $last_bon->km;
@@ -58,8 +58,8 @@ class Consomation extends Model
     public function getTauxAttribute()
     {
         $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
-        $first_bon = $bons->first();
-        $last_bon = $bons->last();
+        $first_bon = $bons->last();
+        $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $qtylittre = $this->getQtyLittreAttribute();
             $KmTotal = $this->getKmTotalAttribute();
@@ -72,8 +72,8 @@ class Consomation extends Model
     public function getPrixAttribute()
     {
         $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
-        $first_bon = $bons->first();
-        $last_bon = $bons->last();
+        $first_bon = $bons->last();
+        $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $bons = $this->Bons()->where('nature', 'gazole');
             $first = $bons->first()->prix;
