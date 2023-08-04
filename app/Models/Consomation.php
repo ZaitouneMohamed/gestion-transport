@@ -36,7 +36,7 @@ class Consomation extends Model
         $first_bon = $bons->first();
         $last_bon = $bons->last();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $first = $bons->first()->qte_litre;
+            $first = $first_bon->qte_litre;
             $qte_littre = $bons->sum('qte_litre') - $first;
             return $qte_littre;
         }
@@ -48,8 +48,8 @@ class Consomation extends Model
         $first_bon = $bons->first();
         $last_bon = $bons->last();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $kmdepart = $bons->first()->km;
-            $kmreturn = $bons->latest()->first()->km;
+            $kmdepart = $first_bon->km;
+            $kmreturn = $last_bon->km;
             $KmTotal = $kmreturn - $kmdepart;
             return $KmTotal;
         }
