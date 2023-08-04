@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\UserServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -27,14 +30,16 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
         ]);
-
-        $userData = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-            "role" => $request->input('role')
-        ];
-        $user = $this->userService->CreateNewUser($userData);
+        if (Auth::user()->hasRole('gazole')) {
+            $role = "gazole";
+        }else {
+            $role = "bons";
+        }
+        User::create([
+            "name"=>$request->input('name'),
+            "email"=>$request->input('email'),
+            "password"=>Hash::make($request->input('password')),
+        ])->assignRole($role);
 
         if (Auth::user()->hasRole('gazole')) {
             return redirect("/admin");
