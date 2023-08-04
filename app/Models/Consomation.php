@@ -84,7 +84,7 @@ class Consomation extends Model
 
     public function getStatueAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole');
+        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
         $first_bon = $bons->last();
         $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
