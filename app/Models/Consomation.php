@@ -85,11 +85,15 @@ class Consomation extends Model
     public function getStatueAttribute()
     {
         $bons = $this->Bons()->where('nature', 'gazole');
-        if ($bons->count() > 1) {
-            $taux = $this->getTauxAttribute();
-            $camionconsomation = $this->Camion->consommation;
-            $statue = $taux - $camionconsomation;
-            return $statue;
+        $first_bon = $bons->last();
+        $last_bon = $bons->first();
+        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
+            if ($bons->count() > 1) {
+                $taux = $this->getTauxAttribute();
+                $camionconsomation = $this->Camion->consommation;
+                $statue = $taux - $camionconsomation;
+                return $statue;
+            }
         }
         // return '<span class="badge bg-secondary">New</span>';
     }
