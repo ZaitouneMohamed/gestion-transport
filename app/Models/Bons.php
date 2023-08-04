@@ -19,10 +19,16 @@ class Bons extends Model
         "km",
         "nature"
     ];
-    public function Consomation() {
+    public function scopeGazole($query)
+    {
+        return $query->where("nature", 'gazole');
+    }
+    public function Consomation()
+    {
         return $this->belongsTo(Consomation::class);
     }
-    public function Station() {
+    public function Station()
+    {
         return $this->belongsTo(Station::class);
     }
 }

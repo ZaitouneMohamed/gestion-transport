@@ -32,7 +32,7 @@ class Consomation extends Model
     }
     public function getQtyLittreAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
         $last_bon = $bons->first();
         $first_bon = $bons->last();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
@@ -44,7 +44,7 @@ class Consomation extends Model
     }
     public function getKmTotalAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
         $first_bon = $bons->last();
         $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
@@ -57,7 +57,7 @@ class Consomation extends Model
 
     public function getTauxAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
         $first_bon = $bons->last();
         $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
@@ -71,11 +71,11 @@ class Consomation extends Model
 
     public function getPrixAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
         $first_bon = $bons->last();
         $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $bons = $this->Bons()->where('nature', 'gazole');
+            $bons = $this->Bons()->gazole();
             $first = $bons->first()->prix;
             $prix = $bons->sum('prix') - $first;
             return $prix;
@@ -84,7 +84,7 @@ class Consomation extends Model
 
     public function getStatueAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
         $first_bon = $bons->last();
         $last_bon = $bons->first();
         if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
