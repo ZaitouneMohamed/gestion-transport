@@ -81,6 +81,19 @@ class HomeController extends Controller
     public function ViewBonsOfTrajet($id)
     {
         $trajet = Consomation::find($id);
-        return view('gazole.bon.index',compact("trajet"));
+        return view('gazole.bon.index', compact("trajet"));
+    }
+
+    public function UpdateBon($id, Request $request)
+    {
+        $bon = Bons::findOrFail($id);
+        $bon->update([
+            "qte_litre" => $request->qte,
+            "prix" => $request->prix,
+            "km" => $request->km
+        ]);
+        return redirect()->back()->with([
+            "success"=>"bon updated successfully;"
+        ]);
     }
 }

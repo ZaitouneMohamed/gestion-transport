@@ -50,15 +50,21 @@
             @foreach ($trajet->bons as $item)
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <div class="card-body font-weight-bold">
-                            <h5>QTE littre : {{ $item->qte_litre }}</h5>
-                            <h5>prix : {{ $item->prix }}</h5>
-                            <h5>N Bon : {{ $item->numero_bon }}</h5>
-                            <h5>KM : {{ $item->km }}</h5>
-                            <h5>Station : {{ $item->Station->name }}</h5>
-                            <h5>nature : {{ $item->nature }}</h5>
-                            <a href="#" class="btn btn-success">Go somewhere</a>
-                        </div>
+                        <form action="{{ route('UpdateBon', $item->id) }}" method="post">
+                            @csrf
+                            @method("post")
+                            <div class="card-body font-weight-bold text-center">
+                                <h5>N Bon : {{ $item->numero_bon }}</h5>
+                                <p>QTE littre</p><input type="text" name="qte" value="{{ $item->qte_litre }}"
+                                    id="">
+                                <p>prix</p><input type="text" name="prix" value="{{ $item->prix }}" id="">
+                                <p>KM :</p> <input type="text" name="km" value="{{ $item->km }}"
+                                    id="">
+                                <h5>Station : {{ $item->Station->name }}</h5>
+                                <h5>nature : {{ $item->nature }}</h5>
+                                <button type="submit" class="btn btn-success">Go somewhere</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             @endforeach

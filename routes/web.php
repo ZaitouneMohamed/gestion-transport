@@ -61,6 +61,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::post("AddBonToConsomation/{id}", "AddBonToConsomation")->name("AddBonToConsomation");
         Route::get("getStation", "getStations")->name("getStations");
         Route::get("ViewBonsOfTrajet/{id}", "ViewBonsOfTrajet")->name("getBons");
+        Route::post("UpdateBon/{id}", "UpdateBon")->name("UpdateBon");
     });
 });
 
