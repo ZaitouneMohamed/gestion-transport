@@ -50,10 +50,10 @@
             @foreach ($trajet->bons as $item)
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <form action="{{ route('UpdateBon', $item->id) }}" method="post">
-                            @csrf
-                            @method("post")
-                            <div class="card-body font-weight-bold text-center">
+                        <div class="card-body font-weight-bold text-center">
+                            <form action="{{ route('UpdateBon', $item->id) }}" method="post">
+                                @csrf
+                                @method('post')
                                 <h5>N Bon : {{ $item->numero_bon }}</h5>
                                 <p>QTE littre</p><input type="text" name="qte" value="{{ $item->qte_litre }}"
                                     id="">
@@ -62,9 +62,14 @@
                                     id="">
                                 <h5>Station : {{ $item->Station->name }}</h5>
                                 <h5>nature : {{ $item->nature }}</h5>
-                                <button type="submit" class="btn btn-success">Go somewhere</button>
-                            </div>
-                        </form>
+                                <button type="submit" class="btn btn-warning">Update</button>
+                            </form>
+                            <form action="{{ route('DeleteBon', $item->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger float-right">Supprimer</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endforeach

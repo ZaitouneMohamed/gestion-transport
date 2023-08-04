@@ -93,7 +93,17 @@ class HomeController extends Controller
             "km" => $request->km
         ]);
         return redirect()->back()->with([
-            "success"=>"bon updated successfully;"
+            "success" => "bon updated successfully;"
         ]);
+    }
+    public function DeleteBon($id)
+    {
+        $bon = Bons::findOrFail($id);
+        if ($bon != null) {
+            $bon->delete();
+            return redirect()->back()->with([
+                "success" => "bon deleted successfully;"
+            ]);
+        };
     }
 }

@@ -55,13 +55,14 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("camions", CamionController::class);
     Route::resource("stations", StationController::class);
     Route::resource("consomations", ConsomationController::class);
-    Route::resource("nature", NatureController::class);
+    // Route::resource("nature", NatureController::class);
     Route::controller(HomeController::class)->group(function () {
         Route::get("CreateBon/{id}", "CreateBon")->name("createBon");
         Route::post("AddBonToConsomation/{id}", "AddBonToConsomation")->name("AddBonToConsomation");
         Route::get("getStation", "getStations")->name("getStations");
         Route::get("ViewBonsOfTrajet/{id}", "ViewBonsOfTrajet")->name("getBons");
         Route::post("UpdateBon/{id}", "UpdateBon")->name("UpdateBon");
+        Route::delete("DeleteBon/{id}", "DeleteBon")->name("DeleteBon");
     });
 });
 
