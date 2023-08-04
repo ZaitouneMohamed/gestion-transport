@@ -48,6 +48,13 @@
                 <option value="gazole">gazole</option>
                 <option value="Autoroute">Autoroute</option>
                 <option value="autre">Autre</option>
+                <option value="achat piece">Achat Piece</option>
+                <option value="Huile">Huile</option>
+                <option value="sayah">Sayah</option>
+                <option value="Espece">Espece</option>
+                <option value="credit">Credit</option>
+                <option value="amandes">Amandes</option>
+                <option value="hakim">Hakim</option>
             </select>
         </div>
         <div class="col-md-6">
