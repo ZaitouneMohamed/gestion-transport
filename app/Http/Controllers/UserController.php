@@ -17,12 +17,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    protected $userService;
+    // protected $userService;
 
-    public function __construct(UserServices $userservice)
-    {
-        $this->userService = $userservice;
-    }
+    // public function __construct(UserServices $userservice)
+    // {
+    //     $this->userService = $userservice;
+    // }
     public function __invoke(Request $request)
     {
         $request->validate([
