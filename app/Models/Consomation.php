@@ -32,17 +32,22 @@ class Consomation extends Model
     }
     public function getQtyLittreAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole');
-        if ($bons->count() > 1) {
+        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $first_bon = $bons->first();
+        $last_bon = $bons->last();
+        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $first = $bons->first()->qte_litre;
             $qte_littre = $bons->sum('qte_litre') - $first;
             return $qte_littre;
         }
+        return null;
     }
     public function getKmTotalAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole');
-        if ($bons->count() > 1) {
+        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $first_bon = $bons->first();
+        $last_bon = $bons->last();
+        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $kmdepart = $bons->first()->km;
             $kmreturn = $bons->latest()->first()->km;
             $KmTotal = $kmreturn - $kmdepart;
@@ -52,8 +57,10 @@ class Consomation extends Model
 
     public function getTauxAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole');
-        if ($bons->count() > 1) {
+        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $first_bon = $bons->first();
+        $last_bon = $bons->last();
+        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $qtylittre = $this->getQtyLittreAttribute();
             $KmTotal = $this->getKmTotalAttribute();
             return number_format(($qtylittre  / $KmTotal) * 100, 2);
@@ -62,8 +69,10 @@ class Consomation extends Model
 
     public function getPrixAttribute()
     {
-        $bons = $this->Bons()->where('nature', 'gazole');
-        if ($bons->count() > 1) {
+        $bons = $this->Bons()->where('nature', 'gazole')->orderByDesc('id')->get();
+        $first_bon = $bons->first();
+        $last_bon = $bons->last();
+        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
             $bons = $this->Bons()->where('nature', 'gazole');
             $first = $bons->first()->prix;
             $prix = $bons->sum('prix') - $first;

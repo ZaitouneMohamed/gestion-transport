@@ -22,4 +22,7 @@ class Bons extends Model
     public function Consomation() {
         return $this->belongsTo(Consomation::class);
     }
+    public function Station() {
+        return $this->belongsTo(Station::class);
+    }
 }
