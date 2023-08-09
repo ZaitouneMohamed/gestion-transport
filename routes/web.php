@@ -28,18 +28,6 @@ use Illuminate\Support\Facades\Route;
 Route::permanentRedirect('/', 'login');
 Route::permanentRedirect('/home', 'admin');
 
-Route::prefix("bons")->middleware(["auth", 'role:bons'])->group(function () {
-    Route::get('/', function () {
-        return view('admin.welcome');
-    });
-    Route::post('/orders_import', [HomeController::class, 'upload'])->name('orders.import');
-    Route::get('getsubcategories', [PdfController::class, 'getsubcategories'])->name('getsubcategories');
-    Route::get('recap', [PdfController::class, 'recap'])->name('recap');
-    Route::get('tickets', [PdfController::class, 'tickets'])->name('tickets');
-    Route::get('bon_reception', [PdfController::class, 'bon_reception'])->name('bon_reception');
-    Route::get('clear', [HomeController::class, 'clear'])->name('clear');
-});
-
 Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::get('/', function () {
         return view('gazole.index');
@@ -55,7 +43,6 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("camions", CamionController::class);
     Route::resource("stations", StationController::class);
     Route::resource("consomations", ConsomationController::class);
-    // Route::resource("nature", NatureController::class);
     Route::controller(HomeController::class)->group(function () {
         Route::get("CreateBon/{id}", "CreateBon")->name("createBon");
         Route::post("AddBonToConsomation/{id}", "AddBonToConsomation")->name("AddBonToConsomation");

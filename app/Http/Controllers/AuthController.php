@@ -27,11 +27,7 @@ class AuthController extends Controller
             "email" => $request->email,
             "password" => $request->password
         ])) {
-            if (Auth::user()->hasRole('gazole')) {
-                return redirect("/admin");
-            } else {
-                return redirect('/bons');
-            }
+            return redirect("/admin");
         } else {
             return redirect('/login')->with([
                 "error" => "these information do not match any one of our records"
