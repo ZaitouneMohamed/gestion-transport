@@ -12,6 +12,7 @@ class Consomation extends Model
     protected $fillable = [
         "chaufeur_id",
         "camion_id",
+        "date",
         "ville",
     ];
     public function Bons()
