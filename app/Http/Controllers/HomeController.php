@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBonRequest;
 use App\Imports\OrderImport;
 use App\Models\Bons;
 use App\Models\Consomation;
@@ -10,7 +11,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-// use Maatwebsite\Excel\Facades\Excel;
 
 
 class HomeController extends Controller
@@ -41,18 +41,18 @@ class HomeController extends Controller
     {
         return view('gazole.bon.create', compact("id"));
     }
-    public function AddBonToConsomation(Request $request, $id)
+    public function AddBonToConsomation(StoreBonRequest $request, $id)
     {
-        $this->validate($request, [
-            "date" => "required",
-            "qte_litre" => "required",
-            "station_id" => "required",
-            // "ville" => "required",
-            "date" => "required",
-            "numero_bon" => "required",
-            "km_return" => "required",
-            "nature" => "required"
-        ]);
+        // $this->validate($request, [
+        //     "date" => "required",
+        //     "qte_litre" => "required",
+        //     "station_id" => "required",
+        //     // "ville" => "required",
+        //     "date" => "required",
+        //     "numero_bon" => "required",
+        //     "km_return" => "required",
+        //     "nature" => "required"
+        // ]);
         $ville = Station::find($request->station_id)->ville;
         $bons = Bons::create([
             "consomation_id" => $id,
