@@ -41,7 +41,7 @@
                     <h2 class="card-title"><b>KM total : {{ $trajet->bons->sum('km') }}</b></h2>
                     <h2 class="card-title"><b>Prix Total : {{ $trajet->bons->sum('prix') }}</b></h2>
                     <h2 class="card-title"><b>Station : {{ $trajet->bons->count() }}</b></h2>
-                    <h2 class="card-title"><b>Camion Consomation : {{ $trajet->camion->id }}</b></h2>
+                    <h2 class="card-title"><b>Camion Consomation : {{ $trajet->camion->consommation }}</b></h2>
                 </div>
             </div>
             <div class="col-4"></div>
