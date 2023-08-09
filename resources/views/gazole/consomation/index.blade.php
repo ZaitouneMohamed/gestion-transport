@@ -17,6 +17,7 @@
                 <th scope="col">camion comsommation</th>
                 <th scope="col">Statue</th>
                 <th scope="col">Prix</th>
+                <th scope="col">Date</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -60,6 +61,9 @@
                     </td>
                     <td>
                         {{ $item->Prix }}
+                    </td>
+                    <td>
+                        {{ $item->Date }}
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
