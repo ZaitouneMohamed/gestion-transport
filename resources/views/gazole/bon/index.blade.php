@@ -65,6 +65,9 @@
                                     id="">
                                 <h5>Station : {{ $item->Station->name }}</h5>
                                 <h5>nature : {{ $item->nature }}</h5>
+                                @if ($item->description)
+                                    autre : {{ $item->description }} <br>
+                                @endif
                                 <button type="submit" class="btn btn-warning">Update</button>
                             </form>
                             <form action="{{ route('DeleteBon', $item->id) }}" method="post">
