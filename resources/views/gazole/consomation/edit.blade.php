@@ -1,4 +1,4 @@
-@extends("gazole.layouts.master")
+@extends('gazole.layouts.master')
 
 @section('content')
     <form class="row g-3" method="POST" action="{{ route('consomations.update', $consomation->id) }}">
@@ -25,6 +25,11 @@
         <div class="col-6">
             <label for="inputAddress" class="form-label">ville</label>
             <input type="text" value="{{ $consomation->ville }}" name="ville" class="form-control" id="inputAddress"
+                placeholder="">
+        </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">date</label>
+            <input type="date" value="{{ $consomation->date }}" name="date" class="form-control" id="inputAddress"
                 placeholder="">
         </div>
         <div class="col-12">
