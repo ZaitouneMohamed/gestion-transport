@@ -1,4 +1,4 @@
-@extends("gazole.layouts.master")
+@extends('gazole.layouts.master')
 
 @section('content')
     <form class="row g-3" method="POST" action="{{ route('consomations.store') }}">
@@ -16,7 +16,7 @@
             <label for="inputState" class="form-label">Camion</label>
             <select id="inputState" name="camion_id" class="form-select">
                 @foreach (\App\Models\Camion::all() as $item)
-                <option value="{{ $item->id }}">{{ $item->matricule }}</option>
+                    <option value="{{ $item->id }}">{{ $item->matricule }}</option>
                 @endforeach
             </select>
         </div>
@@ -69,6 +69,10 @@
             <label for="inputAddress" class="form-label">date</label>
             <input type="date" value="<?php echo date('Y-m-d'); ?>" name="date" class="form-control" id="inputAddress"
                 placeholder="">
+        </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">description</label>
+            <textarea class="form-control" name="description" id="" rows="3"></textarea>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>

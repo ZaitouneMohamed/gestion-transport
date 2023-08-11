@@ -44,6 +44,12 @@
                     <h2 class="card-title"><b>Camion Consomation : {{ $trajet->camion->consommation }}</b></h2>
                 </div>
             </div>
+            <div class="col-4">
+                <div class="card">
+                    <h1 class="card-title"><b>description</b></h1>
+                    <h1 class="card-title">{{ $trajet->description }}</h1>
+                </div>
+            </div>
             <div class="col-4"></div>
         </div>
         <h1>Bons List {{ $trajet->bons->count() }}</h1><a href="{{ route('createBon', $trajet->id) }}"

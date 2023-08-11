@@ -32,6 +32,10 @@
             <input type="date" value="{{ $consomation->date }}" name="date" class="form-control" id="inputAddress"
                 placeholder="">
         </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">description</label>
+            <textarea class="form-control" name="description" id="" rows="3">{{ $consomation->description }}</textarea>
+        </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

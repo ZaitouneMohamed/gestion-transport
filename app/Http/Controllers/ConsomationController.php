@@ -42,6 +42,7 @@ class ConsomationController extends Controller
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
             "ville" => $request->ville,
+            "description" => $request->description,
             "date" => $request->date,
         ]);
         return redirect()->route('consomations.index')->with([
@@ -86,6 +87,7 @@ class ConsomationController extends Controller
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
             "ville" => $request->ville,
+            "description" => $request->description,
             "date" => $request->date,
         ]);
         return redirect()->route('consomations.index')->with([
