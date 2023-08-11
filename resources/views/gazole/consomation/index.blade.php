@@ -63,7 +63,7 @@
                         {{ $item->Prix }}
                     </td>
                     <td>
-                        {{ $item->date }}
+                        {{ $item->Date }}
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"

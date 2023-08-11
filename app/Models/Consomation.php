@@ -31,6 +31,13 @@ class Consomation extends Model
     {
         return $this->belongsTo(Camion::class);
     }
+    public function GetDateAttribute(){
+        $bons = $this->Bons()->gazole();
+        if ($bons->count() > 0) {
+            $first_bon = $bons->first();
+            return $first_bon->date;
+        }
+    }
     public function getQtyLittreAttribute()
     {
         $bons = $this->Bons()->gazole()->orderByDesc('id')->get();

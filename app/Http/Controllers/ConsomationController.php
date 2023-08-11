@@ -42,7 +42,13 @@ class ConsomationController extends Controller
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
             "ville" => $request->ville,
-            "date" => $request->date,
+            // "qte_litre" => $request->qte_littre,
+            // "date" => $request->date,
+            // "bon" => $request->bon,
+            // "station_id" => $request->station_id,
+            // "km_depart" => $request->km_depart,
+            // "km_return" => $request->km_return,
+            // "nature" => $request->nature,
         ]);
         return redirect()->route('consomations.index')->with([
             "success" => "consomation created sucssesfly"
