@@ -35,9 +35,11 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::get('camions/statistiques', function () {
         return view('gazole.statistiques.camion');
     })->name("camion.statistiques");
+
     Route::get('search', function () {
-        return view('gazole.search.index');
+        return view('gazole.statistiques.statistiques');
     })->name("global.search");
+
     Route::get("users", [HomeController::class, 'GazoleUsersList'])->name("gazole.users");
     Route::resource("chaufeur", ChaufeurController::class);
     Route::resource("camions", CamionController::class);
