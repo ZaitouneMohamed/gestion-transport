@@ -64,46 +64,12 @@
                 <option value="Tiznit">Tiznit</option>
             </select>
             <!-- Script by hscripts.com -->
-
         </div>
-        {{-- <div class="col-6">
+        <div class="col-6">
             <label for="inputAddress" class="form-label">date</label>
             <input type="date" value="<?php echo date('Y-m-d'); ?>" name="date" class="form-control" id="inputAddress"
                 placeholder="">
         </div>
-        <div class="col-6">
-            <label for="inputAddress" class="form-label">qte littre</label>
-            <input type="number" name="qte_littre" class="form-control" id="inputAddress" placeholder="">
-        </div> --}}
-        {{-- <div class="col-md-6">
-            <label for="inputState" class="form-label">Station</label>
-            <select id="inputState" name="station_id" class="form-select">
-                @foreach (\App\Models\Station::all() as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endforeach
-            </select>
-        </div> --}}
-        {{-- <div class="col-md-6">
-            <label for="inputCity" class="form-label">KM depart</label>
-            <input type="number" name="km_depart" class="form-control" id="inputCity">
-        </div>
-        <div class="col-md-6">
-            <label for="inputCity" class="form-label">KM return</label>
-            <input type="number" name="km_return" class="form-control" id="inputCity">
-        </div>
-        <div class="col-md-6">
-            <label for="inputCity" class="form-label">numeroBon</label>
-            <input type="number" name="bon" class="form-control" id="inputCity">
-        </div> --}}
-        {{-- <div class="col-md-6">
-            <label for="inputState" class="form-label">Nature</label>
-            <select id="inputState" name="nature" class="form-select">
-                <option selected>Choose...</option>
-                @foreach (\App\Models\Nature::all() as $item)
-                    <option value="{{ $item->name }}">{{ $item->name }}</option>
-                @endforeach
-            </select>
-        </div> --}}
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
