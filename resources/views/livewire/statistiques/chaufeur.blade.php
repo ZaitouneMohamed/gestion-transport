@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <label for="inputState" class="form-label">chaufeur</label>
-            <select id="inputState" class="form-select">
+            <select id="inputState" wire:model="chaufeur" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Chaufeur::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
@@ -31,11 +31,17 @@
                 <th scope="col">camion comsommation</th>
                 <th scope="col">Statue</th>
                 <th scope="col">Prix</th>
+                <th scope="col">Date</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($trajets as $item)
+            @foreach ($trajets as $item)
+                @php
+                    if ($item->Bons->count() > 1) {
+                        $km_total = $item->Bons->last()->km - $item->Bons->first()->km;
+                    }
+                @endphp
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->chaufeur->full_name }}</td>
@@ -62,29 +68,31 @@
                     <td>
                         <span
                             class="badge
-                    @if ($item->statue > 0) bg-danger
-                    @else
-                    bg-success @endif
-                    ">{{ number_format($item->Statue, 2) }}</span>
+                        @if ($item->statue > 0) bg-danger
+                        @else
+                        bg-success @endif
+                        ">{{ number_format($item->Statue, 2) }}</span>
                     </td>
                     <td>
                         {{ $item->Prix }}
+                    </td>
+                    <td>
+                        {{ $item->date }}
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
                             class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
                         <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
-                        <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i
-                                class="fa fa-eye"></i></a>
+                        <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
                         <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
 
     </table>
