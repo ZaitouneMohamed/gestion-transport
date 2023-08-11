@@ -8,7 +8,7 @@
             <label for="inputState" class="form-label">Chaufeur</label>
             <select id="inputState" name="chaufeur_id" class="form-select">
                 @foreach (\App\Models\Chaufeur::all() as $item)
-                    <option @if ($consomation->chaufeur = $item->full_name) selected @endif value="{{ $item->id }}">
+                    <option @if ($consomation->chaufeur_id === $item->id) selected @endif value="{{ $item->id }}">
                         {{ $item->full_name }}</option>
                 @endforeach
             </select>
@@ -17,7 +17,7 @@
             <label for="inputState" class="form-label">Camion</label>
             <select id="inputState" name="camion_id" class="form-select">
                 @foreach (\App\Models\Camion::all() as $item)
-                    <option @if ($consomation->camion = $item->matricule) selected @endif value="{{ $item->id }}">
+                    <option @if ($consomation->camion_id === $item->id) selected @endif value="{{ $item->id }}">
                         {{ $item->matricule }}</option>
                 @endforeach
             </select>
