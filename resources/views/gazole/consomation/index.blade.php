@@ -74,7 +74,7 @@
                         <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>
