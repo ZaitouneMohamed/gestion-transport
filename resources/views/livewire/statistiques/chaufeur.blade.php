@@ -1,4 +1,5 @@
 <div>
+    <h3 class="text text-center">chaufeur statistique</h3>
     <div class="row">
         <div class="col-md-12">
             <label for="inputState" class="form-label">chaufeur</label>
