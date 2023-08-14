@@ -1,13 +1,28 @@
 <div>
     <h3 class="text text-center">station statistique</h3>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <label for="inputState" class="form-label">Stations</label>
-            <select id="inputState" class="form-select">
+            <select id="inputState" wire:model="station" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Station::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Nature</label>
+            <select id="inputState" wire:model="nature" class="form-select">
+                <option value="gazole">gazole</option>
+                <option value="Autoroute">Autoroute</option>
+                <option value="autre">Autre</option>
+                <option value="achat piece">Achat Piece</option>
+                <option value="Huile">Huile</option>
+                <option value="sayah">Sayah</option>
+                <option value="Espece">Espece</option>
+                <option value="credit">Credit</option>
+                <option value="amandes">Amandes</option>
+                <option value="hakim">Hakim</option>
             </select>
         </div>
         <div class="col-6">
