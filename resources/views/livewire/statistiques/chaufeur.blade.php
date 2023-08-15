@@ -19,6 +19,9 @@
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
     </div><br>
+    <div wire:loading>
+        Processing ...
+    </div>
     @if ($chaufeur)
         <div class="row">
             <div class="col-4">

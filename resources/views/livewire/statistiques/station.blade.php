@@ -35,32 +35,35 @@
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
     </div><br>
-        <table class="table">
-            <thead>
+    <div wire:loading>
+        Processing ...
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">numero bon</th>
+                <th scope="col">camion</th>
+                <th scope="col">km</th>
+                <th scope="col">qte littre</th>
+                <th scope="col">prix</th>
+                <th scope="col">date</th>
+                <th scope="col">station</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($stations as $item)
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">numero bon</th>
-                    <th scope="col">camion</th>
-                    <th scope="col">km</th>
-                    <th scope="col">qte littre</th>
-                    <th scope="col">prix</th>
-                    <th scope="col">date</th>
-                    <th scope="col">station</th>
+                    <th scope="row">{{ $item->id }}</th>
+                    <td>{{ $item->numero_bon }}</td>
+                    <td>{{ $item->Consomation->camion->matricule }}</td>
+                    <td>{{ $item->km }}</td>
+                    <td>{{ $item->qte_litre }}</td>
+                    <td>{{ $item->prix }}</td>
+                    <td>{{ $item->date }}</td>
+                    <td>{{ $item->Station->name }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($stations as $item)
-                    <tr>
-                        <th scope="row">{{ $item->id }}</th>
-                        <td>{{ $item->numero_bon }}</td>
-                        <td>{{ $item->Consomation->camion->matricule }}</td>
-                        <td>{{ $item->km }}</td>
-                        <td>{{ $item->qte_litre }}</td>
-                        <td>{{ $item->prix }}</td>
-                        <td>{{ $item->date }}</td>
-                        <td>{{ $item->Station->name }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
 </div>
