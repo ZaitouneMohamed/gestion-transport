@@ -27,7 +27,7 @@ class StoreBonRequest extends FormRequest
             "date" => "required",
             "qte_litre" => "required",
             "station_id" => "required",
-            "prix" => "required",
+            "tarif" => "required",
             "date" => "required",
             "numero_bon" => "required",
             "km_return" => "required",

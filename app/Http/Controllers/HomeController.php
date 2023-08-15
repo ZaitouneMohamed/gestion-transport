@@ -43,21 +43,13 @@ class HomeController extends Controller
     }
     public function AddBonToConsomation(StoreBonRequest $request, $id)
     {
-        // $this->validate($request, [
-        //     "date" => "required",
-        //     "qte_litre" => "required",
-        //     "station_id" => "required",
-        //     // "ville" => "required",
-        //     "date" => "required",
-        //     "numero_bon" => "required",
-        //     "km_return" => "required",
-        //     "nature" => "required"
-        // ]);
         $ville = Station::find($request->station_id)->ville;
+        $tarif = $request->tarif;
+        $prix = $tarif * $request->qte_litre;
         $bons = Bons::create([
             "consomation_id" => $id,
             "qte_litre" => $request->qte_litre,
-            "prix" => $request->prix,
+            "prix" => $prix,
             "station_id" => $request->station_id,
             "ville" => $ville,
             "date" => $request->date,

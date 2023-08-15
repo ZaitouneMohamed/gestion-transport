@@ -30,7 +30,7 @@
             <div class="d-flex">
                 <input type="text" name="qte_litre" class="form-control" placeholder="qte littre" id="inputAddress"
                     placeholder="">
-                <input type="text" name="prix" class="form-control" placeholder="prix">
+                <input type="text" name="tarif" class="form-control" placeholder="tarif">
             </div>
         </div>
 
