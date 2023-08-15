@@ -66,6 +66,7 @@
                                 <h5>{{ $item->date }}</h5>
                                 <p>QTE littre</p><input type="text" name="qte" value="{{ $item->qte_litre }}"
                                     id="">
+                                <h5>tarif : {{ $item->prix / $item->qte_litre }}</h5>
                                 <p>prix</p><input type="text" name="prix" value="{{ $item->prix }}" id="">
                                 <p>KM :</p> <input type="text" name="km" value="{{ $item->km }}"
                                     id="">
