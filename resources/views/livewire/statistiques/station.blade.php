@@ -36,7 +36,9 @@
         </div>
     </div><br>
     <div wire:loading>
-        Processing ...
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
     <table class="table">
         <thead>
@@ -44,11 +46,13 @@
                 <th scope="col">#</th>
                 <th scope="col">numero bon</th>
                 <th scope="col">camion</th>
+                <th scope="col">chaufeur</th>
                 <th scope="col">km</th>
                 <th scope="col">qte littre</th>
                 <th scope="col">prix</th>
                 <th scope="col">date</th>
                 <th scope="col">station</th>
+                <th scope="col">Autre</th>
             </tr>
         </thead>
         <tbody>
@@ -57,11 +61,21 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->numero_bon }}</td>
                     <td>{{ $item->Consomation->camion->matricule }}</td>
+                    <td>{{ $item->Consomation->chaufeur->full_name }}</td>
                     <td>{{ $item->km }}</td>
                     <td>{{ $item->qte_litre }}</td>
                     <td>{{ $item->prix }}</td>
                     <td>{{ $item->date }}</td>
                     <td>{{ $item->Station->name }}</td>
+                    <td>
+                        @if ($item->description)
+                            <details>
+                                <summary>{{ Str::limit($item->description, 10, '...') }}</summary>
+                                <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions,
+                                    international pavilions, award-winning fireworks and seasonal special events.</p>
+                            </details>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

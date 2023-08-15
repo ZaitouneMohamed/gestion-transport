@@ -20,7 +20,9 @@
         </div>
     </div><br>
     <div wire:loading>
-        Processing ...
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
     @if ($chaufeur)
         <div class="row">
