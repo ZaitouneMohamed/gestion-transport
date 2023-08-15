@@ -71,8 +71,7 @@
                         @if ($item->description)
                             <details>
                                 <summary>{{ Str::limit($item->description, 10, '...') }}</summary>
-                                <p>Epcot is a theme park at Walt Disney World Resort featuring exciting attractions,
-                                    international pavilions, award-winning fireworks and seasonal special events.</p>
+                                <p>{{ $item->description }}</p>
                             </details>
                         @endif
                     </td>
