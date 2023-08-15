@@ -11,8 +11,9 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="inputState" class="form-label">Nature</label>
+            <label for="inputState" class="form-label">Naturee</label>
             <select id="inputState" wire:model="nature" class="form-select">
+                <option value=""></option>
                 <option value="gazole">gazole</option>
                 <option value="Autoroute">Autoroute</option>
                 <option value="autre">Autre</option>
@@ -34,18 +35,17 @@
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
     </div><br>
-    @if ($nature & $station)
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">numero bon</th>
                     <th scope="col">camion</th>
+                    <th scope="col">km</th>
+                    <th scope="col">qte littre</th>
                     <th scope="col">prix</th>
                     <th scope="col">date</th>
-                    <th scope="col">qte littre</th>
                     <th scope="col">station</th>
-                    <th scope="col">km</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,17 +54,13 @@
                         <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->numero_bon }}</td>
                         <td>{{ $item->Consomation->camion->matricule }}</td>
+                        <td>{{ $item->km }}</td>
+                        <td>{{ $item->qte_litre }}</td>
                         <td>{{ $item->prix }}</td>
                         <td>{{ $item->date }}</td>
-                        <td>{{ $item->qte_litre }}</td>
-                        <td>{{ $item->Station->id }}</td>
-                        <td>{{ $item->km }}</td>
+                        <td>{{ $item->Station->name }}</td>
                     </tr>
                 @endforeach
             </tbody>
-
         </table>
-    @else
-
-    @endif
 </div>
