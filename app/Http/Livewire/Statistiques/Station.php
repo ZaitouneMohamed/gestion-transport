@@ -16,7 +16,7 @@ class Station extends Component
     public function render()
     {
         return view('livewire.statistiques.station',[
-            "trajets" => Bons::where(function ($query) {
+            "stations" => Bons::where(function ($query) {
                 $query->Where("station_id",  $this->station);
                 $query->Where("nature",  $this->nature);
             })
