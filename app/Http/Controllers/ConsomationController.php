@@ -16,7 +16,7 @@ class ConsomationController extends Controller
      */
     public function index()
     {
-        $consomations = Consomation::latest()->paginate(15);
+        $consomations = Consomation::OrderBy('date','desc')->paginate(15);
         return view('gazole.consomation.index', compact('consomations'));
     }
 
