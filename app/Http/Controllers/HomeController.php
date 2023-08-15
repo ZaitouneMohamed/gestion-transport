@@ -45,7 +45,13 @@ class HomeController extends Controller
     {
         $ville = Station::find($request->station_id)->ville;
         $tarif = $request->tarif;
-        $prix = $tarif * $request->qte_litre;
+        $qte_litre = $request->qte_litre;
+        $km = $request->km_return;
+        if ($km <= 0 || $qte_litre <= 0) {
+            $qte_litre = 1;
+            $km = 1;
+        }
+        $prix = $tarif * $qte_litre;
         $bons = Bons::create([
             "consomation_id" => $id,
             "qte_litre" => $request->qte_litre,
@@ -54,7 +60,7 @@ class HomeController extends Controller
             "ville" => $ville,
             "date" => $request->date,
             "numero_bon" => $request->numero_bon,
-            "km" => $request->km_return,
+            "km" => $km,
             "nature" => $request->nature,
             "description" => $request->description,
         ]);
