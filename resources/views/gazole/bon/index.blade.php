@@ -70,7 +70,14 @@
                                 <p>prix</p><input type="text" name="prix" value="{{ $item->prix }}" id="">
                                 <p>KM :</p> <input type="text" name="km" value="{{ $item->km }}"
                                     id="">
-                                <h5>Station : {{ $item->Station->name }}</h5>
+                                <p>Station : </p>
+                                <select name="station" id="citySelect"class="form-select">
+                                    <option>shoose</option>
+                                    @foreach (\App\Models\Station::all() as $station)
+                                        <option @if ($item->Station->id === $station->id) selected @endif
+                                            value="{{ $station->id }}">{{ $station->name }}</option>
+                                    @endforeach
+                                </select>
                                 <h5>nature : {{ $item->nature }}</h5>
                                 @if ($item->description)
                                     autre : {{ $item->description }} <br>

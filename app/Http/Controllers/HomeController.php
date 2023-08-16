@@ -88,7 +88,8 @@ class HomeController extends Controller
         $bon->update([
             "qte_litre" => $request->qte,
             "prix" => $request->prix,
-            "km" => $request->km
+            "km" => $request->km,
+            "station_id" => $request->station
         ]);
         return redirect()->back()->with([
             "success" => "bon updated successfully;"
