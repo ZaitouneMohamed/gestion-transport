@@ -49,7 +49,7 @@
                 @endphp
                 @foreach ($bons->unique('consomation_id') as $item)
                     @php
-                        $full_price += $item->Consomation->Prix;
+                        $full_price += $item->Consomation->FullPrix;
                     @endphp
                 @endforeach
                 <h2 class="card-title">consomation : {{ $full_price; }} </h2>
