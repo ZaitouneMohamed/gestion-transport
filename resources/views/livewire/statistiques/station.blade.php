@@ -61,6 +61,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">T.ville</th>
                 <th scope="col">numero bon</th>
                 <th scope="col">camion</th>
                 <th scope="col">chaufeur</th>
@@ -77,6 +78,7 @@
             @foreach ($bons as $item)
                 <tr>
                     <th scope="row">{{ $item->consomation->id }}</th>
+                    <td>{{ $item->consomation->ville }}</td>
                     <td>{{ $item->numero_bon }}</td>
                     <td>{{ $item->Consomation->camion->matricule }}</td>
                     <td>{{ $item->Consomation->chaufeur->full_name }}</td>
