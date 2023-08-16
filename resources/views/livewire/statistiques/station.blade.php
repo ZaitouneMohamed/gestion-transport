@@ -9,7 +9,6 @@
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
-            {{ $station }}
         </div>
         <div class="col-md-6">
             <label for="inputState" class="form-label">Naturee</label>
@@ -26,7 +25,6 @@
                 <option value="amandes">Amandes</option>
                 <option value="hakim">Hakim</option>
             </select>
-            {{ $nature }}
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
@@ -36,7 +34,6 @@
             <label for="inputState" class="form-label">Date Fin</label>
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
-        {{$statue}}
     </div><br>
     <div wire:loading>
         <div class="spinner-border" role="status">
