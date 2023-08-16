@@ -9,6 +9,7 @@
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
+            {{ $station }}
         </div>
         <div class="col-md-6">
             <label for="inputState" class="form-label">Naturee</label>
@@ -25,6 +26,7 @@
                 <option value="amandes">Amandes</option>
                 <option value="hakim">Hakim</option>
             </select>
+            {{ $nature }}
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
@@ -34,6 +36,7 @@
             <label for="inputState" class="form-label">Date Fin</label>
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
+        {{$statue}}
     </div><br>
     <div wire:loading>
         <div class="spinner-border" role="status">
@@ -48,6 +51,7 @@
                 <th scope="col">camion</th>
                 <th scope="col">chaufeur</th>
                 <th scope="col">km</th>
+                <th scope="col">nature</th>
                 <th scope="col">qte littre</th>
                 <th scope="col">prix</th>
                 <th scope="col">date</th>
@@ -56,13 +60,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($stations as $item)
+            @foreach ($bons as $item)
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->numero_bon }}</td>
                     <td>{{ $item->Consomation->camion->matricule }}</td>
                     <td>{{ $item->Consomation->chaufeur->full_name }}</td>
                     <td>{{ $item->km }}</td>
+                    <td>{{ $item->nature }}</td>
                     <td>{{ $item->qte_litre }}</td>
                     <td>{{ $item->prix }}</td>
                     <td>{{ $item->date }}</td>
