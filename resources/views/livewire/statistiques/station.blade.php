@@ -11,7 +11,7 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label for="inputState" class="form-label">Naturee</label>
+            <label for="inputState" class="form-label">Nature</label>
             <select id="inputState" wire:model="nature" class="form-select">
                 <option value=""></option>
                 <option value="gazole">gazole</option>
@@ -43,17 +43,16 @@
     <div class="row">
         <div class="col-4">
             <div class="card text-center">
-                <h1 class="card-title">Trajet : {{ $bons->count() }} </h1>
+                <h1 class="card-title">Bons List : {{ $bons->count() }} </h1>
                 @php
                     $full_price = 0;
                 @endphp
-                @foreach ($bons as $item)
+                @foreach ($bons->unique('consomation_id') as $item)
                     @php
-                        $full_price += $item->sum('prix');
-                        // $full_price += $item->Prix;
+                        $full_price += $item->Consomation->Prix;
                     @endphp
                 @endforeach
-                <h2 class="card-title">consomation : {{ $bons->Unique('numero_bon')->sum('prix'); }} </h2>
+                <h2 class="card-title">consomation : {{ $full_price; }} </h2>
             </div>
         </div>
     </div>

@@ -81,6 +81,8 @@ class Consomation extends Model
             $first = $bons->first()->prix;
             $prix = $bons->sum('prix') - $first;
             return $prix;
+        }else{
+            return 0;
         }
     }
 
