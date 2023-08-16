@@ -76,7 +76,7 @@
         <tbody>
             @foreach ($bons as $item)
                 <tr>
-                    <th scope="row">{{ $item->id }}</th>
+                    <th scope="row">{{ $item->consomation->id }}</th>
                     <td>{{ $item->numero_bon }}</td>
                     <td>{{ $item->Consomation->camion->matricule }}</td>
                     <td>{{ $item->Consomation->chaufeur->full_name }}</td>
