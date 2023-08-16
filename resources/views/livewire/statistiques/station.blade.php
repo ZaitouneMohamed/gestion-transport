@@ -43,6 +43,23 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="card text-center">
+                <h1 class="card-title">Trajet : {{ $bons->count() }} </h1>
+                @php
+                    $full_price = 0;
+                @endphp
+                @foreach ($bons as $item)
+                    @php
+                        $full_price += $item->sum('prix');
+                        // $full_price += $item->Prix;
+                    @endphp
+                @endforeach
+                <h2 class="card-title">consomation : {{ $bons->sum('prix'); }} </h2>
+            </div>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
