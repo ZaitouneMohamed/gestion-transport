@@ -53,7 +53,7 @@
                         // $full_price += $item->Prix;
                     @endphp
                 @endforeach
-                <h2 class="card-title">consomation : {{ $bons->sum('prix'); }} </h2>
+                <h2 class="card-title">consomation : {{ $bons->Unique('numero_bon')->sum('prix'); }} </h2>
             </div>
         </div>
     </div>
