@@ -26,20 +26,20 @@
             <div class="col-6">
                 <label for="inputAddress" class="form-label">qte littre *</label>
                 <div class="d-flex">
-                    <input type="text" name="qte_litre" x-model="qty" id="qte_littre" class="form-control" placeholder="qte littre"
+                    <input type="text" name="qte_litre" value="{{ old('qte_litre') }}" x-model="qty" id="qte_littre" class="form-control" placeholder="qte littre"
                         id="inputAddress" placeholder="">
-                    <input type="text" name="tarif" x-model="tarif" id="tarif" class="form-control" placeholder="tarif">
+                    <input type="text" name="tarif" value="{{ old('tarif') }}" x-model="tarif" id="tarif" class="form-control" placeholder="tarif">
                     {{-- <input type="text"  disabled id=""><h1 x-show="tarif !== 0 && qty !== 0" x-text="tarif * qty"></h1> --}}
                     <input type="number" disabled x-model="tarif * qty" readonly>
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">KM return</label>
-                <input type="number" name="km_return" class="form-control" id="inputCity">
+                <input type="number" name="km_return" value="{{ old('km_return') }}" class="form-control" id="inputCity">
             </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">numeroBon</label>
-                <input type="text" name="numero_bon" class="form-control" id="inputCity">
+                <input type="text" name="numero_bon" class="form-control" value="{{ old('numero_bon') }}" id="inputCity">
             </div>
             <div class="col-md-6">
                 <label for="inputState" class="form-label">Nature *</label>
