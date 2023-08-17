@@ -19,11 +19,9 @@ class ValidateCreationBon
     {
         $bon_num = $request->numero_bon;
         $nature = $request->nature;
-        $bon = Bons::where('numero_bon', $bon_num)->where('nature',$nature)->get();
+        $consomation_id = $request->consomation_id;
+        $bon = Bons::where('numero_bon', $bon_num)->where('consomation_id', $consomation_id)->where('nature', $nature)->get();
         if ($bon->count() === 0) {
-            // return redirect()->back()->with([
-            //     "messages" => "please try to change numero or nature"
-            // ]);
             return $next($request);
         } else {
             return redirect()->back()->with([

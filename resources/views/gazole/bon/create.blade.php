@@ -10,6 +10,7 @@
                 <input type="date" value="<?php echo date('Y-m-d'); ?>" name="date" class="form-control" id="inputAddress"
                     placeholder="">
             </div>
+            <input type="hidden" value="{{ $id }}" name="consomation_id">
             <div class="col-md-6">
                 <label for="inputState" class="form-label">Station *</label>
                 <div class="d-flex">
@@ -26,9 +27,10 @@
             <div class="col-6">
                 <label for="inputAddress" class="form-label">qte littre *</label>
                 <div class="d-flex">
-                    <input type="text" name="qte_litre" value="{{ old('qte_litre') }}" x-model="qty" id="qte_littre" class="form-control" placeholder="qte littre"
-                        id="inputAddress" placeholder="">
-                    <input type="text" name="tarif" value="{{ old('tarif') }}" x-model="tarif" id="tarif" class="form-control" placeholder="tarif">
+                    <input type="text" name="qte_litre" value="{{ old('qte_litre') }}" x-model="qty" id="qte_littre"
+                        class="form-control" placeholder="qte littre" id="inputAddress" placeholder="">
+                    <input type="text" name="tarif" value="{{ old('tarif') }}" x-model="tarif" id="tarif"
+                        class="form-control" placeholder="tarif">
                     {{-- <input type="text"  disabled id=""><h1 x-show="tarif !== 0 && qty !== 0" x-text="tarif * qty"></h1> --}}
                     <input type="number" disabled x-model="tarif * qty" readonly>
                 </div>
