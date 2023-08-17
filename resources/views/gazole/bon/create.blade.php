@@ -54,6 +54,7 @@
                     <option value="credit">Credit</option>
                     <option value="amandes">Amandes</option>
                     <option value="hakim">Hakim</option>
+                    <option value="Lavage">Lavage</option>
                 </select>
             </div>
             <div class="col-md-6">
