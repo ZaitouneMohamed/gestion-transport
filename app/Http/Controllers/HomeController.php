@@ -15,6 +15,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("CreateBon")->only("AddBonToConsomation");
+    }
     public function upload(Request $request)
     {
         request()->validate([
