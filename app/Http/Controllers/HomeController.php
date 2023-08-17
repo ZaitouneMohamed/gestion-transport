@@ -17,7 +17,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("CreateBon")->only("AddBonToConsomation");
+        // $this->middleware("CreateBon")->only("AddBonToConsomation");
     }
     public function upload(Request $request)
     {
