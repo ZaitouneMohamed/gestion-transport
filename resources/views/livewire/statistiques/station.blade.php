@@ -53,7 +53,11 @@
                         $full_price += $item->Consomation->FullPrix;
                     @endphp
                 @endforeach
-                <h2 class="card-title">consomation : {{ $full_price; }} </h2>
+                @if ($nature === 'gazole')
+                    <h2 class="card-title">consomation : {{ $full_price }} </h2>
+                @else
+                    <h2 class="card-title">consomation : {{ $bons->sum('prix') }} </h2>
+                @endif
             </div>
         </div>
     </div>
