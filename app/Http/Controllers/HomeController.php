@@ -90,6 +90,7 @@ class HomeController extends Controller
     {
         $bon = Bons::findOrFail($id);
         $bon->update([
+            "date" => $request->date,
             "qte_litre" => $request->qte,
             "prix" => $request->prix,
             "km" => $request->km,

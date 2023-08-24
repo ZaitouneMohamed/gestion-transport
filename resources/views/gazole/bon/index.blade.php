@@ -63,7 +63,8 @@
                                 @csrf
                                 @method('post')
                                 <h5>N Bon : {{ $item->numero_bon }}</h5>
-                                <h5>{{ $item->date }}</h5>
+                                <input type="date" name="date" value="{{ $item->date }}"
+                                    id="">
                                 <p>QTE littre</p><input type="text" name="qte" value="{{ $item->qte_litre }}"
                                     id="">
                                 <h5>tarif : {{ number_format($item->prix / $item->qte_litre, 2) }}</h5>
