@@ -1,4 +1,4 @@
-@extends("gazole.layouts.master")
+@extends('gazole.layouts.master')
 
 @section('content')
     <br>
@@ -22,6 +22,7 @@
                     <td>{{ $item->consommation }}</td>
                     <td>{{ $item->Consomations->count() }}</td>
                     <td class="d-flex">
+                        <a href="#" class="btn btn-warning mr-1"><i class="fa fa-wrench" aria-hidden="true"></i></a>
                         <a href="{{ route('camions.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
                         @if ($item->Consomations->count() == 0)
