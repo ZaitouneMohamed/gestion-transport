@@ -56,7 +56,7 @@
                 @if ($nature === 'gazole')
                     <h2 class="card-title">consomation : {{ $full_price }} </h2>
                 @else
-                <h2 class="card-title">consomation : {{ $bons->unique("numero_bon")->sum('prix') }}</h2>
+                <h2 class="card-title">consomation : {{ $bons->unique(["numero_bon"])->where('nature',"gazole")->sum('prix') }}</h2>
                 @endif
             </div>
         </div>
