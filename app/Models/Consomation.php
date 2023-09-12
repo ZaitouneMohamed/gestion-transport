@@ -87,17 +87,8 @@ class Consomation extends Model
     }
 
     public function getFullPrixAttribute(){
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $first_bon = $bons->last();
-        $last_bon = $bons->first();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $bons = $this->Bons();
-            $first = $bons->first()->prix;
-            $prix = $bons->sum('prix') - $first;
-            return $prix;
-        }else{
-            return 0;
-        }
+        $bons = $this->Bons();
+        return $bons->sum('prix');
     }
 
     public function getStatueAttribute()

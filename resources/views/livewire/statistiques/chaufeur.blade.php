@@ -31,14 +31,20 @@
                     <h1 class="card-title">Trajet : {{ $trajets->count() }} </h1>
                     @php
                         $full_price = 0;
+                        $full_pricee = 0;
                     @endphp
                     @foreach ($trajets as $item)
                         @php
                             // $full_price += $item->Bons->sum('prix');
                             $full_price += $item->Prix;
+                            $full_pricee += $item->FullPrix;
                         @endphp
                     @endforeach
-                    <h2 class="card-title">consomation : {{ $full_price }} </h2>
+                    @if ($chaufeur == 24 || $chaufeur == 23)
+                        <h2 class="card-title">consomation : {{ $full_pricee }} </h2>
+                    @else
+                        <h2 class="card-title">consomation : {{ $full_price }} </h2>
+                    @endif
                 </div>
             </div>
         </div>
