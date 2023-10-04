@@ -4,14 +4,17 @@
     <div x-data="{ page: 'chauffeur' }">
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <button class="btn btn-primary" x-on:click="page = 'chauffeur'">chauffeur</button>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <button class="btn btn-primary" x-on:click="page = 'camion'">camion</button>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <button class="btn btn-primary" x-on:click="page = 'station'">station</button>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary" x-on:click="page = 'trajet'">trajet</button>
             </div>
         </div>
         <div x-show="page === 'chauffeur'" x-transition>
@@ -22,6 +25,9 @@
         </div>
         <div x-show="page === 'station'" x-transition>
             <livewire:statistiques.station />
+        </div>
+        <div x-show="page === 'trajet'" x-transition>
+            <livewire:statistiques.trajet />
         </div>
     </div>
 @endsection

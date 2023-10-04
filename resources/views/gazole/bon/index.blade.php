@@ -38,7 +38,7 @@
             </div>
             <div class="col-4">
                 <div class="card">
-                    <h2 class="card-title"><b>KM total : {{ $trajet->bons->sum('km') }}</b></h2>
+                    {{-- <h2 class="card-title"><b>KM total : {{ $trajet->bons->sum('km') }}</b></h2> --}}
                     <h2 class="card-title"><b>Prix Total : {{ $trajet->Prix }}</b></h2>
                     <h2 class="card-title"><b>Station : {{ $trajet->bons->count() }}</b></h2>
                     <h2 class="card-title"><b>Camion Consomation : {{ $trajet->camion->consommation }}</b></h2>
