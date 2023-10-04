@@ -93,6 +93,7 @@
                     <th scope="col">Statue</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Date</th>
+                    <th scope="col">action</th>
                 </tr>
             </thead>
             <tbody>
@@ -138,6 +139,18 @@
                         </td>
                         <td>
                             {{ $item->date }}
+                        </td>
+                        <td class="d-flex">
+                            <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
+                                class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                            <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
+                                    class="fa fa-pen"></i></a>
+                            <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
+                            <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
