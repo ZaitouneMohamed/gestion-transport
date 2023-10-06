@@ -2,7 +2,7 @@
     <h3 class="text text-center">factures statistique</h3>
     <div class="row">
         <div class="col-md-12">
-            <label for="inputState" class="form-label">Camion</label>
+            <label for="inputState" class="form-label">Station</label>
             <select id="inputState" wire:model="station" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Station::all() as $item)
