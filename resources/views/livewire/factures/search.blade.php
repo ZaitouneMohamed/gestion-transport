@@ -5,7 +5,7 @@
             <label for="inputState" class="form-label">Camion</label>
             <select id="inputState" wire:model="station" class="form-select">
                 <option value=""></option>
-                @foreach (\App\Models\station::all() as $item)
+                @foreach (\App\Models\Station::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                 @endforeach
             </select>
