@@ -43,8 +43,13 @@
                     <span class="text text-danger">{{ $message }}</span>
                 @enderror
             </div><br><br><br><br>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+        @if ($editing)
+            <button wire:click="update()" class="btn btn-warning">update</button>
+            <button wire:click="cancel()" class="btn btn-success">cancel</button>
+        @else
+            <button type="submit" class="btn btn-primary">Submit</button>
+        @endif
     </form>
     <br><br>
     <table class="table">
@@ -67,7 +72,10 @@
                     <td>{{ $item->station->name }}</td>
                     <td>{{ $item->prix }}</td>
                     <td>
-                        <button class="btn btn-danger" wire:click="DeleteFacture({{$item->id}})"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button class="btn btn-danger" wire:click="DeleteFacture({{ $item->id }})"><i
+                                class="fa fa-trash" aria-hidden="true"></i></button>
+                        <button class="btn btn-warning" wire:click="edit({{ $item->id }})"><i
+                                class="fa fa-pencil" aria-hidden="true"></i></button>
                     </td>
                 </tr>
             @endforeach
