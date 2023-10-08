@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('https://akanea.com/wp-content/uploads/2021/10/TMS-2021-article-types-de-transport.jpg'); background-size: cover">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>Admin</b>LTE</a>
+                <a href="#" class="h1"><b>AE</b>TJ</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
