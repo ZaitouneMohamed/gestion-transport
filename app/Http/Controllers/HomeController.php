@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBonRequest;
 use App\Imports\OrderImport;
 use App\Models\Bons;
 use App\Models\Consomation;
+use App\Models\facture;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -68,6 +69,14 @@ class HomeController extends Controller
             "nature" => $request->nature,
             "description" => $request->description,
         ]);
+        if ($request->type == "yes") {
+            facture::create([
+                "date" => $request->date,
+                "prix" => $prix,
+                "station_id" => $request->station_id,
+                "n_bon" => $request->numero_bon,
+            ]);
+        }
         return redirect()->route('consomations.index')->with([
             "success" => "bon added successfly"
         ]);

@@ -63,6 +63,16 @@
                 <label for="inputCity" class="form-label">Autre</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
             </div>
+            <div class="col-md-6">
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" id="customRadio1" value="no" name="type" checked>
+                    <label for="customRadio1" class="custom-control-label">noo</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" id="customRadio2" name="type" value="yes" >
+                    <label for="customRadio2" class="custom-control-label">yes</label>
+                </div>
+            </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
