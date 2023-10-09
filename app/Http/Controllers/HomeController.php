@@ -105,6 +105,14 @@ class HomeController extends Controller
             "km" => $request->km,
             "station_id" => $request->station
         ]);
+        if ($request->type == "yes") {
+            facture::create([
+                "date" => $request->date,
+                "prix" => $request->prix,
+                "station_id" => $request->station,
+                "n_bon" => $request->numero_bon,
+            ]);
+        }
         return redirect()->back()->with([
             "success" => "bon updated successfully;"
         ]);

@@ -62,9 +62,9 @@
                             <form action="{{ route('UpdateBon', $item->id) }}" method="post">
                                 @csrf
                                 @method('post')
+                                <input type="hidden" name="numero_bon" value="{{ $item->numero_bon }}">
                                 <h5>N Bon : {{ $item->numero_bon }}</h5>
-                                <input type="date" name="date" value="{{ $item->date }}"
-                                    id="">
+                                <input type="date" name="date" value="{{ $item->date }}" id="">
                                 <p>QTE littre</p><input type="text" name="qte" value="{{ $item->qte_litre }}"
                                     id="">
                                 <h5>tarif : {{ number_format($item->prix / $item->qte_litre, 2) }}</h5>
@@ -83,6 +83,12 @@
                                 @if ($item->description)
                                     autre : {{ $item->description }} <br>
                                 @endif
+                                <div class="col-md-6">
+                                    <select name="type" id="citySelect"class="form-select">
+                                        <option value="noo">noo</option>
+                                        <option value="yes">yes</option>
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-warning">Update</button>
                             </form>
                             <form action="{{ route('DeleteBon', $item->id) }}" method="post">
