@@ -41,6 +41,7 @@ class ChaufeurController extends Controller
         ]);
         Chaufeur::create([
             "full_name" => $request->full_name,
+            "phone" => $request->phone
         ]);
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur added successly"
@@ -81,10 +82,12 @@ class ChaufeurController extends Controller
     {
         $this->validate($request, [
             "full_name" => "required",
+            "phone" => "required"
         ]);
         $chaufeur = Chaufeur::find($id);
         $chaufeur->update([
             "full_name" => $request->full_name,
+            "phone" => $request->phone
         ]);
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur updated successly"
