@@ -2,8 +2,19 @@
 
 @section('content')
     <br>
-    <a href="{{ route('consomations.create') }}" class="btn btn-success"><b>Create New Trajet</b></a>
-    <br><br>
+    <div class="row">
+        <div class="col-2">
+            <a href="{{ route('consomations.create') }}" class="btn btn-success"><b>Create New Trajet</b></a>
+        </div>
+        <div class="col-6">
+            <form action="{{route('consomations.index')}}">
+                @csrf
+                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
+        <br><br>
+    </div>
     <table class="table">
         <thead>
             <tr>

@@ -14,9 +14,17 @@ class ConsomationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $consomations = Consomation::OrderBy('date','desc')->paginate(15);
+        $query = Consomation::orderBy('date', 'desc');
+
+        if ($request->has('date')) {
+            $date = $request->input('date');
+            $query->where('date', $date);
+        }
+
+        $consomations = $query->paginate(15);
+
         return view('gazole.consomation.index', compact('consomations'));
     }
 
