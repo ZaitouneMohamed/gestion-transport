@@ -7,8 +7,9 @@
             <a href="{{ route('consomations.create') }}" class="btn btn-success"><b>Create New Trajet</b></a>
         </div>
         <div class="col-6">
-            <form action="{{route('consomations.index')}}">
+            <form action="{{route('consomations.index')}}" method="POST">
                 @csrf
+                @method("GET")
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
