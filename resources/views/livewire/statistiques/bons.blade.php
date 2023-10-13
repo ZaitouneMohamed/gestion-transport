@@ -58,6 +58,9 @@
                         <td>{{ $item->Station->name }}</td>
                         <td>{{ $item->km }}</td>
                         <td>{{ $item->nature }}</td>
+                        <td>
+                            <a href="{{ route('getBons', $item->Consomation->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
