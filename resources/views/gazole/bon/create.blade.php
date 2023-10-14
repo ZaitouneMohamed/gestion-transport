@@ -46,17 +46,9 @@
             <div class="col-md-6">
                 <label for="inputState" class="form-label">Nature *</label>
                 <select id="inputState" name="nature" class="form-select">
-                    <option value="gazole">gazole</option>
-                    <option value="Autoroute">Autoroute</option>
-                    <option value="autre">Autre</option>
-                    <option value="achat piece">Achat Piece</option>
-                    <option value="Huile">Huile</option>
-                    <option value="sayah">Sayah</option>
-                    <option value="Espece">Espece</option>
-                    <option value="credit">Credit</option>
-                    <option value="amandes">Amandes</option>
-                    <option value="hakim">Hakim</option>
-                    <option value="Lavage">Lavage</option>
+                    @foreach (App\Models\Natures::all() as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-6">
@@ -65,11 +57,12 @@
             </div>
             <div class="col-md-6">
                 <div class="custom-control custom-radio">
-                    <input class="custom-control-input" type="radio" id="customRadio1" value="no" name="type" checked>
+                    <input class="custom-control-input" type="radio" id="customRadio1" value="no" name="type"
+                        checked>
                     <label for="customRadio1" class="custom-control-label">noo</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input class="custom-control-input" type="radio" id="customRadio2" name="type" value="yes" >
+                    <input class="custom-control-input" type="radio" id="customRadio2" name="type" value="yes">
                     <label for="customRadio2" class="custom-control-label">yes</label>
                 </div>
             </div>
