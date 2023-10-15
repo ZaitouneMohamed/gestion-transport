@@ -13,4 +13,12 @@ class Natures extends Model
         "name",
         "type"
     ];
+    public function scopeBons($query)
+    {
+        $query->where('type', 'bons');
+    }
+    public function scopeAchat($query)
+    {
+        $query->where('type', 'achat');
+    }
 }

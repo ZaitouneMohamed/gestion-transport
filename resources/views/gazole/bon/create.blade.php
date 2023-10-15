@@ -46,7 +46,7 @@
             <div class="col-md-6">
                 <label for="inputState" class="form-label">Nature *</label>
                 <select id="inputState" name="nature" class="form-select">
-                    @foreach (App\Models\Natures::all() as $item)
+                    @foreach (App\Models\Natures::Bons()->get() as $item)
                         <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
