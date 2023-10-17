@@ -123,19 +123,11 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('consomations.index') }}" class="nav-link">
-                                <i class="fa-solid fa-bars"></i>
+                                <i class="fa-solid fa-map-location-dot"></i>
                                 <p>
                                     Trajet
                                     <span
                                         class="right badge badge-success">{{ App\Models\Consomation::count() }}</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('global.search') }}" class="nav-link">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                                <p>
-                                    Search
                                 </p>
                             </a>
                         </li>
@@ -184,6 +176,14 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('global.search') }}" class="nav-link">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <p>
+                                    Search
+                                </p>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('natures.index') }}" class="nav-link">
