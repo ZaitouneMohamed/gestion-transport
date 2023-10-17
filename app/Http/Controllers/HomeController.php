@@ -28,12 +28,13 @@ class HomeController extends Controller
         Excel::import(new OrderImport, $request->file('orders'));
         return back()->with('massage', 'User Imported Successfully');
     }
-    public function clear()
+    public function factures()
     {
-        DB::table('orders')->delete();
-        return redirect()->back()->with([
-            "success" => "table cleared successfly"
-        ]);
+        return view('gazole.factures.index');
+    }
+    public function facturesStatistiques()
+    {
+        return view('gazole.factures.statistiques');
     }
 
     function GazoleUsersList()
