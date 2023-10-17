@@ -19,7 +19,7 @@ class Crud extends Component
     }
     public function GetFacturesList()
     {
-        $this->factures = facture::latest()->get();
+        $this->factures = facture::orderBy('date')->get();
     }
     public function AddBon()
     {
