@@ -52,6 +52,7 @@
         @endif
     </form>
     <br><br>
+    <input type="date" name="" wire:model="dateFilter" id=""><button wire:click="search" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
     <table class="table">
         <thead>
             <tr>
@@ -74,8 +75,8 @@
                     <td>
                         <button class="btn btn-danger" wire:click="DeleteFacture({{ $item->id }})"><i
                                 class="fa fa-trash" aria-hidden="true"></i></button>
-                        <button class="btn btn-warning" wire:click="edit({{ $item->id }})"><i
-                                class="fa fa-pencil" aria-hidden="true"></i></button>
+                        {{-- <button class="btn btn-warning" wire:click="edit({{ $item->id }})"><i
+                                class="fa fa-pencil" aria-hidden="true"></i></button> --}}
                     </td>
                 </tr>
             @endforeach

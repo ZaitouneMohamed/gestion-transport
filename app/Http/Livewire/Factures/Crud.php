@@ -7,15 +7,20 @@ use Livewire\Component;
 
 class Crud extends Component
 {
-    public $date, $prix, $station_id, $n_bon, $factures, $facture_id, $editing;
+    public $date, $prix, $station_id, $n_bon, $factures, $facture_id, $editing, $dateFilter;
     public function render()
     {
         return view('livewire.factures.crud');
+    }
+    public function search()
+    {
+        $this->factures = facture::where('date', $this->dateFilter)->get();
     }
     public function mount()
     {
         $this->GetFacturesList();
         $this->date = date('Y-m-d');
+        $this->dateFilter = date('Y-m-d');
     }
     public function GetFacturesList()
     {
@@ -41,39 +46,38 @@ class Crud extends Component
         session()->flash('message', 'facture successfully deleted');
         $this->GetFacturesList();
     }
-    public function edit($id)
-    {
-        $facture = facture::find($id);
-        $this->n_bon = $facture->n_bon;
-        $this->date = $facture->date;
-        $this->prix = $facture->prix;
-        $this->station_id = $facture->station_id;
-        $this->facture_id = $facture->id;
-        $this->editing = true;
-    }
-    public function cancel()
-    {
-        $this->editing = false;
-        $this->n_bon = "";
-        $this->date = "";
-        $this->prix = "";
-        $this->station_id = "";
-        $this->facture_id = "";
-        // $this->GetFacturesList();
-    }
-    public function update()
-    {
-        $facture = facture::find($this->facture_id);
-        $facture->update([
-            "date" => $this->date,
-            "prix" => $this->prix,
-            "station_id" => $this->station_id,
-            "n_bon" => $this->n_bon,
-        ]);
-        session()->flash('message', 'facture successfully updated');
-        $this->GetFacturesList();
-        $this->cancel();
-    }
+    // public function edit($id)
+    // {
+    //     $facture = facture::find($id);
+    //     $this->n_bon = $facture->n_bon;
+    //     $this->date = $facture->date;
+    //     $this->prix = $facture->prix;
+    //     $this->station_id = $facture->station_id;
+    //     $this->facture_id = $facture->id;
+    //     $this->editing = true;
+    // }
+    // public function cancel()
+    // {
+    //     $this->editing = false;
+    //     $this->n_bon = "";
+    //     $this->date = "";
+    //     $this->prix = "";
+    //     $this->station_id = "";
+    //     $this->facture_id = "";
+    // }
+    // public function update()
+    // {
+    //     $facture = facture::find($this->facture_id);
+    //     $facture->update([
+    //         "date" => $this->date,
+    //         "prix" => $this->prix,
+    //         "station_id" => $this->station_id,
+    //         "n_bon" => $this->n_bon,
+    //     ]);
+    //     session()->flash('message', 'facture successfully updated');
+    //     $this->GetFacturesList();
+    //     $this->cancel();
+    // }
     protected $rules = [
         "date" => "required",
         "prix" => "required",
