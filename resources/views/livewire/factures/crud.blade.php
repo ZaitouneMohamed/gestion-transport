@@ -52,7 +52,8 @@
         @endif
     </form>
     <br><br>
-    <input type="date" name="" wire:model="dateFilter" id=""><button wire:click="search" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <input type="date" name="" wire:model="dateFilter" id="">
+    <button wire:click="search" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
     <table class="table">
         <thead>
             <tr>
