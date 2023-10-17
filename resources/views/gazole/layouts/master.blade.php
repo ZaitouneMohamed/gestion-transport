@@ -141,7 +141,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="fa-solid fa-cart-plus"></i>
                                 <p>
                                     Achat
                                     <i class="fas fa-angle-left right"></i>
@@ -164,7 +164,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
+                                <i class="fa-solid fa-file-lines"></i>
                                 <p>
                                     Factures
                                     <i class="fas fa-angle-left right"></i>
