@@ -26,7 +26,7 @@
                 <th scope="col">Trajet Compose</th>
                 <th scope="col">KM Total</th>
                 <th scope="col">Taux</th>
-                <th scope="col">camion comsommation</th>
+                <th scope="col">camion consommation</th>
                 <th scope="col">Statue</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Date</th>
