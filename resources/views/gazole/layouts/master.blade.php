@@ -142,13 +142,13 @@
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
                                     <a href="{{ route('pieces.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa-solid fa-screwdriver"></i>
                                         <p>pieces</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('reparations.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
                                         <p>Reparations</p>
                                     </a>
                                 </li>
@@ -165,13 +165,13 @@
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
                                     <a href="{{ route('facture.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa-solid fa-money-check-dollar"></i>
                                         <p>List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('facture.statistiques') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fa-solid fa-chart-simple"></i>
                                         <p>statistiques</p>
                                     </a>
                                 </li>
