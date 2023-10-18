@@ -98,7 +98,7 @@
                             <a href="{{ route('chaufeur.index') }}" class="nav-link">
                                 <i class="fa-solid fa-user"></i>
                                 <p>
-                                    Chaufeur
+                                    Chauffeur
                                     <span class="right badge badge-success">{{ App\Models\Chaufeur::count() }}</span>
                                 </p>
                             </a>
