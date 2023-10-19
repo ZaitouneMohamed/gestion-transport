@@ -104,7 +104,7 @@
 
 
         .right {
-            background: url("http://127.0.0.1:8000/images/global images/Isuzu NPR HD.jpeg");
+            background: url("https://aetjtransportetlogistique.ma/images/global images/Isuzu NPR HD.jpeg");
             background-size: cover;
             color: #fff;
             position: relative;
