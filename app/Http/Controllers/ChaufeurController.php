@@ -41,6 +41,9 @@ class ChaufeurController extends Controller
         ]);
         Chaufeur::create([
             "full_name" => $request->full_name,
+            "code" => $request->code,
+            "numero_2" => $request->numero_2,
+            "adresse" => $request->adresse,
             "phone" => $request->phone
         ]);
         return redirect()->route('chaufeur.index')->with([
@@ -87,6 +90,8 @@ class ChaufeurController extends Controller
         $chaufeur = Chaufeur::find($id);
         $chaufeur->update([
             "full_name" => $request->full_name,
+            "numero_2" => $request->numero_2,
+            "adresse" => $request->adresse,
             "phone" => $request->phone
         ]);
         return redirect()->route('chaufeur.index')->with([

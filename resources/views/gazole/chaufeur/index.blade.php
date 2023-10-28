@@ -9,7 +9,10 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">name</th>
-                <th scope="col">phone</th>
+                <th scope="col">code</th>
+                <th scope="col">phone 1</th>
+                <th scope="col">phone 2</th>
+                <th scope="col">adresse</th>
                 <th scope="col">consomation</th>
                 <th scope="col">action</th>
             </tr>
@@ -19,7 +22,10 @@
                 <tr>
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->full_name }}</td>
+                    <td>{{ $item->code }}</td>
                     <td>{{ $item->phone }}</td>
+                    <td>{{ $item->numero_2 }}</td>
+                    <td>{{ $item->adresse }}</td>
                     <td>{{ $item->Consomations->count() }}</td>
                     <td class="d-flex">
                         <a href="{{ route('chaufeur.edit', $item->id) }}" class="btn btn-warning mr-1"><i
