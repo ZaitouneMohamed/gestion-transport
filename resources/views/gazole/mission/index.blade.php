@@ -6,15 +6,6 @@
         <div class="col-2">
             <a href="{{ route('missions.create') }}" class="btn btn-success"><b>Create New Mission</b></a>
         </div>
-        {{-- <div class="col-6">
-            <form action="{{ route('consomations.index') }}" method="POST">
-                @csrf
-                @method('GET')
-                <input type="date" name="date" value="" id="">
-                <input type="submit" value="submit" class="btn btn-success">
-            </form>
-        </div> --}}
-        <br><br>
     </div>
     <table class="table">
         <thead>
