@@ -10,7 +10,7 @@
             <form action="{{ route('consomations.index') }}" method="POST">
                 @csrf
                 @method('GET')
-                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="date" name="date" value="" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div> --}}
