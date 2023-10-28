@@ -38,6 +38,7 @@ class ChaufeurController extends Controller
     {
         $this->validate($request, [
             "full_name" => "required",
+            "code" => " unique:chaufeurs,code",
         ]);
         Chaufeur::create([
             "full_name" => $request->full_name,
@@ -91,6 +92,7 @@ class ChaufeurController extends Controller
         $chaufeur->update([
             "full_name" => $request->full_name,
             "numero_2" => $request->numero_2,
+            "code" => $request->code,
             "adresse" => $request->adresse,
             "phone" => $request->phone
         ]);
