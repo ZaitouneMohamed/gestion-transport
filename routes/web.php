@@ -5,6 +5,7 @@ use App\Http\Controllers\CamionController;
 use App\Http\Controllers\ChaufeurController;
 use App\Http\Controllers\ConsomationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NaturesController;
 use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ReparationController;
@@ -46,6 +47,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("camions", CamionController::class);
     Route::resource("stations", StationController::class);
     Route::resource("consomations", ConsomationController::class);
+    Route::resource("missions", MissionController::class);
     Route::resource("reparations", ReparationController::class);
     Route::resource("pieces", PieceController::class);
     Route::resource("natures", NaturesController::class);
