@@ -25,6 +25,7 @@
                 <th scope="col">trajet mission</th>
                 <th scope="col">nombre magasin</th>
                 <th scope="col">camion</th>
+                <th scope="col">numero bon</th>
                 <th scope="col">KM proposer</th>
                 <th scope="col">KM total</th>
                 <th scope="col">Statue</th>
@@ -40,6 +41,7 @@
                     <td>{{ $item->Ville->name }}</td>
                     <td>{{ $item->nombre_magasin }}</td>
                     <td>{{ $item->camion->matricule }}</td>
+                    <td>{{ $item->numero_bon }}</td>
                     <td>{{ $item->Ville->km_proposer }}</td>
                     <td>{{ $item->km_total }}</td>
                     <td>

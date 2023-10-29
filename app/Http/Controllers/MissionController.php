@@ -41,6 +41,7 @@ class MissionController extends Controller
             "camion_id" => "required",
             "ville_id" => "required",
             "date" => "required",
+            "numero_bon" => "required",
             "km_total" => "required",
             "nombre_magasin" => "required",
         ]);
@@ -48,6 +49,7 @@ class MissionController extends Controller
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
             "ville_id" => $request->ville_id,
+            "numero_bon" => $request->numero_bon,
             "date" => $request->date,
             "km_total" => $request->km_total,
             "nombre_magasin" => $request->nombre_magasin,
@@ -92,6 +94,7 @@ class MissionController extends Controller
         $this->validate($request, [
             "chaufeur_id" => "required",
             "camion_id" => "required",
+            "numero_bon" => "required",
             "ville_id" => "required",
             "date" => "required",
             "km_total" => "required",
@@ -100,6 +103,7 @@ class MissionController extends Controller
         $mission = Mission::findOrFail($id);
         $mission->update([
             "chaufeur_id" => $request->chaufeur_id,
+            "numero_bon" => $request->numero_bon,
             "camion_id" => $request->camion_id,
             "ville_id" => $request->ville_id,
             "date" => $request->date,

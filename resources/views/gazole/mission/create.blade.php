@@ -36,11 +36,15 @@
         </div>
         <div class="col-6">
             <label for="inputAddress" class="form-label">km Total</label>
-            <input type="text" name="km_total" class="form-control"  >
+            <input type="text" name="km_total" class="form-control">
+        </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">numero bon</label>
+            <input type="text" name="numero_bon" class="form-control">
         </div>
         <div class="col-6">
             <label for="inputAddress" class="form-label">nombre magasin</label>
-            <input type="number" name="nombre_magasin" class="form-control" >
+            <input type="number" name="nombre_magasin" class="form-control">
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>

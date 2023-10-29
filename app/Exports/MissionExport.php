@@ -30,6 +30,7 @@ class MissionExport implements FromCollection
                     "camion_matricule" => $mission->Camion->matricule,
                     "km_proposer" => $mission->Ville->km_proposer,
                     "km_total" => $mission->km_total,
+                    "numero_bon" => $mission->numero_bon,
                     "statue" => $mission->km_total - $mission->Ville->km_proposer,
                 ];
             });

@@ -39,6 +39,10 @@
             <input type="text" name="km_total" class="form-control" value="{{ $mission->km_total }}">
         </div>
         <div class="col-6">
+            <label for="inputAddress" class="form-label">Numero Bon</label>
+            <input type="text" name="numero_bon" class="form-control" value="{{ $mission->numero_bon }}">
+        </div>
+        <div class="col-6">
             <label for="inputAddress" class="form-label">nombre magasin</label>
             <input type="number" name="nombre_magasin" class="form-control" value="{{ $mission->nombre_magasin }}">
         </div>
