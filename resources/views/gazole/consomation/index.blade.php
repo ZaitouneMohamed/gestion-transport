@@ -14,6 +14,15 @@
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>
+        <div class="col-4">
+            excel
+            <form action="{{route('excel.exportTrajet')}}" method="POST">
+                @csrf
+                @method("POST")
+                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
         <br><br>
     </div>
     <table class="table">
