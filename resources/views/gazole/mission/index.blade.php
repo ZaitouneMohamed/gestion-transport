@@ -11,12 +11,6 @@
             <form action="{{ route('excel.exportMission') }}" method="POST">
                 @csrf
                 @method('POST')
-                <select name="ville" id="">
-                    <option value=""></option>
-                    @foreach (\App\Models\Ville::all() as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>

@@ -20,8 +20,7 @@ class ExcelController extends Controller
     public function exportMission(Request $request)
     {
         $date = Carbon::parse($request->input('date'));
-        $ville = $request->input('ville');
-        return Excel::download(new MissionExport($date , $ville), 'Mission_export.xlsx');
+        return Excel::download(new MissionExport($date ), 'Mission_export.xlsx');
     }
     public function exportFacture(Request $request)
     {

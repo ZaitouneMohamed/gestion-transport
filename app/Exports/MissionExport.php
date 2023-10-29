@@ -7,12 +7,11 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class MissionExport implements FromCollection
 {
-    protected $date, $ville;
+    protected $date;
 
-    public function __construct($date, $ville)
+    public function __construct($date)
     {
         $this->date = $date;
-        $this->ville = $ville;
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -20,7 +19,6 @@ class MissionExport implements FromCollection
     public function collection()
     {
         return Mission::whereDate('date', $this->date)
-            ->where('ville_id', $this->ville)
             ->get()
             ->map(function ($mission) {
                 return [
