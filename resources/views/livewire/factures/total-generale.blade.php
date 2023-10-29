@@ -16,6 +16,18 @@
         </div>
     </div>
     @if ($datedebut && $datefin)
+        <div class="col-4">
+            excel
+            <form action="{{ route('excel.exportFactureTotalGenerale') }}" method="POST">
+                @csrf
+                @method('POST')
+                <input type="hidden" name="datedebut" wire:model="datedebut">
+                <input type="hidden" name="datefin" wire:model="datefin">
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
+    @endif
+    @if ($datedebut && $datefin)
         <div class="row">
             <div class="col-4">
                 <div class="card text-center">

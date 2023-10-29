@@ -57,6 +57,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::post("exportTrajet", "exportTrajet")->name("exportTrajet");
         Route::post("exportMission", "exportMission")->name("exportMission");
         Route::post("exportFacture", "exportFacture")->name("exportFacture");
+        Route::post("exportFactureTotalGenerale", "exportFactureTotalGenerale")->name("exportFactureTotalGenerale");
     });
 
     Route::controller(HomeController::class)->group(function () {

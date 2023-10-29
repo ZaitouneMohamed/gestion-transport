@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\FactureExport;
+use App\Exports\FactureGeneraleExport;
 use App\Exports\MissionExport;
 use App\Exports\TrajetExport;
 use Carbon\Carbon;
@@ -28,5 +29,11 @@ class ExcelController extends Controller
         $date_fin = Carbon::parse($request->input('datefin'));
         $station = $request->input('station');
         return Excel::download(new FactureExport($date_debut ,$date_fin, $station), 'Facture_export.xlsx');
+    }
+    public function exportFactureTotalGenerale(Request $request)
+    {
+        $date_debut = Carbon::parse($request->input('datedebut'));
+        $date_fin = Carbon::parse($request->input('datefin'));
+        return Excel::download(new FactureGeneraleExport($date_debut ,$date_fin), 'Facture_total_general_export.xlsx');
     }
 }
