@@ -56,6 +56,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::controller(ExcelController::class)->name('excel.')->group(function() {
 
         Route::post("exportTrajet", "exportTrajet")->name("exportTrajet");
+        Route::post("exportMission", "exportMission")->name("exportMission");
     });
 
     Route::controller(HomeController::class)->group(function () {
