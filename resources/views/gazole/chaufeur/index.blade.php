@@ -1,46 +1,84 @@
-@extends("gazole.layouts.master")
+@extends('gazole.layouts.master')
 
 @section('content')
-    <br>
-    <a href="{{ route('chaufeur.create') }}" class="btn btn-success">create new chaufeur</a>
-    <br><br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">name</th>
-                <th scope="col">code</th>
-                <th scope="col">phone 1</th>
-                <th scope="col">phone 2</th>
-                <th scope="col">adresse</th>
-                <th scope="col">consomation</th>
-                <th scope="col">action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($chaufeurs as $item)
-                <tr>
-                    <th scope="row">{{ $item->id }}</th>
-                    <td>{{ $item->full_name }}</td>
-                    <td>{{ $item->code }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->numero_2 }}</td>
-                    <td>{{ $item->adresse }}</td>
-                    <td>{{ $item->Consomations->count() }}</td>
-                    <td class="d-flex">
-                        <a href="{{ route('chaufeur.edit', $item->id) }}" class="btn btn-warning mr-1"><i
-                                class="fa fa-pen"></i></a>
-                        @if ($item->Consomations->count() == 0)
-                            <form action="{{ route('chaufeur.destroy', $item->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                            </form>
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{ $chaufeurs->links() }}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <a href="{{ route('chaufeur.create') }}" class="btn btn-success">create new chaufeur</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="card card-solid">
+                <div class="card-body pb-0">
+                    <div class="row">
+                        @forelse ($chaufeurs as $item)
+                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+                                        {{-- Digital Strategist --}}
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><b>{{ $item->full_name }}</b></h2>
+                                                <p class="text-muted text-sm">
+                                                    <b>Code: </b>{{ $item->code }}
+                                                </p>
+                                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                    <li class="small">
+                                                        <span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
+                                                        Address: {{ $item->adresse }}
+                                                    </li>
+                                                    <li class="small">
+                                                        <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                                                        Phone 1: {{ $item->phone }}
+                                                    </li>
+                                                    <li class="small">
+                                                        <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                                                        Phone 2:{{ $item->numero_2 }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex">
+                                            <a href="{{ route('chaufeur.edit', $item->id) }}" class="btn btn-warning mr-1">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            @if ($item->Consomations->count() == 0)
+                                                <form action="{{ route('chaufeur.destroy', $item->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    {{ $chaufeurs->links() }}
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 @endsection
