@@ -132,7 +132,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('missions.index') }}" class="nav-link">
-                                <i class="fa-solid fa-map-location-dot"></i>
+                                <i class="fa-solid fa-truck-fast"></i>
                                 <p>
                                     Mission
                                     <span class="right badge badge-success">{{ App\Models\Mission::count() }}</span>
