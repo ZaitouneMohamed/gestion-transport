@@ -34,7 +34,7 @@
                     <td>{{ $item->Ville->km_proposer }}</td>
                     <td>{{ $item->km_total }}</td>
                     <td>
-                        @if ($item->km_total - $item->Ville->km_proposer < 0)
+                        @if ($item->Ville->km_proposer - $item->km_total < 0)
                             <span class="badge bg-danger">{{ $item->km_total - $item->Ville->km_proposer }}</span>
                         @else
                             <span class="badge bg-success">{{ $item->km_total - $item->Ville->km_proposer }}</span>
