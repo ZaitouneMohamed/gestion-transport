@@ -53,10 +53,10 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("pieces", PieceController::class);
     Route::resource("natures", NaturesController::class);
 
-    Route::controller(ExcelController::class)->name('excel.')->group(function() {
-
+    Route::controller(ExcelController::class)->name('excel.')->group(function () {
         Route::post("exportTrajet", "exportTrajet")->name("exportTrajet");
         Route::post("exportMission", "exportMission")->name("exportMission");
+        Route::post("exportFacture", "exportFacture")->name("exportFacture");
     });
 
     Route::controller(HomeController::class)->group(function () {

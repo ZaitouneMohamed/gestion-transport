@@ -25,6 +25,21 @@
         </div>
     </div>
     @if ($station)
+    <div class="col-4">
+        excel
+        <form action="{{ route('excel.exportFacture') }}" method="POST">
+            @csrf
+            @method('POST')
+            <input type="hidden" name="datedebut" wire:model="datedebut">
+            <input type="hidden" name="datefin" wire:model="datefin">
+            <input type="hidden" name="station" wire:model="station">
+            <input type="submit" value="submit" class="btn btn-success">
+        </form>
+    </div>
+
+
+    @endif
+    @if ($station)
         <div class="row">
             <div class="col-4">
                 <div class="card text-center">

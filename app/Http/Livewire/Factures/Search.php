@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Factures;
 
+use App\Exports\FactureExport;
 use App\Models\facture;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Search extends Component
 {
@@ -18,7 +20,8 @@ class Search extends Component
                 ->get()
         ]);
     }
-    public function mount() {
+    public function mount()
+    {
         $this->datedebut = date('Y-m-d');
         $this->datefin = date('Y-m-d');
     }
