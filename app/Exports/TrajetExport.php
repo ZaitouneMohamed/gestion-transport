@@ -39,16 +39,16 @@ class TrajetExport implements FromCollection
     public function headings(): array
     {
         return [
-            'full_name',
-            'matricule',
-            'ville',
-            'trajet_compose',
-            'km_total',
-            'taux',
-            'camion_consomation',
-            'statue',
-            'prix',
-            'date',
+            'Full Name',
+            'Matricule',
+            'Ville',
+            'Trajet Compose',
+            'Km Total',
+            'Taux',
+            'Camion Consommation',
+            'Statue',
+            'Prix',
+            'Date',
         ];
     }
 }
