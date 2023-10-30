@@ -12,6 +12,7 @@ use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,3 +78,12 @@ Route::POST("AddUser", UserController::class)->name("add.users")->middleware("au
 Route::get("login", [AuthController::class, 'Login_form'])->name('login')->middleware("guest");
 Route::post("login_c", [AuthController::class, 'login'])->name('login_c');
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/addcahe', function () {
+    $command = Artisan::call("route:cache");
+    dd("route cache with success");
+});
+Route::get('/clearcache', function () {
+    $command = Artisan::call("route:clear");
+    dd("route clear with success");
+});
