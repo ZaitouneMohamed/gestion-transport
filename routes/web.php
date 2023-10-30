@@ -12,7 +12,10 @@ use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UserController;
+use App\Mail\DemoMail;
+use App\Mail\MyTestMail;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,4 +89,14 @@ Route::get('/addcahe', function () {
 Route::get('/clearcache', function () {
     $command = Artisan::call("route:clear");
     dd("route clear with success");
+});
+Route::get('send-mail', function () {
+
+    Mail::send('Mail.TestMail', [], function ($message) {
+        $message->to('dwm23-zaitoune@ifiag.com')
+            ->subject('Test Mail');
+    });
+
+
+    dd("Email is sent successfully.");
 });
