@@ -62,6 +62,7 @@
                 <option value="Taza">Taza</option>
                 <option value="Tetouan">Tetouan</option>
                 <option value="Tiznit">Tiznit</option>
+                <option value="Fkih Ben Salah">Fkih Ben Salah</option>
             </select>
             <!-- Script by hscripts.com -->
         </div>
