@@ -68,13 +68,15 @@
                                     class="fa fa-pencil" aria-hidden="true"></i></a>
                             <form action="{{ route('factures.destroy', $item->id) }}" method="post">
                                 @csrf
-                                @method("DELETE")
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ $factures->links() }}
     </div>
 @endsection
