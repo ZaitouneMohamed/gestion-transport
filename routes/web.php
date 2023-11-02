@@ -5,6 +5,7 @@ use App\Http\Controllers\CamionController;
 use App\Http\Controllers\ChaufeurController;
 use App\Http\Controllers\ConsomationController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\FactureController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NaturesController;
@@ -55,6 +56,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("missions", MissionController::class);
     Route::resource("reparations", ReparationController::class);
     Route::resource("pieces", PieceController::class);
+    Route::resource("factures", FactureController::class);
     Route::resource("natures", NaturesController::class);
 
     Route::controller(ExcelController::class)->name('excel.')->group(function () {
@@ -68,7 +70,6 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::get("CreateBon/{id}", "CreateBon")->name("createBon");
         Route::post("AddBonToConsomation/{id}", "AddBonToConsomation")->name("AddBonToConsomation");
         Route::get("getStation", "getStations")->name("getStations");
-        Route::get("facture", "factures")->name("facture.index");
         Route::get("factureStatistiques", "facturesStatistiques")->name("facture.statistiques");
         Route::get("ViewBonsOfTrajet/{id}", "ViewBonsOfTrajet")->name("getBons");
         Route::post("UpdateBon/{id}", "UpdateBon")->name("UpdateBon");

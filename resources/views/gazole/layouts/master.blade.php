@@ -172,7 +172,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="{{ route('facture.index') }}" class="nav-link">
+                                    <a href="{{ route('factures.index') }}" class="nav-link">
                                         <i class="fa-solid fa-money-check-dollar"></i>
                                         <p>List</p>
                                     </a>
