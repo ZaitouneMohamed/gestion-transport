@@ -12,9 +12,16 @@ class FactureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $factures = facture::latest()->get();
+        $query = facture::orderBy('date', 'desc');
+
+        if ($request->has('date')) {
+            $date = $request->input('date');
+            $query->where('date', $date);
+        }
+
+        $factures = $query->paginate(15);
         return view('gazole.factures.index',compact("factures"));
     }
 
