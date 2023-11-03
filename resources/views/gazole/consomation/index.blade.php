@@ -38,9 +38,6 @@
                 <th scope="col">Statue Gazole</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Date</th>
-                <th scope="col">N° magasin</th>
-                <th scope="col">N° bon charge</th>
-                <th scope="col">statue Mission</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -86,13 +83,6 @@
                     </td>
                     <td>
                         {{ $item->date }}
-                    </td>
-                    <td>
-                        5
-                    </td>
-                    <td>22325</td>
-                    <td>
-                        <span class="badge bg-success">2</span>
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
