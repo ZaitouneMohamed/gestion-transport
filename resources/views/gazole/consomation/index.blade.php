@@ -28,7 +28,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Chaufeur</th>
                 <th scope="col">camion</th>
                 <th scope="col">ville</th>
@@ -39,6 +38,8 @@
                 <th scope="col">Statue</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Date</th>
+                <th scope="col">N° magasin</th>
+                <th scope="col">statue</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -50,7 +51,6 @@
                     }
                 @endphp
                 <tr>
-                    <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->chaufeur->full_name }}</td>
                     <td>{{ $item->camion->matricule }}</td>
                     <td>{{ $item->ville }}</td>
@@ -85,6 +85,12 @@
                     </td>
                     <td>
                         {{ $item->date }}
+                    </td>
+                    <td>
+                        5
+                    </td>
+                    <td>
+                        <span class="badge bg-success">2</span>
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
