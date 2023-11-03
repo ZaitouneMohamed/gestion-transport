@@ -35,12 +35,12 @@
                 <th scope="col">KM Total</th>
                 <th scope="col">Taux</th>
                 <th scope="col">camion consommation</th>
-                <th scope="col">Statue</th>
+                <th scope="col">Statue Gazole</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Date</th>
                 <th scope="col">N° magasin</th>
                 <th scope="col">N° bon charge</th>
-                <th scope="col">statue</th>
+                <th scope="col">statue Mission</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -90,7 +90,7 @@
                     <td>
                         5
                     </td>
-                    <td>2</td>
+                    <td>22325</td>
                     <td>
                         <span class="badge bg-success">2</span>
                     </td>
