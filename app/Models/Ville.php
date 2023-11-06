@@ -13,4 +13,8 @@ class Ville extends Model
         "name",
         "km_proposer"
     ];
+    public function Missions()
+    {
+        return $this->hasMany(Mission::class);
+    }
 }

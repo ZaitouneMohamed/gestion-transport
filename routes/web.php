@@ -15,6 +15,7 @@ use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VilleController;
 use App\Mail\DemoMail;
 use App\Mail\MyTestMail;
 use App\Models\Consomation;
@@ -59,6 +60,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("consomations", ConsomationController::class);
     Route::resource("missions", MissionController::class);
     Route::resource("reparations", ReparationController::class);
+    Route::resource("ville", VilleController::class);
     Route::resource("pieces", PieceController::class);
     Route::resource("factures", FactureController::class);
     Route::resource("natures", NaturesController::class);

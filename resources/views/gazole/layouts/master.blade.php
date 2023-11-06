@@ -194,6 +194,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('ville.index') }}" class="nav-link">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <p>
+                                    Ville
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('natures.index') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <p>
