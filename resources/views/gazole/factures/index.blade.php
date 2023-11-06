@@ -77,6 +77,8 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $factures->links() }}
+        @if ($factures instanceof \Illuminate\Pagination\LengthAwarePaginator)
+            {{ $factures->links() }}
+        @endif
     </div>
 @endsection
