@@ -203,6 +203,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('profile.index') }}" class="nav-link">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <p>
+                                    Profile
+                                    {{-- <span class="right badge badge-success">5</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('gazole.users') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <p>

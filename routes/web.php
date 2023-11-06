@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NaturesController;
 use App\Http\Controllers\PieceController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\UserController;
@@ -74,6 +75,13 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::get("ViewBonsOfTrajet/{id}", "ViewBonsOfTrajet")->name("getBons");
         Route::post("UpdateBon/{id}", "UpdateBon")->name("UpdateBon");
         Route::delete("DeleteBon/{id}", "DeleteBon")->name("DeleteBon");
+    });
+
+    Route::controller(ProfileController::class)->name("profile.")->group(function() {
+        Route::get('profile',"index")->name("index");
+        Route::post('/SetProfile', 'SetProfile')->name("SetProfile");
+        Route::post('/updatePassword', 'updatePassword')->name("updatePassword");
+
     });
 });
 
