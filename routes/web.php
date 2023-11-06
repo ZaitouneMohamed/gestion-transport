@@ -105,16 +105,12 @@ Route::get('/clearcache', function () {
     $command = Artisan::call("route:clear");
     dd("route clear with success");
 });
-
 Route::get('send-mail', function () {
-    $users = User::all();
+    Mail::send('Mail.TestMail', [], function ($message) {
+        $message->to('Yousseftrih59@gmail.com')
+            ->subject('Test Mail');
+    });
 
-    foreach ($users as $item) {
-        Mail::send('Mail.TestMail', [], function ($message) use ($item) {
-            $message->to($item->email)
-                ->subject('Test Mail');
-        });
-    }
 
-    dd("Emails are sent successfully.");
+    dd("Email is sent successfully.");
 });
