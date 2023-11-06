@@ -6,6 +6,7 @@ use App\Exports\FactureExport;
 use App\Exports\FactureGeneraleExport;
 use App\Exports\MissionExport;
 use App\Exports\TrajetExport;
+use App\Models\Consomation;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -14,9 +15,11 @@ class ExcelController extends Controller
 {
     public function exportTrajet(Request $request)
     {
-        $date = Carbon::parse($request->input('date'));
+        $selectedDate = $request->input('date');
+        $trajets = Consomation::with('Bons')->whereDate('date', $selectedDate)->get();
 
-        return Excel::download(new TrajetExport($date), 'trajet_export.xlsx');
+        return Excel::download(new TrajetExport($trajets), 'trajets_bons.xlsx');
+
     }
     public function exportMission(Request $request)
     {

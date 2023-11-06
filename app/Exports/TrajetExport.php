@@ -7,48 +7,61 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class TrajetExport implements FromCollection
 {
-    protected $date;
+    private $trajets;
 
-    public function __construct($date)
+    public function __construct($trajets)
     {
-        $this->date = $date;
+        $this->trajets = $trajets;
     }
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Consomation::whereDate('date', $this->date)
-            ->with(['chaufeur', "Camion"])
-            ->get()
-            ->map(function ($trajet) {
-                return [
-                    'full_name' => $trajet->chaufeur->full_name,
-                    'matricule' => $trajet->camion->matricule,
+        $data = [];
+        foreach ($this->trajets as $trajet) {
+            foreach ($trajet->Bons as $bon) {
+                $data[] = [
+                    'chaufeur' => $trajet->chaufeur->full_name,
+                    'camion' => $trajet->Camion->matricule,
                     'ville' => $trajet->ville,
-                    'trajet_compose' => $trajet->QtyLittre,
+                    'date' => $trajet->date,
+                    'trajet_comose' => $trajet->QtyLittre,
                     'km_total' => $trajet->KmTotal,
-                    'taux' => number_format($trajet->Taux, 2),
-                    'camion_consomation' => $trajet->camion->consommation,
+                    'camion_consomation' => $trajet->Camion->consommation,
                     'statue' => $trajet->statue,
                     'prix' => $trajet->Prix,
-                    'date' => $trajet->date,
+                    'bon_number' => $bon->numero_bon,
+                    'bon_date' => $bon->date,
+                    'qte_littre' => $bon->qte_litre,
+                    'bon_prix' => $bon->prix,
+                    'bon_km' => $bon->km,
+                    'station' => $bon->station->name,
+                    'nature' => $bon->nature,
                 ];
-            });
+            }
+        }
+        return collect($data);
     }
     public function headings(): array
     {
         return [
-            'Full Name',
-            'Matricule',
-            'Ville',
-            'Trajet Compose',
-            'Km Total',
-            'Taux',
-            'Camion Consommation',
-            'Statue',
-            'Prix',
-            'Date',
+            'chaufeur',
+            'camion',
+            'ville',
+            'date',
+            'trajetcompose',
+            'km_total',
+            'camion consomation',
+            'statue',
+            'prix',
+            'numero_bon',
+            'bon_date',
+            'Qte_littre',
+            'bon_prix',
+            'bon_km',
+            'station',
+            'nature',
         ];
     }
 }
