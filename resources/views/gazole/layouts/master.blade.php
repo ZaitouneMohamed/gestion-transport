@@ -195,7 +195,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('ville.index') }}" class="nav-link">
-                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <i class="fa-solid fa-city"></i>
                                 <p>
                                     Ville
                                 </p>
