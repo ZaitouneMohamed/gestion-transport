@@ -10,9 +10,12 @@
 <body>
     <h1>Trajets</h1>
     <ul>
-        @foreach ($trajets as $trajet)
-            <li>{{ $trajet->chaufeur->full_name }} - {{ $trajet->camion->matricule }} - {{ $trajet->ville }} - {{ $trajet->date }}</li>
-        @endforeach
+        @forelse ($trajets as $trajet)
+            <li>{{ $trajet->chaufeur->full_name }} - {{ $trajet->camion->matricule }} - {{ $trajet->ville }} -
+                {{ $trajet->date }}</li>
+        @empty
+            <h1>all good</h1>
+        @endforelse
     </ul>
 </body>
 
