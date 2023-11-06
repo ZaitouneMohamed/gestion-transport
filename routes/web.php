@@ -17,6 +17,7 @@ use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Mail\DemoMail;
 use App\Mail\MyTestMail;
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -104,13 +105,16 @@ Route::get('/clearcache', function () {
     $command = Artisan::call("route:clear");
     dd("route clear with success");
 });
+
 Route::get('send-mail', function () {
+    $users = User::all();
 
-    Mail::send('Mail.TestMail', [], function ($message) {
-        $message->to('dwm23-zaitoune@ifiag.com')
-            ->subject('Test Mail');
-    });
+    foreach ($users as $item) {
+        Mail::send('Mail.TestMail', [], function ($message) use ($item) {
+            $message->to($item->email)
+                ->subject('Test Mail');
+        });
+    }
 
-
-    dd("Email is sent successfully.");
+    dd("Emails are sent successfully.");
 });
