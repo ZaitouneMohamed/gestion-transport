@@ -80,8 +80,8 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::delete("DeleteBon/{id}", "DeleteBon")->name("DeleteBon");
     });
 
-    Route::controller(ProfileController::class)->name("profile.")->group(function() {
-        Route::get('profile',"index")->name("index");
+    Route::controller(ProfileController::class)->name("profile.")->group(function () {
+        Route::get('profile', "index")->name("index");
         Route::post('/SetProfile', 'SetProfile')->name("SetProfile");
         Route::post('/updatePassword', 'updatePassword')->name("updatePassword");
     });
@@ -108,12 +108,14 @@ Route::get('/clearcache', function () {
 });
 
 Route::get('send-mail', function () {
-    $trajets = Consomation::where('statue',0)->get();
-    if ($trajets->count > 0) {
-        Mail::send('Mail.TestMail', [], function ($message) {
-            $message->to('Yousseftrih59@gmail.com')
+    $trajets = Consomation::where('statue', 0)->get();
+
+    if ($trajets->count() > 0) {
+        Mail::send('Mail.TestMail', ['trajets' => $trajets], function ($message) {
+            $message->to('dwm23-zaitoune@ifiag.com')
                 ->subject('Test Mail');
         });
     }
+
     dd("Email is sent successfully.");
 });
