@@ -81,6 +81,40 @@
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
-        
+        <div class="row">
+            <div class="col-lg-6 col-6">
+                <div id="piechart" style="height: 400px;"></div>
+            </div>
+        </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+                ['Sleep', 7]
+            ]);
+
+            var options = {
+                title: 'SI Youssef'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
 @endsection
