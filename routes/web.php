@@ -13,6 +13,7 @@ use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
+use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Mail\DemoMail;
 use App\Mail\MyTestMail;
@@ -81,7 +82,11 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::get('profile',"index")->name("index");
         Route::post('/SetProfile', 'SetProfile')->name("SetProfile");
         Route::post('/updatePassword', 'updatePassword')->name("updatePassword");
+    });
 
+    Route::controller(SwitchController::class)->group(function () {
+        Route::get('SwitchActiveModeForChaufeur/{id}', 'SwitchActiveModeForChaufeur')->name("SwitchActiveModeForChaufeur");
+        Route::get('SwitchActiveModeForCamion/{id}', 'SwitchActiveModeForCamion')->name("SwitchActiveModeForCamion");
     });
 });
 

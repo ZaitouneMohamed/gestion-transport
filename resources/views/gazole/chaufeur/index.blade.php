@@ -24,7 +24,6 @@
                             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                                 <div class="card bg-light d-flex flex-fill">
                                     <div class="card-header text-muted border-bottom-0">
-                                        {{-- Digital Strategist --}}
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="row">
@@ -55,6 +54,17 @@
                                             <a href="{{ route('chaufeur.edit', $item->id) }}" class="btn btn-warning mr-1">
                                                 <i class="fas fa-pen"></i>
                                             </a>
+                                            @if ($item->statue === 1)
+                                                <a href="{{ route('SwitchActiveModeForChaufeur', $item->id) }}"
+                                                    class="btn btn-success mr-1">
+                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('SwitchActiveModeForChaufeur', $item->id) }}"
+                                                    class="btn btn-danger mr-1">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </a>
+                                            @endif
                                             @if ($item->Consomations->count() == 0)
                                                 <form action="{{ route('chaufeur.destroy', $item->id) }}" method="post">
                                                     @csrf

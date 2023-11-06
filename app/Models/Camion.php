@@ -10,6 +10,7 @@ class Camion extends Model
     use HasFactory;
     protected $fillable = [
         "matricule",
+        "statue",
         "consommation"
     ];
     public function Consomations()

@@ -22,7 +22,15 @@
                     <td>{{ $item->consommation }}</td>
                     <td>{{ $item->Consomations->count() }}</td>
                     <td class="d-flex">
-                        <a href="#" class="btn btn-warning mr-1"><i class="fa fa-wrench" aria-hidden="true"></i></a>
+                        @if ($item->statue === 1)
+                            <a href="{{ route('SwitchActiveModeForCamion', $item->id) }}" class="btn btn-success mr-1">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </a>
+                        @else
+                            <a href="{{ route('SwitchActiveModeForCamion', $item->id) }}" class="btn btn-danger mr-1">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
+                        @endif
                         <a href="{{ route('camions.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
                         @if ($item->Consomations->count() == 0)
