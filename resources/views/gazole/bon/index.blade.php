@@ -52,8 +52,10 @@
             </div>
             <div class="col-4"></div>
         </div>
-        <h1>Bons List {{ $trajet->bons->count() }}</h1><a href="{{ route('createBon', $trajet->id) }}"
-            class="btn btn-success">Add Bon</a>
+        <h1>Bons List {{ $trajet->bons->count() }}</h1>
+        @if ($trajet->status === 0)
+            <a href="{{ route('createBon', $trajet->id) }}" class="btn btn-success">Add Bon</a>
+        @endif
         <div class="row">
             @foreach ($trajet->bons as $item)
                 <div class="col-4">
