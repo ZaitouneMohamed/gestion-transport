@@ -7,18 +7,18 @@
             <a href="{{ route('consomations.create') }}" class="btn btn-success"><b>Create New Trajet</b></a>
         </div>
         <div class="col-6">
-            <form action="{{route('consomations.index')}}" method="POST">
+            <form action="{{ route('consomations.index') }}" method="POST">
                 @csrf
-                @method("GET")
+                @method('GET')
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>
         <div class="col-4">
             excel
-            <form action="{{route('excel.exportTrajet')}}" method="POST">
+            <form action="{{ route('excel.exportTrajet') }}" method="POST">
                 @csrf
-                @method("POST")
+                @method('POST')
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
@@ -49,21 +49,21 @@
                     }
                 @endphp
                 <tr>
-                    <td>{{ $item->chaufeur->full_name }}</td>
+                    <td>{{ $item->chaufeur->full_name }} </td>
                     <td>{{ $item->camion->matricule }}</td>
                     <td>{{ $item->ville }}</td>
                     <td>
-                        @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                        @if ($item->status === 1)
                             {{ $item->QtyLittre }}
                         @endif
                     </td>
                     <td>
-                        @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                        @if ($item->status === 1)
                             {{ $item->KmTotal }}
                         @endif
                     </td>
                     <td>
-                        @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                        @if ($item->status === 1)
                             {{ number_format($item->Taux, 2) }}
                         @endif
                     </td>
@@ -71,29 +71,45 @@
                         {{ $item->Camion->consommation }}
                     </td>
                     <td>
-                        <span
-                            class="badge
-                        @if ($item->statue > 0) bg-danger
-                        @else
-                        bg-success @endif
-                        ">{{ number_format($item->Statue, 2) }}</span>
+                        @if ($item->status === 1)
+                            <span
+                                class="badge
+                            @if ($item->statue > 0) bg-danger
+                            @else
+                            bg-success @endif
+                            ">{{ number_format($item->Statue, 2) }}</span>
+                        @endif
                     </td>
                     <td>
-                        {{ $item->Prix }}
+                        @if ($item->status === 1)
+                            {{ $item->Prix }}
+                        @endif
                     </td>
                     <td>
                         {{ $item->date }}
                     </td>
                     <td class="d-flex">
-                        <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
-                            class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                        @if ($item->status === 0)
+                            <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
+                                class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                            @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                                <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                    title="check that trajet is complete" class="btn btn-danger mr-1"><b><i
+                                            class="fa-solid fa-xmark"></i></b></a>
+                            @endif
+                        @else
+                            <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                title="check that trajet is not complete" class="btn btn-success mr-1"><b><i
+                                        class="fa-solid fa-check"></i></b></a>
+                        @endif
                         <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
                         <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
                         <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i
+                                    class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

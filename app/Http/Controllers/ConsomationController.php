@@ -52,6 +52,7 @@ class ConsomationController extends Controller
             "ville" => $request->ville,
             "description" => $request->description,
             "date" => $request->date,
+            "statue" => 0
         ]);
         return redirect()->route('consomations.index')->with([
             "success" => "consomation created sucssesfly"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Camion;
 use App\Models\Chaufeur;
+use App\Models\Consomation;
 use Illuminate\Http\Request;
 
 class SwitchController extends Controller
@@ -21,6 +22,15 @@ class SwitchController extends Controller
     {
         $product = Camion::find($id);
         $product->statue = !$product->statue;
+        $product->save();
+        return redirect()->back()->with([
+            "success" => "chauffeur Statue Update successful"
+        ]);
+    }
+    function SwitchActiveModeForTrajet($id)
+    {
+        $product = Consomation::find($id);
+        $product->status = !$product->status;
         $product->save();
         return redirect()->back()->with([
             "success" => "chauffeur Statue Update successful"

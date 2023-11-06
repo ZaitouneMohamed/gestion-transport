@@ -14,6 +14,7 @@ class Consomation extends Model
         "camion_id",
         "date",
         "description",
+        "status",
         "ville",
     ];
     public function Bons()
