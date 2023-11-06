@@ -109,7 +109,7 @@ Route::get('/clearcache', function () {
 });
 
 Route::get('send-mail', function () {
-    $trajets = Consomation::where('statue', 0)->get();
+    $trajets = Consomation::where('status', 0)->get();
 
     if ($trajets->count() > 0) {
         Mail::send('Mail.TestMail', ['trajets' => $trajets], function ($message) {
@@ -117,6 +117,7 @@ Route::get('send-mail', function () {
                 ->subject('Test Mail');
         });
     }
-
-    dd("Email is sent successfully.");
-});
+    return redirect()->back()->with([
+        "success" => "email send with success"
+    ]);
+})->name("email");

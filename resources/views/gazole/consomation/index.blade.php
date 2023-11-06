@@ -22,6 +22,7 @@
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
+            <a href="{{ route('email') }}"><i class="fa fa-envelope-open" aria-hidden="true"></i></a>
         </div>
         <br><br>
     </div>
