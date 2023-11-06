@@ -211,15 +211,15 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('gazole.users') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <p>
                                     Users List
-                                    {{-- <span class="right badge badge-success">5</span> --}}
+                                    <span class="right badge badge-success">5</span>
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
