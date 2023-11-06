@@ -17,7 +17,10 @@ class Camion extends Model
     {
         return $this->hasMany(Consomation::class);
     }
-
+    public function scopeActive($query)
+    {
+        return $query->where("statue", 1);
+    }
     public function getConsomationPrixAttribute()
     {
         $consomation = $this->Consomations();
