@@ -112,7 +112,7 @@ Route::get('send-mail', function () {
 
     if ($trajets->count() > 0) {
         Mail::send('Mail.TestMail', ['trajets' => $trajets], function ($message) {
-            $message->to('dwm23-zaitoune@ifiag.com')
+            $message->to('Yousseftrih59@gmail.com')
                 ->subject('Test Mail');
         });
     }
