@@ -19,11 +19,14 @@ class FactureController extends Controller
         if ($request->has('date')) {
             $date = $request->input('date');
             $query->where('date', $date);
+            $factures = $query->get(); // No pagination for specific date
+        } else {
+            $factures = $query->paginate(15); // Paginate other results
         }
 
-        $factures = $query->paginate(15);
-        return view('gazole.factures.index',compact("factures"));
+        return view('gazole.factures.index', compact('factures'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,7 +83,7 @@ class FactureController extends Controller
     public function edit($id)
     {
         $facture = facture::find($id);
-        return view('gazole.factures.edit',compact('facture'));
+        return view('gazole.factures.edit', compact('facture'));
     }
 
     /**
