@@ -17,6 +17,7 @@ use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Mail\DemoMail;
 use App\Mail\MyTestMail;
+use App\Models\Consomation;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
@@ -105,12 +106,14 @@ Route::get('/clearcache', function () {
     $command = Artisan::call("route:clear");
     dd("route clear with success");
 });
+
 Route::get('send-mail', function () {
-    Mail::send('Mail.TestMail', [], function ($message) {
-        $message->to('Yousseftrih59@gmail.com')
-            ->subject('Test Mail');
-    });
-
-
+    $trajets = Consomation::where('statue',0)->get();
+    if ($trajets->count > 0) {
+        Mail::send('Mail.TestMail', [], function ($message) {
+            $message->to('Yousseftrih59@gmail.com')
+                ->subject('Test Mail');
+        });
+    }
     dd("Email is sent successfully.");
 });
