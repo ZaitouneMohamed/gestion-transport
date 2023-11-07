@@ -5,7 +5,7 @@
             <label for="inputState" class="form-label">ville</label>
             <select name="ville" wire:model="ville" class="form-select">
                 <option value=""></option>
-                <option value="Agadir">Agadir</option>
+                {{-- <option value="Agadir">Agadir</option>
                 <option value="Al Hoceima">Al Hoceima</option>
                 <option value="Azilal">Azilal</option>
                 <option value="Beni Mellal">Beni Mellal</option>
@@ -43,7 +43,10 @@
                 <option value="Tata">Tata</option>
                 <option value="Taza">Taza</option>
                 <option value="Tetouan">Tetouan</option>
-                <option value="Tiznit">Tiznit</option>
+                <option value="Tiznit">Tiznit</option> --}}
+                @foreach (\App\Models\Ville::all() as $item)
+                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-6">
