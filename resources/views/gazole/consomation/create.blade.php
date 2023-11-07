@@ -23,7 +23,7 @@
         <div class="col-6">
             <label for="inputState" class="form-label">ville</label>
             <select name="ville" class="form-select">
-                <option value="Agadir">Agadir</option>
+                {{-- <option value="Agadir">Agadir</option>
                 <option value="Al Hoceima">Al Hoceima</option>
                 <option value="Azilal">Azilal</option>
                 <option value="Beni Mellal">Beni Mellal</option>
@@ -63,10 +63,10 @@
                 <option value="Tetouan">Tetouan</option>
                 <option value="Tiznit">Tiznit</option>
                 <option value="Fkih Ben Salah">Fkih Ben Salah</option>
-                <option value="Kalaa">Kalaa</option>
-                {{-- @foreach (\App\Models\Ville::all() as $item)
+                <option value="Kalaa">Kalaa</option> --}}
+                @foreach (\App\Models\Ville::all() as $item)
                     <option value="{{ $item->name }}">{{ $item->name }}</option>
-                @endforeach --}}
+                @endforeach
             </select>
         </div>
         <div class="col-6">
