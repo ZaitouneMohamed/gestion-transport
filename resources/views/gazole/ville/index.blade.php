@@ -22,7 +22,7 @@
                     <td class="d-flex">
                         <a href="{{ route('ville.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
-                        @if ($item->Missions->count() > 0)
+                        @if ($item->Missions->count() == 0)
                             <form action="{{ route('ville.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
