@@ -1,8 +1,29 @@
 @extends('gazole.layouts.master')
 
 @section('content')
+    <br><br>
+    <div class="row">
+        <div class="col-4">
+            <a href="{{ route('reparations.create') }}" class="btn btn-success">create new reparation</a>
+        </div>
+        <div class="col-4">
+            <form action="{{ route('reparations.index') }}" method="post">
+                @csrf
+                @method("GET")
+                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="submit" value="SUBMIT" class="btn btn-success">
+            </form>
+        </div>
+        <div class="col-4">
+            {{-- export excel --}}
+            <form action="{{ route('excel.exportReparation') }}" method="POST">
+                @csrf
+                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
+    </div>
     <br>
-    <a href="{{ route('reparations.create') }}" class="btn btn-success">create new reparation</a>
     <br><br>
     <table class="table">
         <thead>

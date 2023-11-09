@@ -14,10 +14,14 @@ class ReparationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reparations = Reparation::latest()->paginate(15);
-        return view('gazole.reparation.index',compact('reparations'));
+        $reparations = Reparation::latest();
+        if ($request->has('date')) {
+            $reparations->whereDate('date', $request->date);
+        }
+        $reparations = $reparations->paginate(15);
+        return view('gazole.reparation.index', compact('reparations'));
     }
 
     /**
@@ -109,7 +113,7 @@ class ReparationController extends Controller
     {
         $piece = Reparation::find($id);
         $piece->delete();
-        return redirect()->route('pieces.index')->with([
+        return redirect()->route('reparations.index')->with([
             "success" => "reparation delete with success"
         ]);
     }

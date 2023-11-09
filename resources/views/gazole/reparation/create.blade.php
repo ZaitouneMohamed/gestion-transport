@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <label for="inputState" class="form-label">Chaufeur</label>
             <select id="inputState" name="chaufeur_id" class="form-select">
-                @foreach (\App\Models\Chaufeur::all() as $item)
+                @foreach (\App\Models\Chaufeur::active()->get() as $item)
                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
                 @endforeach
             </select>
@@ -15,7 +15,7 @@
         <div class="col-md-6">
             <label for="inputState" class="form-label">Camion</label>
             <select id="inputState" name="camion_id" class="form-select">
-                @foreach (\App\Models\Camion::all() as $item)
+                @foreach (\App\Models\Camion::active()->get() as $item)
                     <option value="{{ $item->id }}">{{ $item->matricule }}</option>
                 @endforeach
             </select>
