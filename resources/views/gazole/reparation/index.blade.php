@@ -11,11 +11,11 @@
                 @csrf
                 @method("GET")
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
-                <input type="submit" value="SUBMIT" class="btn btn-success">
+                <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
         </div>
         <div class="col-4">
-            {{-- export excel --}}
+            excel
             <form action="{{ route('excel.exportReparation') }}" method="POST">
                 @csrf
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
