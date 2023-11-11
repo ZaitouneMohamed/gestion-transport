@@ -53,6 +53,7 @@ class MissionController extends Controller
             "date" => $request->date,
             "km_total" => $request->km_total,
             "nombre_magasin" => $request->nombre_magasin,
+            "description" => $request->description
         ]);
         return redirect()->route('missions.index')->with([
             "success" => "Mission ajoutée avec succès"
@@ -109,6 +110,7 @@ class MissionController extends Controller
             "date" => $request->date,
             "km_total" => $request->km_total,
             "nombre_magasin" => $request->nombre_magasin,
+            "description" => $request->description
         ]);
         return redirect()->route('missions.index')->with([
             "success" => "Mission modifiée avec succès"

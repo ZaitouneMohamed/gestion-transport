@@ -10,7 +10,7 @@ class Mission extends Model
     use HasFactory;
 
     protected $fillable = [
-        "chaufeur_id", "camion_id", "ville_id", "date", "km_total", "nombre_magasin" , "numero_bon"
+        "chaufeur_id", "camion_id", "ville_id", "date", "km_total", "nombre_magasin" , "numero_bon" , "description"
     ];
     public function chaufeur()
     {

@@ -29,6 +29,7 @@
                 <th scope="col">KM proposer</th>
                 <th scope="col">KM total</th>
                 <th scope="col">Statue</th>
+                <th scope="col">desciption</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -50,6 +51,9 @@
                         @else
                             <span class="badge bg-success">{{ $item->km_total - $item->Ville->km_proposer }}</span>
                         @endif
+                    </td>
+                    <td>
+                        {{ $item->description }}
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('missions.edit', $item->id) }}" class="btn btn-warning mr-1"><i

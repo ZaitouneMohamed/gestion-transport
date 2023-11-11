@@ -46,6 +46,10 @@
             <label for="inputAddress" class="form-label">nombre magasin</label>
             <input type="number" name="nombre_magasin" class="form-control" value="{{ $mission->nombre_magasin }}">
         </div>
+        <div class="col-6">
+            <label for="inputAddress" class="form-label">description</label>
+            <textarea class="form-control" name="description" id="" rows="3">{{ $mission->description }}</textarea>
+        </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
