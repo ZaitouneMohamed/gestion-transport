@@ -9,7 +9,7 @@
         <div class="col-4">
             <form action="{{ route('reparations.index') }}" method="post">
                 @csrf
-                @method("GET")
+                @method('GET')
                 <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
                 <button type="submit" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
@@ -60,10 +60,10 @@
                         </form>
                     </td>
                 </tr>
-                {{ $reparations->links() }}
             @empty
                 <h1 class="text text-center">No Reparation Found</h1>
             @endforelse
         </tbody>
     </table>
+    {{ $reparations->links() }}
 @endsection
