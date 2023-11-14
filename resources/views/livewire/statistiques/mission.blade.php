@@ -51,17 +51,17 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Chaufeur</th>
+                    <th scope="col">date</th>
+                    <th scope="col">chaufeur name</th>
+                    <th scope="col">chaufeur code</th>
+                    <th scope="col">trajet mission</th>
+                    <th scope="col">nombre magasin</th>
                     <th scope="col">camion</th>
-                    <th scope="col">ville</th>
-                    <th scope="col">Trajet Compose</th>
-                    <th scope="col">KM Total</th>
-                    <th scope="col">Taux</th>
-                    <th scope="col">camion comsommation</th>
+                    <th scope="col">numero bon</th>
+                    <th scope="col">KM proposer</th>
+                    <th scope="col">KM total</th>
                     <th scope="col">Statue</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">desciption</th>
                     <th scope="col">action</th>
                 </tr>
             </thead>
