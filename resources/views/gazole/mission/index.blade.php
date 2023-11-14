@@ -61,7 +61,12 @@
                         @endif
                     </td>
                     <td>
-                        {{ $item->description }}
+                        @if ($item->description)
+                            <details>
+                                <summary>{{ Str::limit($item->description, 10, '...') }}</summary>
+                                <p>{{ $item->description }}</p>
+                            </details>
+                        @endif
                     </td>
                     <td class="d-flex">
                         <a href="{{ route('missions.edit', $item->id) }}" class="btn btn-warning mr-1"><i
