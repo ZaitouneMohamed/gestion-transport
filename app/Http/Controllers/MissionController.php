@@ -12,11 +12,20 @@ class MissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $missions = Mission::latest()->paginate(15);
-        return view('gazole.mission.index', compact("missions"));
+        $query = Mission::latest();
+
+        if ($request->has('date')) {
+            $date = $request->input('date');
+            $query->whereDate('date', $date);
+        }
+
+        $missions = $query->paginate(15);
+
+        return view('gazole.mission.index', compact('missions'));
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -7,6 +7,14 @@
             <a href="{{ route('missions.create') }}" class="btn btn-success"><b>Create New Mission</b></a>
         </div>
         <div class="col-4">
+            <form action="{{ route('missions.index') }}" method="POST">
+                @csrf
+                @method('GET')
+                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
+        <div class="col-4">
             excel
             <form action="{{ route('excel.exportMission') }}" method="POST">
                 @csrf
@@ -70,5 +78,8 @@
             @endforelse
         </tbody>
     </table>
-    {{ $missions->links() }}
+    <!-- Check if it's paginated before using links -->
+    @if ($missions instanceof \Illuminate\Pagination\LengthAwarePaginator)
+        {{ $missions->links() }}
+    @endif
 @endsection
