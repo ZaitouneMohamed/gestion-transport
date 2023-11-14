@@ -19,6 +19,9 @@
             <div class="col-md-2">
                 <button class="btn btn-primary" x-on:click="page = 'bons'">bons</button>
             </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" x-on:click="page = 'mission'">mission</button>
+            </div>
         </div>
         <div x-show="page === 'chauffeur'" x-transition>
             <livewire:statistiques.chaufeur />
@@ -34,6 +37,9 @@
         </div>
         <div x-show="page === 'bons'" x-transition>
             <livewire:statistiques.bons />
+        </div>
+        <div x-show="page === 'mission'" x-transition>
+            <livewire:statistiques.mission />
         </div>
     </div>
 @endsection
