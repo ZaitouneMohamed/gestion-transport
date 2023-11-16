@@ -1,7 +1,7 @@
 @extends('gazole.layouts.master')
 
 @section('content')
-    <form method="POST" action="{{ route('ville.edit', $ville->id) }}">
+    <form method="POST" action="{{ route('ville.update', $ville->id) }}">
         @csrf
         @method('PUT')
         <div class="mb-3">
