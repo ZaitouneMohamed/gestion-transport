@@ -50,7 +50,7 @@ class FactureController extends Controller
             'date' => 'required',
             'prix' => 'required',
             'station_id' => 'required',
-            'n_bon' => 'required|unique:factures,n_bon',
+            'n_bon' => 'required',
         ]);
         $facture = facture::create([
             "date" => $request->date,
