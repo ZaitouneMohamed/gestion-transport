@@ -81,14 +81,14 @@
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-lg-6 col-6">
                 <div id="piechart" style="height: 400px;"></div>
             </div>
             <div class="col-lg-6 col-6">
                 <div id="chart_div" style="height: 400px;"></div>
             </div>
-        </div> --}}
+        </div>
     </div>
 @endsection
 
