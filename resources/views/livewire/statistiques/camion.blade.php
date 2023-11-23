@@ -19,6 +19,16 @@
             <input type="date" wire:model="datefin" class="form-control" id="">
         </div>
     </div><br>
+    @if ($camion && $datedebut && $datefin)
+        <form action="{{ route('excel.ExportCamionSearch') }}" method="post">
+            @csrf
+            @method('POST')
+            <input type="hidden" name="date_debut" wire:model="datedebut">
+            <input type="hidden" name="date_fin" wire:model="datefin">
+            <input type="hidden" name="camion_id" wire:model="camion">
+            <button class="btn btn-success">excel</button>
+        </form>
+    @endif
     <div wire:loading>
         <div class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -108,11 +118,13 @@
                                 class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
                             <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                     class="fa fa-pen"></i></a>
-                            <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
+                            <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i
+                                    class="fa fa-eye"></i></a>
                             <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i
+                                        class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CamionExport;
 use App\Exports\FactureExport;
 use App\Exports\FactureGeneraleExport;
 use App\Exports\MissionExport;
@@ -43,5 +44,17 @@ class ExcelController extends Controller
     {
         $date = Carbon::parse($request->input('date'));
         return Excel::download(new ReparationExport($date), 'Reparation_export.xlsx');
+    }
+
+    // search
+
+    public function ExportCamionSearch(Request $request)
+    {
+        $date_debut = Carbon::parse($request->input('date_debut'));
+        $date_fin = Carbon::parse($request->input('date_fin'));
+        $camion_id = $request->input('camion_id');
+
+        return Excel::download(new CamionExport($date_debut , $date_fin , $camion_id) , "trajetParCamion.xlsx");
+
     }
 }

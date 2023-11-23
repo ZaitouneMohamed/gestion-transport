@@ -71,6 +71,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::post("exportFacture", "exportFacture")->name("exportFacture");
         Route::post("exportFactureTotalGenerale", "exportFactureTotalGenerale")->name("exportFactureTotalGenerale");
         Route::post("exportReparation", "exportReparation")->name("exportReparation");
+        Route::post("ExportCamionSearch", "ExportCamionSearch")->name("ExportCamionSearch");
     });
 
     Route::controller(HomeController::class)->group(function () {
@@ -102,7 +103,7 @@ Route::get("login", [AuthController::class, 'Login_form'])->name('login')->middl
 Route::post("login_c", [AuthController::class, 'login'])->name('login_c');
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/addcahe', function () {
+Route::get('/addcache', function () {
     $command = Artisan::call("route:cache");
     dd("route cache with success");
 });
