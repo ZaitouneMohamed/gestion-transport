@@ -7,18 +7,20 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ReparationExport implements FromCollection
 {
-    protected $date;
+    protected $date_debut;
+    protected $date_fin;
 
-    public function __construct($date)
+    public function __construct($date_debut , $date_fin)
     {
-        $this->date = $date;
+        $this->date_debut = $date_debut;
+        $this->date_fin = $date_fin;
     }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Reparation::whereDate('date', $this->date)
+        return Reparation::whereBetween('date', [$this->date_debut, $this->date_fin])
             ->get()
             ->map(function ($item) {
                 return [

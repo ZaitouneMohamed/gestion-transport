@@ -42,8 +42,9 @@ class ExcelController extends Controller
     }
     public function exportReparation(Request $request)
     {
-        $date = Carbon::parse($request->input('date'));
-        return Excel::download(new ReparationExport($date), 'Reparation_export.xlsx');
+        $date_debut = Carbon::parse($request->input('date_debut'));
+        $date_fin = Carbon::parse($request->input('date_fin'));
+        return Excel::download(new ReparationExport($date_debut, $date_fin), 'Reparation_export.xlsx');
     }
 
     // search
@@ -54,7 +55,6 @@ class ExcelController extends Controller
         $date_fin = Carbon::parse($request->input('date_fin'));
         $camion_id = $request->input('camion_id');
 
-        return Excel::download(new CamionExport($date_debut , $date_fin , $camion_id) , "trajetParCamion.xlsx");
-
+        return Excel::download(new CamionExport($date_debut, $date_fin, $camion_id), "trajetParCamion.xlsx");
     }
 }

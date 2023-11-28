@@ -18,7 +18,8 @@
             excel
             <form action="{{ route('excel.exportReparation') }}" method="POST">
                 @csrf
-                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="date" name="date_debut" value="<?php echo date('Y-m-d'); ?>" id="">
+                <input type="date" name="date_fin" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>
