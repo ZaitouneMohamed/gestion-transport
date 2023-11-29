@@ -15,18 +15,24 @@
             <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-    {{-- @if ($datedebut && $datefin)
-        <div class="col-4">
-            excel
-            <form action="{{ route('excel.exportFactureTotalGenerale') }}" method="POST">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="datedebut" wire:model="datedebut">
-                <input type="hidden" name="datefin" wire:model="datefin">
-                <input type="submit" value="submit" class="btn btn-success">
-            </form>
+    @if ($datedebut && $datefin)
+        <div class="row">
+            <div class="col-4">
+                <div class="card text-center">
+                    @php
+                        $full_price = 0;
+                    @endphp
+                    @foreach ($reparations as $item)
+                        @php
+                            // $full_price += $item->Bons->sum('prix');
+                            $full_price += $item->prix;
+                        @endphp
+                    @endforeach
+                    <h2 class="card-title">total : {{ $full_price }} </h2>
+                </div>
+            </div>
         </div>
-    @endif --}}
+    @endif
     @if ($datedebut && $datefin)
         <table class="table">
             <thead>
