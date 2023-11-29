@@ -25,7 +25,7 @@
                     @foreach ($reparations as $item)
                         @php
                             // $full_price += $item->Bons->sum('prix');
-                            $full_price += $item->prix;
+                            $full_price += floatval($item->prix);
                         @endphp
                     @endforeach
                     <h2 class="card-title">total : {{ $full_price }} </h2>
