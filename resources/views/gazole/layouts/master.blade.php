@@ -160,6 +160,12 @@
                                         <p>Reparations</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('reparation.statistiques') }}" class="nav-link">
+                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <p>Reparations statistiques</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
