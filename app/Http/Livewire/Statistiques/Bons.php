@@ -14,7 +14,7 @@ class Bons extends Component
             "bons" => ModelsBons::where(function ($query) {
                 $query->Where("numero_bon",  $this->numero);
             })
-                ->where('date', $this->date)
+                // ->where('date', $this->date)
                 ->get()
         ]);
     }
