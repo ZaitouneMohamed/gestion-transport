@@ -49,7 +49,8 @@ class ReparationController extends Controller
             "reparation" => $request->reparation,
             "fournisseur" => $request->fournisseur,
             "prix" => $request->prix,
-            "nature" => $request->nature
+            "nature" => $request->nature,
+            "type" => $request->type,
         ]);
         return redirect()->route('reparations.index')->with([
             "success" => "reparation added with success"

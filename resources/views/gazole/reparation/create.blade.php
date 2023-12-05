@@ -38,6 +38,10 @@
             <input type="text" name="nature" id="" placeholder="nature" class="form-control">
         </div>
         <div class="col-6">
+            <label for="inputAddress" class="form-label">type</label>
+            <input type="text" name="type" id="" placeholder="type" class="form-control">
+        </div>
+        <div class="col-6">
             <label for="inputAddress" class="form-label">Fournisseur</label>
             <input type="text" name="fournisseur" id="" placeholder="fournisseur" class="form-control">
         </div>

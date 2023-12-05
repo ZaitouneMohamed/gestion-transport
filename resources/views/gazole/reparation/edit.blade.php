@@ -44,6 +44,11 @@
                 value="{{ $reparation->nature }}">
         </div>
         <div class="col-6">
+            <label for="inputAddress" class="form-label">Type</label>
+            <input type="text" name="type" id="" placeholder="type" class="form-control"
+                value="{{ $reparation->type }}">
+        </div>
+        <div class="col-6">
             <label for="inputAddress" class="form-label">Fournisseur</label>
             <input type="text" name="fournisseur" id="" placeholder="fournisseur"
                 value="{{ $reparation->fournisseur }}" class="form-control">

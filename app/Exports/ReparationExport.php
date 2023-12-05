@@ -31,6 +31,7 @@ class ReparationExport implements FromCollection
                     "reparation" => $item->reparation,
                     "prix" => $item->prix,
                     "nature" => $item->nature,
+                    "type" => $item->type,
                     "fournisseur" => $item->fournisseur,
                 ];
             });

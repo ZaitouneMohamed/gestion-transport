@@ -30,6 +30,7 @@ class CreateReparationRequest extends FormRequest
             "reparation" =>  "required",
             "fournisseur" =>  "required",
             "prix" =>  "required",
+            "type" =>  "required",
             "nature" =>  "required"
         ];
     }

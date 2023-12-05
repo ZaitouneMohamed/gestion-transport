@@ -16,6 +16,7 @@ class Reparation extends Model
         "reparation",
         "fournisseur",
         "prix",
+        "type",
         "nature"
     ];
 

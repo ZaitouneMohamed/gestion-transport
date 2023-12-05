@@ -36,6 +36,7 @@
                 <th scope="col">reparation</th>
                 <th scope="col">prix</th>
                 <th scope="col">nature</th>
+                <th scope="col">type</th>
                 <th scope="col">fournisseur</th>
                 <th scope="col">action</th>
             </tr>
@@ -50,6 +51,7 @@
                     <td>{{ $item->reparation }}</td>
                     <td>{{ $item->prix }}</td>
                     <td>{{ $item->nature }}</td>
+                    <td>{{ $item->type }}</td>
                     <td>{{ $item->fournisseur }}</td>
                     <td class="d-flex">
                         <a href="{{ route('reparations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
