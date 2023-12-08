@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-lg-6 col-6">
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
-                <canvas id="myPieChart" width="300" height="300"></canvas>
+                <canvas id="myPieChart" width="200" height="200"></canvas>
             </div>
             <div class="col-lg-6 col-6">
                 <div id="chart_div" style="height: 400px;"></div>
@@ -109,12 +109,6 @@
                 datasets: [{
                     data: results.map(item => item.total_prix),
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.7)',
-                        'rgba(54, 162, 235, 0.7)',
-                        'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
                         'rgba(255, 0, 0, 0.7)', // Red
                         'rgba(0, 255, 0, 0.7)', // Green
                         'rgba(0, 0, 255, 0.7)', // Blue
