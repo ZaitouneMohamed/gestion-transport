@@ -111,7 +111,7 @@
                                     $totalStatue += $item->Statue;
                                 @endphp
                                 <td>
-                                    @if ($item->sum_statues > 0)
+                                    @if ($item->sum_statues < 0)
                                         <span class="badge bg-success">{{ $item->sum_statues }}</span>
                                     @else
                                         <span class="badge bg-danger">{{ $item->sum_statues }}</span>
