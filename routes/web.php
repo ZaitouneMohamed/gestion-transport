@@ -17,6 +17,7 @@ use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
 use App\Models\Consomation;
+use App\Models\facture;
 use App\Models\Station;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,18 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             ->whereYear('f.date', now()->year)
             ->groupBy('stations.id', 'stations.name')
             ->get();
-        return view('gazole.index', compact("results"));
+
+        $results_2 = facture::select(
+            DB::raw('YEAR(date) AS year'),
+            DB::raw('MONTH(date) AS month'),
+            DB::raw('SUM(prix) AS total_prix')
+        )
+            ->whereIn('station_id', function ($query) {
+                $query->select('id')->from('stations')->where('name', '!=', 'divers');
+            })
+            ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
+            ->get();
+        return view('gazole.index', compact("results","results_2"));
     });
 
     Route::get('search', function () {

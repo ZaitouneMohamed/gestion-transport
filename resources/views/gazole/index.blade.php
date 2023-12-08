@@ -87,7 +87,7 @@
                 <canvas id="myPieChart" width="200" height="200"></canvas>
             </div>
             <div class="col-lg-6 col-6">
-                <div id="chart_div" style="height: 400px;"></div>
+                <canvas id="myColumnChart" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
@@ -118,6 +118,24 @@
                         'rgba(128, 128, 0, 0.7)', // Olive
                         'rgba(128, 128, 128, 0.7)', // Gray
                     ],
+                }],
+            },
+        });
+    </script>
+    <script>
+        var results = @json($results);
+
+        var ctx = document.getElementById('myColumnChart').getContext('2d');
+        var myColumnChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: results.map(function(item) {
+                    return item.year + '-' + ('0' + item.month).slice(-2);
+                }),
+                datasets: [{
+                    label: 'Total Prix',
+                    data: results.map(item => item.total_prix),
+                    backgroundColor: 'rgba(75, 192, 192, 0.7)', // Adjust the color as needed
                 }],
             },
         });
