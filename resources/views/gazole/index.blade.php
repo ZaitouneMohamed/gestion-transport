@@ -91,7 +91,7 @@
             </div>
             <div class="col-lg-6 col-6">
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
-                <table class="table table-striped table-valign-middle">
+                {{-- <table class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
                             <th>Chaufeur Code</th>
@@ -124,7 +124,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> --}}
 
 
             </div>
