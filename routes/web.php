@@ -50,7 +50,6 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             ->where('co.date', '>=', now()->subDays(30))
             ->groupBy('ch.full_name')
             ->get();
-        dd($results);
         return view('gazole.index',compact("results"));
     });
 
