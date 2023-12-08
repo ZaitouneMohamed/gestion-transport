@@ -105,7 +105,7 @@
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: data.map(item => item.chauffeur_name),
+                labels: data.map(item => item.chaufeur_name),
                 datasets: [{
                     data: data.map(item => item.trajetcount),
                     backgroundColor: [
