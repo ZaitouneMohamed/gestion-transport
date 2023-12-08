@@ -101,23 +101,25 @@
                     </thead>
                     <tbody>
                         @foreach ($chaufeursWithSumStatues as $item)
-                        @php
-                            $totalStatue = 0;
-                        @endphp
-                            <tr>
-                                <td>{{ $item->code }}</td>
-                                <td>{{ $item->full_name }}</td>
-                                @php
-                                    $totalStatue += $item->Statue;
-                                @endphp
-                                <td>
-                                    @if ($item->sum_statues < 0)
-                                        <span class="badge bg-success">{{ $item->sum_statues }}</span>
-                                    @else
-                                        <span class="badge bg-danger">{{ $item->sum_statues }}</span>
-                                    @endif
-                                </td>
-                            </tr>
+                            @php
+                                $totalStatue = 0;
+                            @endphp
+                            @if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')
+                                <tr>
+                                    <td>{{ $item->code }}</td>
+                                    <td>{{ $item->full_name }}</td>
+                                    @php
+                                        $totalStatue += $item->Statue;
+                                    @endphp
+                                    <td>
+                                        @if ($item->sum_statues < 0)
+                                            <span class="badge bg-success">{{ $item->sum_statues }}</span>
+                                        @else
+                                            <span class="badge bg-danger">{{ $item->sum_statues }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
