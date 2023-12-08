@@ -83,7 +83,8 @@
         </section>
         <div class="row">
             <div class="col-lg-6 col-6">
-                <div id="piechart" style="height: 400px;"></div>
+                {{-- <div id="piechart" style="height: 400px;"></div> --}}
+                <canvas id="myPieChart" width="400" height="400"></canvas>
             </div>
             <div class="col-lg-6 col-6">
                 <div id="chart_div" style="height: 400px;"></div>
@@ -92,9 +93,37 @@
     </div>
 @endsection
 
+@section('style')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@endsection
+
 @section('scripts')
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script>
+        < script >
+            var data = @json($results);
+
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: data.map(item => item.chauffeur_name),
+                datasets: [{
+                    data: data.map(item => item.trajetcount),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                        'rgba(255, 159, 64, 0.7)',
+                    ],
+                }],
+            },
+        });
+    </>
+    </script>
+    {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
+    {{-- <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
         });
@@ -190,5 +219,5 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
-    </script>
+    </script> --}}
 @endsection
