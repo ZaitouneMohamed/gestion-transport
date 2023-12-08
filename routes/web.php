@@ -86,9 +86,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         });
 
         // Order the collection by sum_statues in descending order
-        $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortByDesc('sum_statues');
-
-
+        $chaufeursWithSumStatues = $chaufeursWithSumStatues->orderBy('sum_statues', 'asc');
         // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues"));
     });
