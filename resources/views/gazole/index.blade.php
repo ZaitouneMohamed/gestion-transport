@@ -123,7 +123,7 @@
         });
     </script>
     <script>
-        var results = @json($results);
+        var results = @json($results_2);
 
         var ctx = document.getElementById('myColumnChart').getContext('2d');
         var myColumnChart = new Chart(ctx, {
