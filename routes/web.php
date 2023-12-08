@@ -21,6 +21,7 @@ use App\Mail\MyTestMail;
 use App\Models\Consomation;
 use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -43,7 +44,14 @@ Route::permanentRedirect('/home', 'admin');
 
 Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::get('/', function () {
-        return view('gazole.index');
+        $results = DB::table('consomations as co')
+            ->join('chaufeurs as ch', 'co.chaufeur_id', '=', 'ch.id')
+            ->select('ch.full_name as chaufeur_name', DB::raw('COUNT(co.id) as trajetcount'))
+            ->where('co.date', '>=', now()->subDays(30))
+            ->groupBy('ch.full_name')
+            ->get();
+        dd($results);
+        return view('gazole.index',compact("results"));
     });
 
     Route::get('search', function () {
