@@ -73,7 +73,9 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             $query->where('statue', 1)
                 ->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year);
-        }])->get();
+        }])
+        ->where('statue', 1)
+        ->get();
         // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
     });
