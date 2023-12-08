@@ -45,12 +45,13 @@ Route::permanentRedirect('/home', 'admin');
 
 Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::get('/', function () {
-        $results = Station::leftJoin('factures as f', 'stations.id', '=', 'f.station_id')
-            ->select('stations.name', DB::raw('COUNT(f.id) as total_factures'), DB::raw('SUM(f.prix) as total_prix'))
-            ->whereMonth('f.date', now()->month)
-            ->whereYear('f.date', now()->year)
-            ->groupBy('stations.id', 'stations.name')
+        $results = Station::withCount('factures')
+            ->withSum('factures', 'prix')
+            ->whereHas('factures', function ($query) {
+                $query->whereMonth('date', now()->month)->whereYear('date', now()->year);
+            })
             ->get();
+            
         return view('gazole.index', compact("results"));
     });
 

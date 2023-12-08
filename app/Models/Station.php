@@ -16,4 +16,9 @@ class Station extends Model
     {
         return $this->hasMany(Consomation::class);
     }
+
+    public function factures()
+    {
+        return $this->hasMany(Facture::class);
+    }
 }
