@@ -107,7 +107,7 @@
             data: {
                 labels: results.map(item => item.name),
                 datasets: [{
-                    data: results.map(item => item.total_factures),
+                    data: results.map(item => item.total_prix),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
                         'rgba(54, 162, 235, 0.7)',
