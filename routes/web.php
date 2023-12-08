@@ -75,10 +75,17 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
                 ->whereYear('date', now()->year);
         }])
             ->where('statue', 1)
-            ->selectRaw('chaufeurs.*, SUM(consomations_statues) as sum_statues')
             ->get();
+
+        // Calculate the sum of statues for each Chauffeur in PHP
+        $chaufeursWithSumStatues->each(function ($chauffeur) {
+            $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
+                return $consomation->getStatueAttribute();
+            });
+        });
+
         // dd($chaufeurs_consomation);
-        return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
+        return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues"));
     });
 
     Route::get('search', function () {

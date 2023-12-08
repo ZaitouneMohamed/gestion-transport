@@ -100,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($chaufeurs_consomation as $item)
+                        @foreach ($chaufeursWithSumStatues as $item)
                         @php
                             $totalStatue = 0;
                         @endphp
