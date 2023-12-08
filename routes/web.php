@@ -70,13 +70,11 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         //     ->groupBy('chaufeur_id')
         //     ->get();
         $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
-            $query->where('statue', 1)
-                ->whereMonth('date', now()->month)
+            $query->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year);
         }])
             ->where('statue', 1)
             ->get();
-
         // Calculate the sum of statues for each Chauffeur in PHP
         $chaufeursWithSumStatues->each(function ($chauffeur) {
             $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
