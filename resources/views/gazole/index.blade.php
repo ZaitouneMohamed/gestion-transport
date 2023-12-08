@@ -86,7 +86,7 @@
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
                 <canvas id="myPieChart" width="200" height="200"></canvas>
             </div>
-            <div class="col-lg-6 col-6">
+            <div class="col-lg-12 col-12">
                 <canvas id="myColumnChart" width="400" height="400"></canvas>
             </div>
         </div>
