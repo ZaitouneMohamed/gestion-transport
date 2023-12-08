@@ -123,7 +123,7 @@
         });
     </script>
     <script>
-        var results = @json($results);
+        var results = @json($results_2);
 
         var ctx = document.getElementById('myColumnChart').getContext('2d');
         var colors = ['rgba(75, 192, 192, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 205, 86, 0.7)',
@@ -138,9 +138,8 @@
             type: 'bar',
             data: {
                 labels: results.map(function(item) {
-                    var date = new Date(item.year, item.month -
-                    1); // Subtract 1 because months are zero-indexed
-                    return monthNames[date.getMonth()] + ' ' + item.year;
+                    return monthNames[item.month - 1] + ' ' + item
+                    .year; // Subtract 1 because months are zero-indexed
                 }),
                 datasets: [{
                     label: 'Total Prix',
