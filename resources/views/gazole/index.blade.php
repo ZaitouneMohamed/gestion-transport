@@ -99,8 +99,7 @@
 
 @section('scripts')
     <script>
-        < script >
-            var data = @json($results);
+        var data = @json($results);
 
         var ctx = document.getElementById('myPieChart').getContext('2d');
         var myPieChart = new Chart(ctx, {
@@ -120,7 +119,6 @@
                 }],
             },
         });
-    </>
     </script>
     {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
     {{-- <script type="text/javascript">
