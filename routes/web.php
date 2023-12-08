@@ -47,11 +47,12 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         $results = DB::table('consomations as co')
             ->join('chaufeurs as ch', 'co.chaufeur_id', '=', 'ch.id')
             ->select('ch.full_name as chaufeur_name', DB::raw('COUNT(co.id) as trajetcount'))
-            ->where('co.date', '>=', now()->subDays(30))
-            ->where('co.status', '=',1)
+            ->whereMonth('co.date', '=', now()->month)
+            ->whereYear('co.date', '=', now()->year)
             ->groupBy('ch.full_name')
             ->get();
-        return view('gazole.index',compact("results"));
+
+        return view('gazole.index', compact("results"));
     });
 
     Route::get('search', function () {
