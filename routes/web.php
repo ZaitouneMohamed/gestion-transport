@@ -75,6 +75,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
                 ->where('status', 1);
         }])
             ->where('statue', 1)
+            ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
             ->get();
         // Calculate the sum of statues for each Chauffeur in PHP
         $chaufeursWithSumStatues->each(function ($chauffeur) {
