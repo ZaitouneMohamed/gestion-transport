@@ -75,7 +75,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
                 ->whereYear('date', now()->year);
         }])
             ->where('statue', 1)
-            ->selectRaw('chaufeurs.*, SUM(Statue) as sum_statues')
+            ->selectRaw('chaufeurs.*, SUM(consomations_statues) as sum_statues')
             ->get();
         // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
