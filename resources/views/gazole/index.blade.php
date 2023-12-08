@@ -91,42 +91,32 @@
             </div>
             <div class="col-lg-6 col-6">
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
-                {{-- <table class="table table-striped table-valign-middle">
+                <table class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
                             <th>Chaufeur Code</th>
                             <th>Chaufeur Name</th>
-                            <th>Consumption Date</th>
                             <th>Status</th>
-                            <th>Consumation Count</th>
-                            <th>More</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($chaufeurs_consomation as $item)
+                        @php
+                            $totalStatue = 0;
+                        @endphp
                             <tr>
-                                <td>{{ $item->code }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->consumption_date }}</td>
+                                <td>{{ $item->chaufeur->code }}</td>
+                                <td>{{ $item->chaufeur->full_name }}</td>
+                                @php
+                                    $totalStatue += $item->Statue;
+                                @endphp
                                 <td>
-                                    @if ($item->status == 1)
-                                        <span class="badge badge-success">Active</span>
-                                    @else
-                                        <span class="badge badge-danger">Inactive</span>
-                                    @endif
-                                </td>
-                                <td>{{ $item->consomation_count }}</td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
+                                    {{ $totalStatue }}
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
-                </table> --}}
-
-
+                </table>
             </div>
         </div>
     </div>
