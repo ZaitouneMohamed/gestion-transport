@@ -77,7 +77,6 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             ->where('statue', 1)
             ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
             ->get();
-
         // Calculate the sum of statues for each Chauffeur in PHP
         $chaufeursWithSumStatues->each(function ($chauffeur) {
             $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
@@ -85,8 +84,9 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             });
         });
 
-        // Order the collection by sum_statues in descending order
-        $chaufeursWithSumStatues = $chaufeursWithSumStatues->orderBy('sum_statues', 'asc');
+        // Order the collection by sum_statues in ascending order
+        $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues');
+
         // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues"));
     });
