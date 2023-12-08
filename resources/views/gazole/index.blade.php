@@ -105,13 +105,13 @@
                             $totalStatue = 0;
                         @endphp
                             <tr>
-                                <td>{{ $item->chaufeur->code }}</td>
-                                <td>{{ $item->chaufeur->full_name }}</td>
+                                <td>{{ $item->code }}</td>
+                                <td>{{ $item->full_name }}</td>
                                 @php
                                     $totalStatue += $item->Statue;
                                 @endphp
                                 <td>
-                                    {{ $totalStatue }}
+                                    {{ $item->sum_statues }}
                                 </td>
                             </tr>
                         @endforeach

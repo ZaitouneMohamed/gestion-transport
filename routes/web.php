@@ -16,6 +16,7 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
+use App\Models\Chaufeur;
 use App\Models\Consomation;
 use App\Models\facture;
 use App\Models\Station;
@@ -61,14 +62,19 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
             ->get();
 
-        $chaufeurs_consomation = Consomation::with("chaufeur")
-            ->selectRaw('chaufeur_id')
-            ->whereMonth('date', now()->month)
-            ->whereYear('date', now()->year)
-            ->where('status', 1)
-            ->groupBy('chaufeur_id')
-            ->get();
-            // dd($chaufeurs_consomation);
+        // $chaufeurs_consomation = Consomation::with("chaufeur")
+        //     ->selectRaw('chaufeur_id')
+        //     ->whereMonth('date', now()->month)
+        //     ->whereYear('date', now()->year)
+        //     ->where('status', 1)
+        //     ->groupBy('chaufeur_id')
+        //     ->get();
+        $chaufeurs_consomation = Chaufeur::withCount(['consomations as sum_statues' => function ($query) {
+            $query->where('statue', 1)
+                ->whereMonth('date', now()->month)
+                ->whereYear('date', now()->year);
+        }])->get();
+        // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
     });
 
