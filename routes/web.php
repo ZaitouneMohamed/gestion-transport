@@ -16,6 +16,7 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
+use App\Http\Livewire\Statistiques\Station;
 use App\Mail\DemoMail;
 use App\Mail\MyTestMail;
 use App\Models\Consomation;
@@ -44,14 +45,12 @@ Route::permanentRedirect('/home', 'admin');
 
 Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::get('/', function () {
-        $results = DB::table('consomations as co')
-            ->join('chaufeurs as ch', 'co.chaufeur_id', '=', 'ch.id')
-            ->select('ch.full_name as chaufeur_name', DB::raw('COUNT(co.id) as trajetcount'))
-            ->whereMonth('co.date', '=', now()->month)
-            ->whereYear('co.date', '=', now()->year)
-            ->groupBy('ch.full_name')
+        $results = Station::leftJoin('factures as f', 'stations.id', '=', 'f.station_id')
+            ->select('stations.name', DB::raw('COUNT(f.id) as total_factures'), DB::raw('SUM(f.prix) as total_prix'))
+            ->whereMonth('f.date', now()->month)
+            ->whereYear('f.date', now()->year)
+            ->groupBy('stations.id', 'stations.name')
             ->get();
-
         return view('gazole.index', compact("results"));
     });
 

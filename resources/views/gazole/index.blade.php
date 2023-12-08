@@ -99,30 +99,20 @@
 
 @section('scripts')
     <script>
-        var data = @json($results);
+        var results = @json($results);
 
         var ctx = document.getElementById('myPieChart').getContext('2d');
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: data.map(item => item.chaufeur_name),
+                labels: results.map(item => item.name),
                 datasets: [{
-                    data: data.map(item => item.trajetcount),
+                    data: results.map(item => item.total_factures),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',
                         'rgba(54, 162, 235, 0.7)',
                         'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)',
-                        'rgba(153, 102, 255, 0.7)',
-                        'rgba(255, 159, 64, 0.7)',
-                        'rgba(255, 0, 0, 0.7)', // Red
-                        'rgba(0, 255, 0, 0.7)', // Green
-                        'rgba(0, 0, 255, 0.7)', // Blue
-                        'rgba(255, 255, 0, 0.7)', // Yellow
-                        'rgba(128, 0, 128, 0.7)', // Purple
-                        'rgba(0, 128, 128, 0.7)', // Teal
-                        'rgba(128, 128, 0, 0.7)', // Olive
-                        'rgba(128, 128, 128, 0.7)', // Gray
+                        // Add more colors as needed
                     ],
                 }],
             },
