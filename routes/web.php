@@ -60,7 +60,16 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
             })
             ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
             ->get();
-        return view('gazole.index', compact("results","results_2"));
+
+        $chaufeurs_consomation = Consomation::join('chaufeurs as ch', 'consomations.chaufeur_id', '=', 'ch.id')
+            ->where('consomations.status', 1)
+            ->select('ch.code as code', 'ch.full_name as name', 'consomations.* as consomation_count')
+            ->whereMonth('consomations.date', now()->month)
+            ->whereYear('consomations.date', now()->year)
+            ->where('ch.statue', 1)
+            ->groupBy('consomations.chaufeur_id')
+            ->get();
+        return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
     });
 
     Route::get('search', function () {
