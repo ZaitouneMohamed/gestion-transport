@@ -72,7 +72,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
             $query->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year)
-                ->where('statue', 1);
+                ->where('status', 1);
         }])
             ->where('statue', 1)
             ->get();
