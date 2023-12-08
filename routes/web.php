@@ -69,13 +69,14 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         //     ->where('status', 1)
         //     ->groupBy('chaufeur_id')
         //     ->get();
-        $chaufeurs_consomation = Chaufeur::withCount(['consomations as sum_statues' => function ($query) {
+        $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
             $query->where('statue', 1)
                 ->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year);
         }])
-        ->where('statue', 1)
-        ->get();
+            ->where('statue', 1)
+            ->selectRaw('chaufeurs.*, SUM(Statue) as sum_statues')
+            ->get();
         // dd($chaufeurs_consomation);
         return view('gazole.index', compact("results", "results_2", "chaufeurs_consomation"));
     });
