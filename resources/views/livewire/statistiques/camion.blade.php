@@ -51,6 +51,14 @@
                     <h2 class="card-title">consomation : {{ $full_price }} </h2>
                 </div>
             </div>
+            <div class="col-4">
+                @if ($trajets->count() > 0)
+                    <div class="card text-center">
+                        <h2 class="card-title">New Taux : {{ ($trajets->sum('QtyLittre') / $trajets->sum('KmTotal')) * 100 }}
+                        </h2>
+                    </div>
+                @endif
+            </div>
         </div>
         <table class="table">
             <thead>
