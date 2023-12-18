@@ -54,8 +54,9 @@
             <div class="col-4">
                 @if ($trajets->count() > 0)
                     <div class="card text-center">
-                        <h2 class="card-title">New Taux : {{ ($trajets->sum('QtyLittre') / $trajets->sum('KmTotal')) * 100 }}
-                        </h2>
+                        <h2 class="card-title">Trajet Composeé : {{ $trajets->sum('QtyLittre')  }}</h2>
+                        <h2 class="card-title">KM Total : {{ $trajets->sum('KmTotal')  }}</h2>
+                        <h1 class="card-title">New Taux : {{ ($trajets->sum('QtyLittre') / $trajets->sum('KmTotal')) * 100 }}</h1>
                     </div>
                 @endif
             </div>
