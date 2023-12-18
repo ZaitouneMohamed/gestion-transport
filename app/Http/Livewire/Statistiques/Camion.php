@@ -19,6 +19,7 @@ class Camion extends Component
             "trajets" => Consomation::where(function ($query) {
                 $query->Where("camion_id",  $this->camion);
             })
+                ->where("status", 1)
                 ->whereBetween('date', [$this->datedebut, $this->datefin])
                 ->get()
         ]);
