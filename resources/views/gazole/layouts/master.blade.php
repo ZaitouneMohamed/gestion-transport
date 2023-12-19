@@ -143,27 +143,27 @@
                             <a href="#" class="nav-link">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <p>
-                                    Achat
+                                    Mouvement de Caisse
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('pieces.index') }}" class="nav-link">
                                         <i class="fa-solid fa-screwdriver"></i>
                                         <p>pieces</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('reparations.index') }}" class="nav-link">
                                         <i class="fa-solid fa-screwdriver-wrench"></i>
-                                        <p>Reparations</p>
+                                        <p>Caisse</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('reparation.statistiques') }}" class="nav-link">
                                         <i class="fa-solid fa-screwdriver-wrench"></i>
-                                        <p>Reparations statistiques</p>
+                                        <p>statistiques Caisse</p>
                                     </a>
                                 </li>
                             </ul>
