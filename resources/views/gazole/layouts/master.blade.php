@@ -156,13 +156,13 @@
                                 </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('reparations.index') }}" class="nav-link">
-                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
                                         <p>Caisse</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('reparation.statistiques') }}" class="nav-link">
-                                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        <i class="fa-solid fa-chart-simple"></i>
                                         <p>statistiques Caisse</p>
                                     </a>
                                 </li>
