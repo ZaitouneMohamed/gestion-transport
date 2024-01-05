@@ -54,9 +54,10 @@
             <div class="col-4">
                 @if ($trajets->count() > 0)
                     <div class="card text-center">
-                        <h2 class="card-title">Trajet Composeé : {{ $trajets->sum('QtyLittre')  }}</h2>
-                        <h2 class="card-title">KM Total : {{ $trajets->sum('KmTotal')  }}</h2>
-                        <h1 class="card-title">New Taux : {{ ($trajets->sum('QtyLittre') / $trajets->sum('KmTotal')) * 100 }}</h1>
+                        <h2 class="card-title">Trajet Composeé : {{ $trajets->sum('QtyLittre') }}</h2>
+                        <h2 class="card-title">KM Total : {{ $trajets->sum('KmTotal') }}</h2>
+                        <h1 class="card-title">New Taux :
+                            {{ ($trajets->sum('QtyLittre') / $trajets->sum('KmTotal')) * 100 }}</h1>
                     </div>
                 @endif
             </div>
@@ -86,22 +87,26 @@
                         }
                     @endphp
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
-                        <td>{{ $item->chaufeur->full_name }}</td>
+                        <td>{{ $item->chaufeur->full_name }} </td>
                         <td>{{ $item->camion->matricule }}</td>
                         <td>{{ $item->ville }}</td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                            @if ($item->status === 1)
                                 {{ $item->QtyLittre }}
                             @endif
                         </td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                            @if ($item->status === 1)
                                 {{ $item->KmTotal }}
                             @endif
                         </td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                            @if ($item->status === 1)
+                                {{ $item->km_proposer }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->status === 1)
                                 {{ number_format($item->Taux, 2) }}
                             @endif
                         </td>
@@ -109,22 +114,46 @@
                             {{ $item->Camion->consommation }}
                         </td>
                         <td>
-                            <span
-                                class="badge
+                            @if ($item->status === 1)
+                                <span
+                                    class="badge
                         @if ($item->statue > 0) bg-danger
                         @else
                         bg-success @endif
                         ">{{ number_format($item->Statue, 2) }}</span>
+                            @endif
+                        </td>
+                        <td style="width: 35%">
+                            @if ($item->status === 1)
+                                @if ($item->km_proposer - $item->KmTotal < 0)
+                                    <span class="badge bg-danger">{{ $item->km_proposer - $item->KmTotal }}</span>
+                                @else
+                                    <span class="badge bg-success">{{ $item->km_proposer - $item->KmTotal }}</span>
+                                @endif
+                            @endif
                         </td>
                         <td>
-                            {{ $item->Prix }}
+                            @if ($item->status === 1)
+                                {{ $item->Prix }}
+                            @endif
                         </td>
                         <td>
                             {{ $item->date }}
                         </td>
                         <td class="d-flex">
-                            <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
-                                class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                            @if ($item->status === 0)
+                                <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
+                                    class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                                @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                                    <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                        title="check that trajet is complete" class="btn btn-danger mr-1"><b><i
+                                                class="fa-solid fa-xmark"></i></b></a>
+                                @endif
+                            @else
+                                <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                    title="check that trajet is not complete" class="btn btn-success mr-1"><b><i
+                                            class="fa-solid fa-check"></i></b></a>
+                            @endif
                             <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                     class="fa fa-pen"></i></a>
                             <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i
