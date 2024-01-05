@@ -34,9 +34,11 @@
                 <th scope="col">ville</th>
                 <th scope="col">Trajet Compose</th>
                 <th scope="col">KM Total</th>
+                <th scope="col">KM proposer</th>
                 <th scope="col">Taux</th>
                 <th scope="col">camion consommation</th>
                 <th scope="col">Statue Gazole</th>
+                <th scope="col">Statue mission</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Date</th>
                 <th scope="col">action</th>
@@ -65,6 +67,11 @@
                     </td>
                     <td>
                         @if ($item->status === 1)
+                            {{ $item->km_proposer }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($item->status === 1)
                             {{ number_format($item->Taux, 2) }}
                         @endif
                     </td>
@@ -79,6 +86,15 @@
                             @else
                             bg-success @endif
                             ">{{ number_format($item->Statue, 2) }}</span>
+                        @endif
+                    </td>
+                    <td style="width: 35%">
+                        @if ($item->status === 1)
+                            @if ($item->km_proposer - $item->KmTotal < 0)
+                                <span class="badge bg-danger">{{ $item->km_proposer - $item->KmTotal }}</span>
+                            @else
+                                <span class="badge bg-success">{{ $item->km_proposer - $item->KmTotal }}</span>
+                            @endif
                         @endif
                     </td>
                     <td>

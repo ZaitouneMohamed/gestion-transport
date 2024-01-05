@@ -26,10 +26,11 @@ class StoreConsomationRequest extends FormRequest
         return [
             "chaufeur_id" => "required",
             "camion_id" => "required",
+            "nombre_magasin" => "required",
             "ville" => "required",
         ];
     }
-    
+
     // public function messages()
     // {
     //     return [

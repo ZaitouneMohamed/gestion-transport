@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreConsomationRequest;
 use App\Http\Requests\UpdateConsomationRequest;
 use App\Models\Consomation;
+use App\Models\Ville;
 use Illuminate\Http\Request;
 
 class ConsomationController extends Controller
@@ -46,12 +47,16 @@ class ConsomationController extends Controller
      */
     public function store(StoreConsomationRequest $request)
     {
-        $consomation = Consomation::create([
+        // dd($request->all());
+        $ville = Ville::find($request->ville);
+        Consomation::create([
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
-            "ville" => $request->ville,
+            "ville" => $ville->name,
             "description" => $request->description,
             "date" => $request->date,
+            "km_proposer" => $ville->km_proposer,
+            "n_magasin" => $request->nombre_magasin,
             "statue" => 0
         ]);
         return redirect()->route('consomations.index')->with([

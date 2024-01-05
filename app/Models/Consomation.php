@@ -16,6 +16,8 @@ class Consomation extends Model
         "description",
         "status",
         "ville",
+        "km_proposer",
+        "n_magasin"
     ];
     public function Bons()
     {
