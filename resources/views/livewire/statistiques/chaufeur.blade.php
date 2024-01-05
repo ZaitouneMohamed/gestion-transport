@@ -51,15 +51,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Chaufeur</th>
                     <th scope="col">camion</th>
                     <th scope="col">ville</th>
                     <th scope="col">Trajet Compose</th>
                     <th scope="col">KM Total</th>
+                    <th scope="col">KM proposer</th>
                     <th scope="col">Taux</th>
-                    <th scope="col">camion comsommation</th>
-                    <th scope="col">Statue</th>
+                    <th scope="col">camion consommation</th>
+                    <th scope="col">Statue Gazole</th>
+                    <th scope="col">Statue mission</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Date</th>
                     <th scope="col">action</th>
@@ -73,22 +74,26 @@
                         }
                     @endphp
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
-                        <td>{{ $item->chaufeur->full_name }}</td>
+                        <td>{{ $item->chaufeur->full_name }} </td>
                         <td>{{ $item->camion->matricule }}</td>
                         <td>{{ $item->ville }}</td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                            @if ($item->status === 1)
                                 {{ $item->QtyLittre }}
                             @endif
                         </td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                            @if ($item->status === 1)
                                 {{ $item->KmTotal }}
                             @endif
                         </td>
                         <td>
-                            @if ($item->Bons->where('nature', 'gazole')->count() > 1)
+                            @if ($item->status === 1)
+                                {{ $item->km_proposer }}
+                            @endif
+                        </td>
+                        <td>
+                            @if ($item->status === 1)
                                 {{ number_format($item->Taux, 2) }}
                             @endif
                         </td>
@@ -96,29 +101,55 @@
                             {{ $item->Camion->consommation }}
                         </td>
                         <td>
-                            <span
-                                class="badge
-                            @if ($item->statue > 0) bg-danger
-                            @else
-                            bg-success @endif
-                            ">{{ number_format($item->Statue, 2) }}</span>
+                            @if ($item->status === 1)
+                                <span
+                                    class="badge
+                        @if ($item->statue > 0) bg-danger
+                        @else
+                        bg-success @endif
+                        ">{{ number_format($item->Statue, 2) }}</span>
+                            @endif
+                        </td>
+                        <td style="width: 35%">
+                            @if ($item->status === 1)
+                                @if ($item->km_proposer - $item->KmTotal < 0)
+                                    <span class="badge bg-danger">{{ $item->km_proposer - $item->KmTotal }}</span>
+                                @else
+                                    <span class="badge bg-success">{{ $item->km_proposer - $item->KmTotal }}</span>
+                                @endif
+                            @endif
                         </td>
                         <td>
-                            {{ $item->Prix }}
+                            @if ($item->status === 1)
+                                {{ $item->Prix }}
+                            @endif
                         </td>
                         <td>
                             {{ $item->date }}
                         </td>
                         <td class="d-flex">
-                            <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
-                                class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                            @if ($item->status === 0)
+                                <a href="{{ route('createBon', $item->id) }}" title="Add Bons Here"
+                                    class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                                @if ($item->Bons->where('nature', 'gazole')->count() >= 2)
+                                    <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                        title="check that trajet is complete" class="btn btn-danger mr-1"><b><i
+                                                class="fa-solid fa-xmark"></i></b></a>
+                                @endif
+                            @else
+                                <a href="{{ route('SwitchActiveModeForTrajet', $item->id) }}"
+                                    title="check that trajet is not complete" class="btn btn-success mr-1"><b><i
+                                            class="fa-solid fa-check"></i></b></a>
+                            @endif
                             <a href="{{ route('consomations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                     class="fa fa-pen"></i></a>
-                            <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i class="fa fa-eye"></i></a>
+                            <a href="{{ route('getBons', $item->id) }}" class="btn btn-info mr-1"><i
+                                    class="fa fa-eye"></i></a>
                             <form action="{{ route('consomations.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')"><i
+                                        class="fa fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
