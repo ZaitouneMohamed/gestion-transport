@@ -130,7 +130,7 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('missions.index') }}" class="nav-link">
                                 <i class="fa-solid fa-truck-fast"></i>
                                 <p>
@@ -138,7 +138,7 @@
                                     <span class="right badge badge-success">{{ App\Models\Mission::count() }}</span>
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fa-solid fa-cart-plus"></i>
