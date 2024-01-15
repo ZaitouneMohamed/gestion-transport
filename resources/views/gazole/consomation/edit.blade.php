@@ -28,6 +28,12 @@
                 placeholder="">
         </div>
         <div class="col-6">
+            <label for="inputAddress" class="form-label">N Magasin</label>
+            <input type="text" value="{{ $consomation->n_magasin }}" name="nombre_magasin" class="form-control" id="inputAddress"
+                placeholder="">
+        </div>
+
+        <div class="col-6">
             <label for="inputAddress" class="form-label">date</label>
             <input type="date" value="{{ $consomation->date }}" name="date" class="form-control" id="inputAddress"
                 placeholder="">

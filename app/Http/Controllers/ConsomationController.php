@@ -100,6 +100,7 @@ class ConsomationController extends Controller
         $consomation->update([
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
+            "n_magasin" => $request->nombre_magasin,
             "ville" => $request->ville,
             "description" => $request->description,
             "date" => $request->date,
