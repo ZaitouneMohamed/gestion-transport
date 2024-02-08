@@ -1,6 +1,13 @@
 <div x-show="page === 'total'" x-transition>
     <h3 class="text text-center">Total Generale</h3>
     <div class="row">
+        <div class="col-12">
+            <label for="inputState" class="form-label">Type</label>
+            <select wire:model="type" id="" class="form-control">
+                <option value="0">facture</option>
+                <option value="1">Espéce</option>
+            </select>
+        </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
             <input type="date" wire:model="datedebut" class="form-control" id="">

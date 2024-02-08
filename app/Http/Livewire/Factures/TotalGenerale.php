@@ -8,17 +8,19 @@ use Livewire\Component;
 
 class TotalGenerale extends Component
 {
-    public $datedebut, $datefin;
+    public $datedebut, $datefin, $type;
     public function render()
     {
-        $station_id = Station::where('name','DIVERS')->first();
+        $station_id = Station::where('name', 'DIVERS')->first();
         return view('livewire.factures.total-generale', [
-            "factures" => facture::where('station_id','!=',$station_id->id)
+            "factures" => facture::where('station_id', '!=', $station_id->id)
+                ->where('type', $this->type)
                 ->whereBetween('date', [$this->datedebut, $this->datefin])
                 ->get()
         ]);
     }
-    public function mount() {
+    public function mount()
+    {
         $this->datedebut = date('Y-m-d');
         $this->datefin = date('Y-m-d');
     }
