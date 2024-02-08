@@ -11,6 +11,8 @@ class Chaufeur extends Model
     protected $fillable = [
         "full_name", "phone",
         "code", "numero_2",
+        "email", "cnss",
+        "cni",
         "adresse", "statue",
     ];
     public function Consomations()

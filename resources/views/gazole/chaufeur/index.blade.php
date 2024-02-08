@@ -45,6 +45,20 @@
                                                         <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
                                                         Phone 2:{{ $item->numero_2 }}
                                                     </li>
+                                                </ul><br>
+                                                <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                    <li class="small">
+                                                        <span class="fa-li"><i class="fa-solid fa-envelope"></i></span>
+                                                        email: {{ $item->email }}
+                                                    </li>
+                                                    <li class="small">
+                                                        {{-- <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> --}}
+                                                        cni: {{ $item->cni }}
+                                                    </li>
+                                                    <li class="small">
+                                                        {{-- <span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> --}}
+                                                        cnss:{{ $item->cnss }}
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -39,13 +39,17 @@ class ChaufeurController extends Controller
         $this->validate($request, [
             "full_name" => "required",
             "code" => " unique:chaufeurs,code",
+            "phone" => " required",
         ]);
         Chaufeur::create([
             "full_name" => $request->full_name,
             "code" => $request->code,
             "numero_2" => $request->numero_2,
             "adresse" => $request->adresse,
-            "phone" => $request->phone
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "cnss" => $request->cnss,
+            "cni"   => $request->cni,
         ]);
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur added successly"
@@ -72,7 +76,7 @@ class ChaufeurController extends Controller
     public function edit($id)
     {
         $chaufeur = Chaufeur::find($id);
-        return view('gazole.chaufeur.edit',compact('chaufeur'));
+        return view('gazole.chaufeur.edit', compact('chaufeur'));
     }
 
     /**
@@ -91,10 +95,13 @@ class ChaufeurController extends Controller
         $chaufeur = Chaufeur::find($id);
         $chaufeur->update([
             "full_name" => $request->full_name,
-            "numero_2" => $request->numero_2,
             "code" => $request->code,
+            "numero_2" => $request->numero_2,
             "adresse" => $request->adresse,
-            "phone" => $request->phone
+            "phone" => $request->phone,
+            "email" => $request->email,
+            "cnss" => $request->cnss,
+            "cni"   => $request->cni,
         ]);
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur updated successly"
