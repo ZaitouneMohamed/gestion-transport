@@ -10,6 +10,11 @@ class Station extends Model
     use HasFactory;
     protected $fillable = [
         "name",
+        "solde",
+        "gerant_name",
+        "gerant_phone",
+        "gerant_rep_name",
+        "gerant_rep_phone",
         "ville"
     ];
     public function Consomations()

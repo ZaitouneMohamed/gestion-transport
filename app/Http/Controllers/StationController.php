@@ -43,7 +43,12 @@ class StationController extends Controller
         ]);
         Station::create([
             "name" => $request->name,
-            "ville" => $request->ville
+            "ville" => $request->ville,
+            "solde" => $request->solde,
+            "gerant_name" => $request->gerant_name,
+            "gerant_phone" => $request->gerant_phone,
+            "gerant_rep_name" => $request->gerant_rep_name,
+            "gerant_rep_phone" => $request->gerant_rep_phone,
         ]);
         return redirect()->route('stations.index')->with([
             "success" => "station added successfly"
@@ -70,7 +75,7 @@ class StationController extends Controller
     public function edit($id)
     {
         $station = Station::find($id);
-        return view('gazole.station.edit',compact("station"));
+        return view('gazole.station.edit', compact("station"));
     }
 
     /**
@@ -89,7 +94,12 @@ class StationController extends Controller
         ]);
         $station->update([
             "name" => $request->name,
-            "ville" => $request->ville
+            "ville" => $request->ville,
+            "solde" => $request->solde,
+            "gerant_name" => $request->gerant_name,
+            "gerant_phone" => $request->gerant_phone,
+            "gerant_rep_name" => $request->gerant_rep_name,
+            "gerant_rep_phone" => $request->gerant_rep_phone,
         ]);
         return redirect()->route('stations.index')->with([
             "success" => "station updated successfly"
