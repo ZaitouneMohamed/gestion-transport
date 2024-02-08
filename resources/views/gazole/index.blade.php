@@ -21,7 +21,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ App\Models\Camion::Active()->count() }}</h3>
+                                <h3>{{ App\Models\Camion::Active()->Aej()->count() }}</h3>
                                 <p>Camion</p>
                             </div>
                             <div class="icon">
