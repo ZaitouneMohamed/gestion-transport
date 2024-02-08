@@ -36,4 +36,14 @@ class SwitchController extends Controller
             "success" => "chauffeur Statue Update successful"
         ]);
     }
+
+    function SwitchIsForAejModeForCamion($id)
+    {
+        $product = Camion::find($id);
+        $product->is_for_aej = !$product->is_for_aej;
+        $product->save();
+        return redirect()->back()->with([
+            "success" => "chauffeur Statue Update successful"
+        ]);
+    }
 }

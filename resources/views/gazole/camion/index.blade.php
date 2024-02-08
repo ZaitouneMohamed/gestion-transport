@@ -32,6 +32,7 @@
                     <td>{{ $item->puissanse_fiscale }}</td>
                     <td>{{ $item->premier_mise }}</td>
                     <td class="d-flex">
+                        {{-- switch active mode --}}
                         @if ($item->statue === 1)
                             <a href="{{ route('SwitchActiveModeForCamion', $item->id) }}" class="btn btn-success mr-1">
                                 <i class="fa fa-check" aria-hidden="true"></i>
@@ -43,6 +44,16 @@
                         @endif
                         <a href="{{ route('camions.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
+                        {{-- switch is for aej mode --}}
+                        @if ($item->is_for_aej === 1)
+                            <a href="{{ route('SwitchIsForAejModeForCamion', $item->id) }}" class="btn btn-success mr-1">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </a>
+                        @else
+                            <a href="{{ route('SwitchIsForAejModeForCamion', $item->id) }}" class="btn btn-danger mr-1">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
+                        @endif
                         @if ($item->Consomations->count() == 0)
                             <form action="{{ route('camions.destroy', $item->id) }}" method="post">
                                 @csrf

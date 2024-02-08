@@ -143,6 +143,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::controller(SwitchController::class)->group(function () {
         Route::get('SwitchActiveModeForChaufeur/{id}', 'SwitchActiveModeForChaufeur')->name("SwitchActiveModeForChaufeur");
         Route::get('SwitchActiveModeForCamion/{id}', 'SwitchActiveModeForCamion')->name("SwitchActiveModeForCamion");
+        Route::get('SwitchIsForAejModeForCamion/{id}', 'SwitchIsForAejModeForCamion')->name("SwitchIsForAejModeForCamion");
         Route::get('SwitchActiveModeForTrajet/{id}', 'SwitchActiveModeForTrajet')->name("SwitchActiveModeForTrajet");
     });
 });
