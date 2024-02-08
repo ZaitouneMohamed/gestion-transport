@@ -11,6 +11,13 @@ class Camion extends Model
     protected $fillable = [
         "matricule",
         "statue",
+        "is_for_aej",
+        "marque",
+        "genre",
+        "type_carburant",
+        "n_chasie",
+        "puissanse_fiscale",
+        "premier_mise",
         "consommation"
     ];
     public function Consomations()

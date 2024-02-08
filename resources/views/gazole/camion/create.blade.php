@@ -1,15 +1,46 @@
-@extends("gazole.layouts.master")
+@extends('gazole.layouts.master')
 
 @section('content')
-    <form method="POST" action="{{route('camions.store')}}" >
+    <form method="POST" action="{{ route('camions.store') }}">
         @csrf
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">matricule</label>
-            <input type="test" name="matricule" placeholder="matricule" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">consommation</label>
-            <input type="test" name="consommation" placeholder="consomation" class="form-control" id="exampleInputPassword1">
+        <div class="row">
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">matricule *</label>
+                <input type="text" name="matricule" placeholder="matricule" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">consommation *</label>
+                <input type="text" name="consommation" placeholder="consomation" class="form-control"
+                    id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">marque</label>
+                <input type="text" name="marque" placeholder="marque" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">genre</label>
+                <input type="text" name="genre" placeholder="genre" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">type_carburant</label>
+                <input type="text" name="type_carburant" placeholder="type_carburant" class="form-control"
+                    id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">n_chasie</label>
+                <input type="text" name="n_chasie" placeholder="n_chasie" class="form-control"
+                    id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">puissanse_fiscale</label>
+                <input type="text" name="puissanse_fiscale" placeholder="puissanse_fiscale" class="form-control"
+                    id="exampleInputPassword1">
+            </div>
+            <div class="col-6">
+                <label for="exampleInputPassword1" class="form-label">premier_mise</label>
+                <input type="date" name="premier_mise" placeholder="premier_mise" class="form-control" value="<?php echo date('Y-m-d'); ?>"
+                    id="exampleInputPassword1">
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

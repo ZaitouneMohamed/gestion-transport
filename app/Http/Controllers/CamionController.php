@@ -44,6 +44,12 @@ class CamionController extends Controller
         Camion::create([
             "matricule" => $request->matricule,
             "consommation" => $request->consommation,
+            "marque" => $request->marque,
+            "genre" => $request->genre,
+            "type_carburant" => $request->type_carburant,
+            "n_chasie" => $request->n_chasie,
+            "puissanse_fiscale" => $request->pupuissanse_fiscale,
+            "premier_mise" => $request->premier_mise,
         ]);
         return redirect()->route('camions.index')->with([
             "success" => "camion added successly"
@@ -90,6 +96,12 @@ class CamionController extends Controller
         $camion->Update([
             "matricule" => $request->matricule,
             "consommation" => $request->consommation,
+            "marque" => $request->marque,
+            "genre" => $request->genre,
+            "type_carburant" => $request->type_carburant,
+            "n_chasie" => $request->n_chasie,
+            "puissanse_fiscale" => $request->pupuissanse_fiscale,
+            "premier_mise" => $request->premier_mise,
         ]);
         return redirect()->route('camions.index')->with([
             "success" => "camion added successly"

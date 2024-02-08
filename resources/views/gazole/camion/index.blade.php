@@ -10,7 +10,12 @@
                 <th scope="col">#</th>
                 <th scope="col">matricule</th>
                 <th scope="col">consomation theorique</th>
-                <th scope="col">consomation</th>
+                <th scope="col">marque</th>
+                <th scope="col">genre</th>
+                <th scope="col">type_carburant</th>
+                <th scope="col">n_chasie</th>
+                <th scope="col">puissanse_fiscale</th>
+                <th scope="col">premier_mise</th>
                 <th scope="col">action</th>
             </tr>
         </thead>
@@ -20,7 +25,12 @@
                     <th scope="row">{{ $item->id }}</th>
                     <td>{{ $item->matricule }}</td>
                     <td>{{ $item->consommation }}</td>
-                    <td>{{ $item->Consomations->count() }}</td>
+                    <td>{{ $item->marque }}</td>
+                    <td>{{ $item->gener }}</td>
+                    <td>{{ $item->type_carburant }}</td>
+                    <td>{{ $item->n_chasie }}</td>
+                    <td>{{ $item->puissanse_fiscale }}</td>
+                    <td>{{ $item->premier_mise }}</td>
                     <td class="d-flex">
                         @if ($item->statue === 1)
                             <a href="{{ route('SwitchActiveModeForCamion', $item->id) }}" class="btn btn-success mr-1">
