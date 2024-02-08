@@ -13,6 +13,7 @@ class facture extends Model
         "date",
         "prix",
         "station_id",
+        "type",
         "n_bon",
     ];
 

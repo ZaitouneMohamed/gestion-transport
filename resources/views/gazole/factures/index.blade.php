@@ -34,6 +34,13 @@
                     <input type="text" class="form-control" id="exampleInputEmail1" name="prix"
                         aria-describedby="emailHelp">
                 </div><br><br><br><br>
+                <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">Type</label>
+                    <select name="type" id="" class="form-control">
+                        <option value="0">facture</option>
+                        <option value="1">Espéce</option>
+                    </select>
+                </div><br><br><br><br>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -52,6 +59,7 @@
                     <th scope="col">numero bon</th>
                     <th scope="col">station</th>
                     <th scope="col">prix</th>
+                    <th scope="col">type</th>
                     <th scope="col">action</th>
                 </tr>
             </thead>
@@ -63,6 +71,13 @@
                         <td>{{ $item->n_bon }}</td>
                         <td>{{ $item->station->name }}</td>
                         <td>{{ $item->prix }}</td>
+                        <td>
+                            @if ($item->type == 0)
+                                facture
+                            @else
+                                espéce
+                            @endif
+                        </td>
                         <td class="d-flex">
                             <a href="{{ route('factures.edit', $item->id) }}" class="btn btn-warning"><i
                                     class="fa fa-pencil" aria-hidden="true"></i></a>

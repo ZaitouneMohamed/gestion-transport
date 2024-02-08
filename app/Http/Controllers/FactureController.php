@@ -57,6 +57,7 @@ class FactureController extends Controller
             "prix" => $request->prix,
             "station_id" => $request->station_id,
             "n_bon" => $request->n_bon,
+            "type" => $request->type,
         ]);
         return redirect()->route('factures.index')->with([
             "success" => "facture added with success"
@@ -107,6 +108,7 @@ class FactureController extends Controller
             "prix" => $request->prix,
             "station_id" => $request->station_id,
             "n_bon" => $request->n_bon,
+            "type" => $request->type,
         ]);
         return redirect()->route('factures.index')->with([
             "success" => "facture updated with success"
