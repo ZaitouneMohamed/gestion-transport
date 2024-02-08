@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +90,11 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues');
 
         // dd($chaufeurs_consomation);
-        return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues"));
+
+        $currentMonth = Carbon::now()->month;
+
+        $consomationsCount = Consomation::whereMonth('date', $currentMonth)->count();
+        return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues", "consomationsCount"));
     });
 
     Route::get('search', function () {

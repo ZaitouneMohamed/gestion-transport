@@ -28,6 +28,10 @@ class Camion extends Model
     {
         return $query->where("statue", 1);
     }
+    public function scopeAej($query)
+    {
+        return $query->where("is_for_aej", 1);
+    }
     public function getConsomationPrixAttribute()
     {
         $consomation = $this->Consomations();

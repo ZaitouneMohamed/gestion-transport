@@ -21,7 +21,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ App\Models\Camion::count() }}</h3>
+                                <h3>{{ App\Models\Camion::Aej()->Active()->count() }}</h3>
                                 <p>Camion</p>
                             </div>
                             <div class="icon">
@@ -36,7 +36,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ App\Models\Chaufeur::count() }}</h3>
+                                <h3>{{ App\Models\Chaufeur::Active()->count() }}</h3>
                                 <p>Chaufeur</p>
                             </div>
                             <div class="icon">
@@ -66,7 +66,7 @@
                         <!-- small box -->
                         <div class="small-box bg-secondary">
                             <div class="inner">
-                                <h3>{{ App\Models\Consomation::count() }}</h3>
+                                <h3>{{ $consomationsCount }}</h3>
                                 <p>Trajet</p>
                             </div>
                             <div class="icon">
