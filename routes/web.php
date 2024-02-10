@@ -62,6 +62,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
                 $query->select('id')->from('stations')->where('name', '!=', 'divers');
             })
             ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
+            ->where('type', 0)
             ->get();
 
         // $chaufeurs_consomation = Consomation::with("chaufeur")
