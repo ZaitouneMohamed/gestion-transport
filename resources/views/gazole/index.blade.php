@@ -22,7 +22,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ App\Models\Camion::Active()->Aej()->count() }}</h3>
-                                <p>Camionn</p>
+                                <p>Camion</p>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-truck"></i>
@@ -137,21 +137,25 @@
                     <tbody>
                         @foreach ($stationsData as $item)
                             <!--@php-->
-                            <!--    $totalStatue = 0;-->
-                            <!--@endphp-->
-                            <!--@if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')-->
-                                <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->factures->sum("prix") }}</td>
-                                    <td>
-                                        @if ($item->factures->sum("prix") > $item->solde)
-                                            <span class="badge bg-danger">{{ $item->factures->sum("prix") > $item->solde }}</span>
-                                        @else
-                                            <span class="badge bg-success">{{ $item->solde - $item->factures->sum("prix") }}</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            <!--@endif-->
+                                                                                            <!--    $totalStatue = 0;-->
+                                                                                    <!--@endphp ?> ?>-->
+                            <!--@if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')
+    -->
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->factures->sum('prix') }}</td>
+                                <td>
+                                    @if ($item->factures->sum('prix') > $item->solde)
+                                        <span
+                                            class="badge bg-danger">{{ $item->factures->sum('prix') > $item->solde }}</span>
+                                    @else
+                                        <span
+                                            class="badge bg-success">{{ $item->solde - $item->factures->sum('prix') }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <!--
+    @endif-->
                         @endforeach
                     </tbody>
                 </table>
@@ -174,7 +178,7 @@
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: results.map(item => item.name ),
+                labels: results.map(item => item.name),
                 datasets: [{
                     data: results.map(item => item.percentage_prix),
                     backgroundColor: [
@@ -220,5 +224,4 @@
             },
         });
     </script>
-
 @endsection
