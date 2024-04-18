@@ -22,7 +22,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ App\Models\Camion::Active()->Aej()->count() }}</h3>
-                                <p>Camion</p>
+                                <p>Camionn</p>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-truck"></i>
