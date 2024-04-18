@@ -34,6 +34,7 @@
                 <select name="type" id="citySelect"class="form-select">
                     <option value="0" @if ($facture->type == 0) selected @endif>facture</option>
                     <option value="1" @if ($facture->type == 1) selected @endif>Espéce</option>
+                    <option value="2" @if ($facture->type == 2) selected @endif>Caisse</option>
                 </select>
             </div>
             <div class="col-6">

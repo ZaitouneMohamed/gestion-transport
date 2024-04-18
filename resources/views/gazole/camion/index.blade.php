@@ -44,6 +44,8 @@
                         @endif
                         <a href="{{ route('camions.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
+                        <a href="{{ route('camions.show', $item->id) }}" class="btn btn-success mr-1"><i
+                                class="fa fa-eye"></i></a>
                         {{-- switch is for aej mode --}}
                         @if ($item->is_for_aej === 1)
                             <a href="{{ route('SwitchIsForAejModeForCamion', $item->id) }}" class="btn btn-success mr-1">

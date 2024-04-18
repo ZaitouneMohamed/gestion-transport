@@ -86,6 +86,10 @@
                                                     <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             @endif
+                                            <a href="{{ route('chauffeur.details', $item->id) }}"
+                                                class="btn btn-primary mr-1">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

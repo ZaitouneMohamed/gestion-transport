@@ -124,6 +124,41 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-lg-6 col-6">
+                {{-- <div id="piechart" style="height: 400px;"></div> --}}
+                <table class="table table-striped table-valign-middle">
+                    <thead>
+                        <tr>
+                            <th>Station</th>
+                            <th>total Mount</th>
+                            <th>Statuss</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($stationsData as $item)
+                            <!--@php-->
+                            <!--    $totalStatue = 0;-->
+                            <!--@endphp-->
+                            <!--@if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')-->
+                                <tr>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->factures->sum("prix") }}</td>
+                                    <td>
+                                        @if ($item->factures->sum("prix") > $item->solde)
+                                            <span class="badge bg-danger">{{ $item->factures->sum("prix") > $item->solde }}</span>
+                                        @else
+                                            <span class="badge bg-success">{{ $item->solde - $item->factures->sum("prix") }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            <!--@endif-->
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg6 col-6">
+                <div id="barchart_values" style="width: 900px; height: 300px;"></div>
+            </div>
         </div>
     </div>
 @endsection
@@ -135,16 +170,15 @@
 @section('scripts')
     <script>
         var results = @json($results);
-
         var ctx = document.getElementById('myPieChart').getContext('2d');
         var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: results.map(item => item.name),
+                labels: results.map(item => item.name ),
                 datasets: [{
-                    data: results.map(item => item.total_prix),
+                    data: results.map(item => item.percentage_prix),
                     backgroundColor: [
-                        'rgba(255, 0, 0, 0.7)', // Red
+                        'rgba(255, 0, 0, 0.7)',
                         'rgba(0, 255, 0, 0.7)', // Green
                         'rgba(0, 0, 255, 0.7)', // Blue
                         'rgba(255, 255, 0, 0.7)', // Yellow
@@ -174,7 +208,7 @@
             data: {
                 labels: results.map(function(item) {
                     return monthNames[item.month - 1] + ' ' + item
-                        .year; // Subtract 1 because months are zero-indexed
+                        .year;
                 }),
                 datasets: [{
                     label: 'Total Prix',
@@ -186,102 +220,5 @@
             },
         });
     </script>
-    {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
-    {{-- <script type="text/javascript">
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-                ['Sleep', 7]
-            ]);
-            var options = {
-                title: 'SI Youssef'
-            };
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-        }
-    </script>
-    <script>
-        google.charts.load('current', {
-            packages: ['corechart', 'bar']
-        });
-        google.charts.setOnLoadCallback(drawStacked);
-
-        function drawStacked() {
-            var data = new google.visualization.DataTable();
-            data.addColumn('timeofday', 'Time of Day');
-            data.addColumn('number', 'Motivation Level');
-            data.addColumn('number', 'Energy Level');
-
-            data.addRows([
-                [{
-                    v: [8, 0, 0],
-                    f: '8 am'
-                }, 1, .25],
-                [{
-                    v: [9, 0, 0],
-                    f: '9 am'
-                }, 2, .5],
-                [{
-                    v: [10, 0, 0],
-                    f: '10 am'
-                }, 3, 1],
-                [{
-                    v: [11, 0, 0],
-                    f: '11 am'
-                }, 4, 2.25],
-                [{
-                    v: [12, 0, 0],
-                    f: '12 pm'
-                }, 5, 2.25],
-                [{
-                    v: [13, 0, 0],
-                    f: '1 pm'
-                }, 6, 3],
-                [{
-                    v: [14, 0, 0],
-                    f: '2 pm'
-                }, 7, 4],
-                [{
-                    v: [15, 0, 0],
-                    f: '3 pm'
-                }, 8, 5.25],
-                [{
-                    v: [16, 0, 0],
-                    f: '4 pm'
-                }, 9, 7.5],
-                [{
-                    v: [17, 0, 0],
-                    f: '5 pm'
-                }, 10, 10],
-            ]);
-
-            var options = {
-                title: 'Motivation and Energy Level Throughout the Day',
-                isStacked: true,
-                hAxis: {
-                    title: 'Time of Day',
-                    format: 'h:mm a',
-                    viewWindow: {
-                        min: [7, 30, 0],
-                        max: [17, 30, 0]
-                    }
-                },
-                vAxis: {
-                    title: 'Rating (scale of 1-10)'
-                }
-            };
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-    </script> --}}
 @endsection

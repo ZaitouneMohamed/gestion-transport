@@ -19,6 +19,9 @@ class Bons extends Model
         "km",
         "nature"
     ];
+
+    protected $casts = ['date' => 'date'];
+
     public function scopeGazole($query)
     {
         return $query->where("nature", 'gazole');

@@ -24,11 +24,20 @@ class FactureGeneraleExport implements FromCollection
             ->where('station_id', '!=', $station_id->id)
             ->get()
             ->map(function ($facture) {
+                $type_word = '';
+                if ($facture->type == 0) {
+                    $type_word = 'facture';
+                } elseif ($facture->type == 1) {
+                    $type_word = 'espéce';
+                } else {
+                    $type_word = 'caisse';
+                }
                 return [
                     "date" => $facture->date,
                     "prix" => $facture->prix,
                     "station" => $facture->Station->name,
                     "n_bon" => $facture->n_bon,
+                    "type" => $type_word,
                 ];
             });;
     }

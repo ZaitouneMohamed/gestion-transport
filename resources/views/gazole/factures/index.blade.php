@@ -39,6 +39,7 @@
                     <select name="type" id="" class="form-control">
                         <option value="0">facture</option>
                         <option value="1">Espéce</option>
+                        <option value="2">Caisse</option>
                     </select>
                 </div><br><br><br><br>
             </div>
@@ -74,8 +75,10 @@
                         <td>
                             @if ($item->type == 0)
                                 facture
-                            @else
+                            @elseif ($item->type == 1)
                                 espéce
+                            @else
+                                caisse
                             @endif
                         </td>
                         <td class="d-flex">

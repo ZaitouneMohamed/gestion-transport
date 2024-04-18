@@ -1,7 +1,7 @@
 <div>
     <h3 class="text text-center">Trajet statistique</h3>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <label for="inputState" class="form-label">ville</label>
             <select name="ville" wire:model="ville" class="form-select">
                 <option value=""></option>
@@ -46,6 +46,15 @@
                 <option value="Tiznit">Tiznit</option> --}}
                 @foreach (\App\Models\Ville::all() as $item)
                     <option value="{{ $item->name }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Camion</label>
+            <select id="inputState" wire:model="camion" class="form-select">
+                <option value=""></option>
+                @foreach (\App\Models\Camion::all() as $item)
+                    <option value="{{ $item->id }}">{{ $item->matricule }}</option>
                 @endforeach
             </select>
         </div>

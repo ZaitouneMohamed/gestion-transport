@@ -19,6 +19,9 @@ class Consomation extends Model
         "km_proposer",
         "n_magasin"
     ];
+
+    // protected $casts = ['date' => 'date'];
+
     public function Bons()
     {
         return $this->hasMany(Bons::class);

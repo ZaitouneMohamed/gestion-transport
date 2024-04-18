@@ -32,18 +32,23 @@
                     @php
                         $full_price = 0;
                         $full_pricee = 0;
+                        $qtyLittre =0;
                     @endphp
                     @foreach ($trajets as $item)
                         @php
                             // $full_price += $item->Bons->sum('prix');
                             $full_price += $item->Prix;
                             $full_pricee += $item->FullPrix;
+                            if ($item->status == 1) {
+                                $qtyLittre += $item->QtyLittre;
+                            }
                         @endphp
                     @endforeach
                     @if ($chaufeur == 24 || $chaufeur == 23)
                         <h2 class="card-title">consomation : {{ $full_pricee }} </h2>
                     @else
-                        <h2 class="card-title">consomation : {{ $full_price }} </h2>
+                        <h2 class="card-title">Prix : {{ $full_price }} </h2>
+                        <h2 class="card-title">consomation : {{ $qtyLittre }} </h2>
                     @endif
                 </div>
             </div>

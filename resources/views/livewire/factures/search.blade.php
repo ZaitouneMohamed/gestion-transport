@@ -16,6 +16,7 @@
                 <option></option>
                 <option value="0">facture</option>
                 <option value="1">Espéce</option>
+                <option value="2">Caisse</option>
             </select>
 
         </div>
@@ -72,6 +73,7 @@
                     <th scope="col">n bon</th>
                     <th scope="col">Date</th>
                     <th scope="col">total</th>
+                    <th scope="col">type</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -83,6 +85,15 @@
                         <td>{{ $item->n_bon }}</td>
                         <td>{{ $item->date }}</td>
                         <td>{{ $item->prix }}</td>
+                        <td>
+                            @if ($item->type == 0)
+                                facture
+                            @elseif ($item->type == 1)
+                                espéce
+                            @else
+                                caisse
+                            @endif
+                        </td>
                         <td class="d-flex">
                         </td>
                     </tr>

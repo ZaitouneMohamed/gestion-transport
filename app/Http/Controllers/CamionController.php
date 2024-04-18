@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Camion;
+use App\Models\CamionCharge;
 use App\Models\Chaufeur;
+use App\Models\Natures;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CamionController extends Controller
@@ -64,7 +67,13 @@ class CamionController extends Controller
      */
     public function show($id)
     {
-        //
+        $currentMonth = Carbon::now()->month;
+        $camion = Camion::with(['Charge', 'Consomations' => function ($query) use ($currentMonth) {
+            $query->whereMonth('date', $currentMonth);
+        }])->find($id);
+        $chaufeurs = Chaufeur::active()->get();
+        $natures = Natures::all();
+        return view('gazole.camionCharge.index', compact('camion', 'chaufeurs', 'natures'));
     }
 
     /**
@@ -119,6 +128,30 @@ class CamionController extends Controller
         Camion::find($id)->delete();
         return redirect()->route('camions.index')->with([
             "success" => "camion deleted successly"
+        ]);
+    }
+    public function AddNewCharge(Request $request)
+    {
+        $this->validate($request, [
+            "chaufeur_id" => "required|exists:chaufeurs,id",
+            "date" => "required",
+        ]);
+        CamionCharge::create([
+            "camion_id" => $request->camion_id,
+            "chaufeur_id" => $request->chaufeur_id,
+            "date" => $request->date,
+            "nature" => $request->nature,
+            "prix_location" => $request->prix_location,
+        ]);
+        return redirect()->back()->with([
+            "success" => "charge create with success"
+        ]);
+    }
+    public function deleteCharge(CamionCharge $camionCharge)
+    {
+        $camionCharge->delete();
+        return redirect()->back()->with([
+            "success" => "charge deleted with success"
         ]);
     }
 }

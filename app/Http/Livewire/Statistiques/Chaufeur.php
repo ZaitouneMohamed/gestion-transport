@@ -16,9 +16,8 @@ class Chaufeur extends Component
     public function render()
     {
         return view('livewire.statistiques.chaufeur', [
-            "trajets" => Consomation::Where("chaufeur_id",  $this->chaufeur)
+            "trajets" => Consomation::with(['Bons','Station','Camion','chaufeur'])->Where("chaufeur_id",  $this->chaufeur)
                 ->whereBetween('date', [$this->datedebut, $this->datefin])
-                ->with('Bons')
                 ->get()
         ]);
     }

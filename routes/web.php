@@ -45,58 +45,83 @@ Route::permanentRedirect('/', 'login');
 Route::permanentRedirect('/home', 'admin');
 
 Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
-    Route::get('/', function () {
-        $results = Station::join('factures as f', 'stations.id', '=', 'f.station_id')
-            ->select('stations.name', DB::raw('COUNT(f.id) as total_factures'), DB::raw('SUM(f.prix) as total_prix'))
-            ->whereMonth('f.date', now()->month)
-            ->whereYear('f.date', now()->year)
-            ->groupBy('stations.id', 'stations.name')
-            ->get();
+    // Route::get('/', function () {
+    //     $results = Station::join('factures as f', 'stations.id', '=', 'f.station_id')
+    //         ->select('stations.name', DB::raw('COUNT(f.id) as total_factures'), DB::raw('SUM(f.prix) as total_prix'))
+    //         ->whereMonth('f.date', now()->month)
+    //         ->whereYear('f.date', now()->year)
+    //         ->groupBy('stations.id', 'stations.name')
+    //         ->get();
 
-        $results_2 = facture::select(
-            DB::raw('YEAR(date) AS year'),
-            DB::raw('MONTH(date) AS month'),
-            DB::raw('SUM(prix) AS total_prix')
-        )
-            ->whereIn('station_id', function ($query) {
-                $query->select('id')->from('stations')->where('name', '!=', 'divers');
-            })
-            ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
-            ->where('type', 0)
-            ->get();
+    //     $currentMonth = Carbon::now()->month;
+    //     $currentYear = Carbon::now()->year;
 
-        // $chaufeurs_consomation = Consomation::with("chaufeur")
-        //     ->selectRaw('chaufeur_id')
-        //     ->whereMonth('date', now()->month)
-        //     ->whereYear('date', now()->year)
-        //     ->where('status', 1)
-        //     ->groupBy('chaufeur_id')
-        //     ->get();
-        $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
-            $query->whereMonth('date', now()->month)
-                ->whereYear('date', now()->year)
-                ->where('status', 1);
-        }])
-            ->where('statue', 1)
-            ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
-            ->get();
-        // Calculate the sum of statues for each Chauffeur in PHP
-        $chaufeursWithSumStatues->each(function ($chauffeur) {
-            $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
-                return $consomation->getStatueAttribute();
-            });
-        });
+    //     $total_factures_current_month = facture::whereMonth('date', $currentMonth)
+    //         ->whereYear('date', $currentYear)
+    //         ->whereIn('station_id', function ($query) {
+    //             $query->select('id')->from('stations')->where('name', '!=', 'divers');
+    //         })
+    //         ->sum('prix');
 
-        // Order the collection by sum_statues in ascending order
-        $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues');
+    //     $results = Station::join('factures as f', 'stations.id', '=', 'f.station_id')
+    //         ->select(
+    //             'stations.name',
+    //             DB::raw('COUNT(f.id) as total_factures'),
+    //             DB::raw('SUM(f.prix) as total_prix')
+    //         )
+    //         ->whereMonth('f.date', now()->month)
+    //         ->whereYear('f.date', now()->year)
+    //         ->groupBy('stations.id', 'stations.name')
+    //         ->get();
 
-        // dd($chaufeurs_consomation);
 
-        $currentMonth = Carbon::now()->month;
+    //     foreach ($results as $result) {
+    //         $result->percentage_prix = $total_factures_current_month > 0 ? ($result->total_prix / $total_factures_current_month) * 100 : 0;
+    //     }
 
-        $consomationsCount = Consomation::whereMonth('date', $currentMonth)->count();
-        return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues", "consomationsCount"));
-    });
+
+    //     $results_2 = facture::select(
+    //         DB::raw('YEAR(date) AS year'),
+    //         DB::raw('MONTH(date) AS month'),
+    //         DB::raw('SUM(prix) AS total_prix')
+    //     )
+    //         ->whereIn('station_id', function ($query) {
+    //             $query->select('id')->from('stations')->where('name', '!=', 'divers');
+    //         })
+    //         ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
+    //         ->get();
+
+    //     $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
+    //         $query->whereMonth('date', now()->month)
+    //             ->whereYear('date', now()->year)
+    //             ->where('status', 1);
+    //     }])
+    //         ->where('statue', 1)
+    //         ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
+    //         ->get();
+    //     // Calculate the sum of statues for each Chauffeur in PHP
+    //     $chaufeursWithSumStatues->each(function ($chauffeur) {
+    //         $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
+    //             return $consomation->getStatueAttribute();
+    //         });
+    //     });
+
+    //     // Order the collection by sum_statues in ascending order
+    //     $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues');
+
+    //     // dd($chaufeurs_consomation);
+
+    //     $currentMonth = Carbon::now()->month;
+
+    //     $consomationsCount = Consomation::whereMonth('date', $currentMonth)->count();
+    //     return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues", "consomationsCount"));
+    // });
+
+    Route::get("/", [HomeController::class, 'Home']);
+
+    Route::get("/chauffeur/{id}/chart-data", [HomeController::class, 'SuiviGazoleParChaufeur'])->name("chauffeur.SuiviGazoleParChaufeur");
+    Route::get('/chauffeur/{id}', [HomeController::class, 'showDetails'])->name('chauffeur.details');
+
 
     Route::get('search', function () {
         return view('gazole.statistiques.statistiques');
@@ -112,7 +137,13 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
 
     Route::get("users", [HomeController::class, 'GazoleUsersList'])->name("gazole.users");
     Route::resource("chaufeur", ChaufeurController::class);
+    // camion start
     Route::resource("camions", CamionController::class);
+    Route::controller(CamionController::class)->group(function () {
+        Route::post('AddBonCharge', 'AddNewCharge')->name("camion.AddNewCharge");
+        Route::delete('deleteCharge/{camionCharge}', 'deleteCharge')->name("camion.deleteCharge");
+    });
+    // camion end
     Route::resource("stations", StationController::class);
     Route::resource("consomations", ConsomationController::class);
     Route::resource("missions", MissionController::class);

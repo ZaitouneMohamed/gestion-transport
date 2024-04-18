@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('missions', function (Blueprint $table) {
+        Schema::create('camion_charges', function (Blueprint $table) {
             $table->id();
-            $table->date("date");
             $table->foreignId('chaufeur_id')->unsigned();
             $table->foreign('chaufeur_id')->references('id')->on('chaufeurs')->onDelete('cascade');
             $table->foreignId('camion_id')->unsigned();
             $table->foreign('camion_id')->references('id')->on('camions')->onDelete('cascade');
-            $table->foreignId('ville_id')->unsigned();
-            $table->foreign('ville_id')->references('id')->on('villes')->onDelete('cascade');
-            $table->integer("nombre_magasin");
-            $table->float("km_total");
+            $table->date('date');
+            $table->string('nature')->nullable();
+            $table->float('prix_location')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('missions');
+        Schema::dropIfExists('camion_charges');
     }
 };
