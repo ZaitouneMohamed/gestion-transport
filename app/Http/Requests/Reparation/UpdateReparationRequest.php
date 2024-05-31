@@ -24,13 +24,9 @@ class UpdateReparationRequest extends FormRequest
     public function rules()
     {
         return [
-            "chaufeur_id" => "required",
-            "camion_id" => "required",
             "date" =>  "required",
-            "reparation" =>  "required",
-            "fournisseur" =>  "required",
-            "prix" =>  "required",
-            "nature" =>  "required"
+            "n_bon" =>  "required",
+            "solde" =>  "required",
         ];
     }
 }

@@ -53,8 +53,8 @@
                 @foreach ($reparations as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
-                        <td>{{ $item->Chaufeur->full_name }}</td>
-                        <td>{{ $item->Camion->matricule }}</td>
+                        <td>{{ $item->Chaufeur?->full_name }}</td>
+                        <td>{{ $item->Camion?->matricule }}</td>
                         <td>{{ $item->date }}</td>
                         <td>{{ $item->reparation }}</td>
                         <td>{{ $item->prix }}</td>
@@ -62,8 +62,17 @@
                         <td>{{ $item->type }}</td>
                         <td>{{ $item->fournisseur }}</td>
                         <td class="d-flex">
+                            <a href="{{ route('reparations.show', $item->id) }}" title=""
+                                class="btn btn-success mr-1"><b><i class="fa fa-eye"></i></b></a>
+                            <a href="{{ route('CreateReparationInfo', $item->id) }}" title="Add Reparation Info Here"
+                                class="btn btn-success mr-1"><b><i class="fa fa-plus"></i></b></a>
+                            {{--  --}}
                             <a href="{{ route('reparations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                     class="fa fa-pen"></i></a>
+                            {{--  --}}
+                            <a href="{{ route('pdf.GetInfoOfReparation', $item->id) }}"
+                                class="btn btn-warning mr-1"><i class="fa-solid fa-file-pdf"></i></a>
+                            {{--  --}}
                             <form action="{{ route('reparations.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('delete')

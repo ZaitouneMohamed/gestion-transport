@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Trajet extends Component
 {
-    public $ville, $datedebut, $datefin,$camion;
+    public $ville, $datedebut, $datefin;
     function mount()
     {
         $this->datedebut = date('Y-m-d');
@@ -15,15 +15,11 @@ class Trajet extends Component
     }
     public function render()
     {
-       return view('livewire.statistiques.trajet', [
+        return view('livewire.statistiques.trajet', [
             "trajets" => Consomation::where("ville", $this->ville)
-                ->when($this->camion, function ($query, $camion) {
-                    return $query->where('camion_id', $camion); 
-                })
-                ->whereBetween('date', [$this->datedebut, $this->datefin]) 
-                ->with('Bons') 
-                ->get() 
+                ->whereBetween('date', [$this->datedebut, $this->datefin])
+                ->with('Bons')
+                ->get()
         ]);
-
     }
 }

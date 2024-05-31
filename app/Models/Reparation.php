@@ -17,9 +17,14 @@ class Reparation extends Model
         "fournisseur",
         "prix",
         "type",
+        "n_bon",
         "nature"
     ];
 
+    public function infos()
+    {
+        return $this->hasMany(ReparationInfo::class);
+    }
     public function Chaufeur()
     {
         return $this->belongsTo(Chaufeur::class);

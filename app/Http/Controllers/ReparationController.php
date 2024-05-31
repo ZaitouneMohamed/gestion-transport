@@ -43,14 +43,9 @@ class ReparationController extends Controller
     public function store(CreateReparationRequest $request)
     {
         Reparation::create([
-            "chaufeur_id" => $request->chaufeur_id,
-            "camion_id" => $request->camion_id,
             "date" => $request->date,
-            "reparation" => $request->reparation,
-            "fournisseur" => $request->fournisseur,
-            "prix" => $request->prix,
-            "nature" => $request->nature,
-            "type" => $request->type,
+            "prix" => $request->solde,
+            "n_bon" => $request->n_bon,
         ]);
         return redirect()->route('reparations.index')->with([
             "success" => "reparation added with success"
@@ -65,7 +60,8 @@ class ReparationController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Reparation::find($id);
+        return view('gazole.reparation.show', compact('data'));
     }
 
     /**
@@ -76,8 +72,8 @@ class ReparationController extends Controller
      */
     public function edit($id)
     {
-        $reparation = Reparation::find($id);
-        return view('gazole.reparation.edit', compact('reparation'));
+        $item = Reparation::find($id);
+        return view('gazole.reparation.edit', compact('item'));
     }
 
     /**
@@ -91,13 +87,9 @@ class ReparationController extends Controller
     {
         $reparation = Reparation::find($id);
         $reparation->update([
-            "chaufeur_id" => $request->chaufeur_id,
-            "camion_id" => $request->camion_id,
             "date" => $request->date,
-            "reparation" => $request->reparation,
-            "fournisseur" => $request->fournisseur,
-            "prix" => $request->prix,
-            "nature" => $request->nature
+            "prix" => $request->solde,
+            "n_bon" => $request->n_bon,
         ]);
         return redirect()->route('reparations.index')->with([
             "success" => "reparation updated with success"

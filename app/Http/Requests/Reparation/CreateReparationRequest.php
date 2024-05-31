@@ -24,14 +24,15 @@ class CreateReparationRequest extends FormRequest
     public function rules()
     {
         return [
-            "chaufeur_id" => "required",
-            "camion_id" => "required",
+            // "chaufeur_id" => "required",
+            // "camion_id" => "required",
             "date" =>  "required",
-            "reparation" =>  "required",
-            "fournisseur" =>  "required",
-            "prix" =>  "required",
-            "type" =>  "required",
-            "nature" =>  "required"
+            "n_bon" =>  "required|unique:reparations,n_bon",
+            // "reparation" =>  "required",
+            // "fournisseur" =>  "required",
+            "solde" =>  "required",
+            // "type" =>  "required",
+            // "nature" =>  "required"
         ];
     }
 }

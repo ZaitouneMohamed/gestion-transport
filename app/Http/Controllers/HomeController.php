@@ -8,6 +8,7 @@ use App\Models\Bons;
 use App\Models\Chaufeur;
 use App\Models\Consomation;
 use App\Models\facture;
+use App\Models\ReparationInfo;
 use App\Models\Station;
 use App\Models\User;
 use Carbon\Carbon;
@@ -184,6 +185,10 @@ class HomeController extends Controller
     {
         return view('gazole.bon.create', compact("id"));
     }
+    function CreateReparationInfo($id)
+    {
+        return view('gazole.reparation.CreateDetail', compact("id"));
+    }
     public function AddBonToConsomation(StoreBonRequest $request, $id)
     {
         $ville = Station::find($request->station_id)->ville;
@@ -220,6 +225,31 @@ class HomeController extends Controller
         ]);
     }
 
+    public function AddInfoToReparation(Request $request, $id)
+    {
+        $this->validate($request, [
+            'reparation_id' => "required",
+            'camion_id' => "required",
+            'chaufeur_id' => "required",
+            'prix' => "required",
+            'date' => "required",
+            'nature' => "required",
+            'type_id' => "required",
+        ]);
+        ReparationInfo::create([
+            "reparation_id" => $request->reparation_id,
+            "camion_id" => $request->camion_id,
+            "chaufeur_id" => $request->chaufeur_id,
+            "prix" => $request->prix,
+            "date" => $request->date,
+            "nature" => $request->nature,
+            "type_id" => $request->type_id,
+        ]);
+
+        return redirect()->route('reparations.index')->with([
+            "success" => "reparation info added successfly"
+        ]);
+    }
     public function getStations(Request $request)
     {
         $city = $request->city;

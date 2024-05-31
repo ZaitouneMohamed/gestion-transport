@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('camion_charges', function (Blueprint $table) {
+        Schema::create('reparation_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('reparation_id')->unsigned();
+            $table->foreign('reparation_id')->references('id')->on('reparations')->onDelete('cascade');
             $table->foreignId('chaufeur_id')->unsigned();
             $table->foreign('chaufeur_id')->references('id')->on('chaufeurs')->onDelete('cascade');
             $table->foreignId('camion_id')->unsigned();
             $table->foreign('camion_id')->references('id')->on('camions')->onDelete('cascade');
-            $table->date('date');
-            $table->string('nature')->nullable();
-            $table->float('prix_location')->nullable();
+            $table->double("prix");
+            $table->date("date");
+            $table->string("nature");
+            $table->foreignId('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('natures')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('camion_charges');
+        Schema::dropIfExists('reparation_infos');
     }
 };
