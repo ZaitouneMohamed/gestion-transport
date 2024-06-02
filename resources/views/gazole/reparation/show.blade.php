@@ -55,9 +55,9 @@
             </div>
             <div class="col-4"></div>
         </div> --}}
-        <h1>Info List {{ $data->Info->count() }}</h1>
+        <h1>Info List {{ $data->infos?->count() ?? 0 }}</h1>
         <div class="row">
-            @foreach ($data->Info as $item)
+            @forelse ($data->infos as $item)
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body font-weight-bold text-center">
@@ -76,10 +76,13 @@
                                             value="{{ $chaufeur->id }}">{{ $chaufeur->full_name }}</option>
                                     @endforeach
                                 </select><br>
-                                <input type="date" name="date" value="{{ $item->date }}" class="form-control" id="">
+                                <input type="date" name="date" value="{{ $item->date }}" class="form-control"
+                                    id="">
                                 {{--  --}}
-                                <p>prix</p><input type="text" name="prix" value="{{ $item->prix }}" class="form-control" id=""><br>
-                                <p>Nature</p><input type="text" name="nature" value="{{ $item->nature }}" class="form-control" id=""><br>
+                                <p>prix</p><input type="text" name="prix" value="{{ $item->prix }}"
+                                    class="form-control" id=""><br>
+                                <p>Nature</p><input type="text" name="nature" value="{{ $item->nature }}"
+                                    class="form-control" id=""><br>
                                 {{--  --}}
                                 <select name="nature" class="form-select">
                                     @foreach (\App\Models\Natures::all() as $nature)
@@ -97,7 +100,8 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+            @endforelse
         </div>
     </div>
 @endsection

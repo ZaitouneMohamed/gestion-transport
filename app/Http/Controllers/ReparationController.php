@@ -61,6 +61,7 @@ class ReparationController extends Controller
     public function show($id)
     {
         $data = Reparation::find($id);
+        $data->load('infos');
         return view('gazole.reparation.show', compact('data'));
     }
 

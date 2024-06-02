@@ -43,7 +43,8 @@
                 <th scope="col">camion</th>
                 <th scope="col">date</th>
                 <th scope="col">reparation</th>
-                <th scope="col">prix</th>
+                <th scope="col">solde</th>
+                <th scope="col">left</th>
                 <th scope="col">nature</th>
                 <th scope="col">type</th>
                 <th scope="col">fournisseur</th>
@@ -52,6 +53,9 @@
         </thead>
         <tbody>
             @forelse ($reparations as $item)
+                @php
+                    $left = 0;
+                @endphp
                 <tr>
                     <th scope="row">{{ $item->n_bon }}</th>
                     <td>{{ $item->Chaufeur?->full_name }}</td>
@@ -59,6 +63,12 @@
                     <td>{{ $item->date }}</td>
                     <td>{{ $item->reparation }}</td>
                     <td>{{ $item->prix }}</td>
+                    <td>
+                        @php
+                            $left = $item->prix - $item->infos->sum('prix');
+                        @endphp
+                        {{$left}}
+                    </td>
                     <td>{{ $item->nature }}</td>
                     <td>{{ $item->type }}</td>
                     <td>{{ $item->fournisseur }}</td>
@@ -77,7 +87,9 @@
                         <form action="{{ route('reparations.destroy', $item->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this item?');"><i
+                                    class="fa fa-trash"></i></button>
                         </form>
                     </td>
                 </tr>

@@ -23,7 +23,7 @@ class ValidateReparationSoldeInfo
 
         $solde = $reparation->prix;
 
-        $full_reparation_solde_now = $reparation->Info->SUM('prix');
+        $full_reparation_solde_now = $reparation->infos?->SUM('prix') ?? 0;
 
         $prix_request = $prix + $full_reparation_solde_now;
 
