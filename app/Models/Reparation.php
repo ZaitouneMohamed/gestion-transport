@@ -21,7 +21,7 @@ class Reparation extends Model
         "nature"
     ];
 
-    public function infos()
+    public function Info()
     {
         return $this->hasMany(ReparationInfo::class);
     }

@@ -101,7 +101,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     });
     //
     Route::controller(PdfController::class)->group(function(){
-        Route::get('GetInfoOfReparation/{id}', "GetInfoOfReparation")->name("pdf.GetInfoOfReparation");
+        Route::get('GetInfoOfReparation/{reparation}', "GetInfoOfReparation")->name("pdf.GetInfoOfReparation");
         Route::get('GetAllReparationsInfo', "GetAllReparationsInfo")->name("pdf.GetAllReparationsInfo");
     });
     //

@@ -23,15 +23,14 @@
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>
-        {{-- <div class="col-3">
-            PDF
+        <div class="col-3">
+            <i class="fa-solid fa-file-pdf"></i>
             <form action="{{ route('pdf.GetAllReparationsInfo') }}" method="GET">
-                @csrf
                 <input type="date" name="date_debut" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="date" name="date_fin" value="<?php echo date('Y-m-d'); ?>" id="">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
-        </div> --}}
+        </div>
     </div>
     <br>
     <br><br>
@@ -65,9 +64,9 @@
                     <td>{{ $item->prix }}</td>
                     <td>
                         @php
-                            $left = $item->prix - $item->infos->sum('prix');
+                            $left = $item->prix - $item->Info->sum('prix');
                         @endphp
-                        {{$left}}
+                        {{ $left }}
                     </td>
                     <td>{{ $item->nature }}</td>
                     <td>{{ $item->type }}</td>
@@ -81,8 +80,8 @@
                         <a href="{{ route('reparations.edit', $item->id) }}" class="btn btn-warning mr-1"><i
                                 class="fa fa-pen"></i></a>
                         {{--  --}}
-                        <a href="{{ route('pdf.GetInfoOfReparation', $item->id) }}" class="btn btn-info mr-1"><i
-                                class="fa-solid fa-file-pdf"></i></a>
+                        <a href="{{ route('pdf.GetInfoOfReparation', $item) }}" target="_blank"
+                            class="btn btn-info mr-1"><i class="fa-solid fa-file-pdf"></i></a>
                         {{--  --}}
                         <form action="{{ route('reparations.destroy', $item->id) }}" method="post">
                             @csrf

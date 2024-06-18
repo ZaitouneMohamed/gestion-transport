@@ -41,19 +41,16 @@
     <table style="width:100%">
         <thead>
             <tr>
-                <th class="my_td"> {{ $data->n_bon }}</th>
-                <th class="my_td">{{ $data->date }}</th>
-                <th class="my_td">{{ $data->prix }}</th>
-            </tr>
-            <tr>
+                <th class="my_td">N_bon</th>
                 <th class="my_td">Date</th>
                 <th class="my_td">Nature</th>
                 <th class="my_td">Prix</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($data->Info as $item)
-                <tr>
+            @forelse ($data as $item)
+            <tr>
+                    <td class="my_td">{{ $item->reparation->n_bon }}</td>
                     <td class="my_td">{{ $item->date }}</td>
                     <td class="my_td">{{ $item->nature }} </td>
                     <td class="my_td">{{ $item->prix }} </td>

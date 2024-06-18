@@ -9,9 +9,9 @@ use PDF;
 
 class PdfController extends Controller
 {
-    public function GetInfoOfReparation($id)
+    public function GetInfoOfReparation(Reparation $reparation)
     {
-        $data = Reparation::find($id);
+        $data = $reparation->load("Info");
         $pdf = PDF::loadView('gazole.pdf.ReparationInfo', compact('data'));
         return $pdf->stream('ReparationInfo.pdf');
     }
@@ -19,11 +19,7 @@ class PdfController extends Controller
     {
         $data = ReparationInfo::with('reparation')->whereBetween('date', [$request->date_debut, $request->date_fin])->get();
 
-        // Dump the data to inspect
-        // dd($data);
-
-        // Generate PDF with the reparations data
-        $pdf = PDF::loadView('gazole.pdf.ReparationInfo', compact('data'));
+        $pdf = PDF::loadView('gazole.pdf.AllReparationInfo', compact('data'));
         return $pdf->stream('ReparationInfo.pdf');
     }
 }
