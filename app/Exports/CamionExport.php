@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\Camion;
 use App\Models\Consomation;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class CamionExport implements FromCollection
+class CamionExport implements FromCollection , WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -37,5 +38,21 @@ class CamionExport implements FromCollection
                             "date" => $item->date,
                         ];
                     });
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Chauffeur',
+            'Matricule Camion',
+            'Ville',
+            'Trajet Composé (Litres)',
+            'Km Total',
+            'Taux',
+            'Consommation Camion',
+            'Statut',
+            'Prix',
+            'Date',
+        ];
     }
 }

@@ -4,8 +4,9 @@ namespace App\Exports;
 
 use App\Models\Mission;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class MissionExport implements FromCollection
+class MissionExport implements FromCollection, WithHeadings
 {
     protected $date;
 
@@ -34,5 +35,24 @@ class MissionExport implements FromCollection
                     "statue" => $mission->km_total - $mission->Ville->km_proposer,
                 ];
             });
+    }
+
+    /**
+     * @return array
+     */
+    public function headings(): array
+    {
+        return [
+            'Date',
+            'Nom du Chauffeur',
+            'Code du Chauffeur',
+            'Ville',
+            'Nombre de Magasins',
+            'Matricule du Camion',
+            'KM proposés',
+            'KM total',
+            'Numéro de Bon',
+            'Statut',
+        ];
     }
 }

@@ -3,9 +3,10 @@
 namespace App\Exports;
 
 use App\Models\Consomation;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class TrajetExport implements FromCollection
+class TrajetExport implements FromCollection, WithHeadings
 {
     private $trajets;
 
@@ -43,25 +44,28 @@ class TrajetExport implements FromCollection
         }
         return collect($data);
     }
+    /**
+     * @return array
+     */
     public function headings(): array
     {
         return [
-            'chaufeur',
-            'camion',
-            'ville',
-            'date',
-            'trajetcompose',
-            'km_total',
-            'camion consomation',
-            'statue',
-            'prix',
-            'numero_bon',
-            'bon_date',
-            'Qte_littre',
-            'bon_prix',
-            'bon_km',
-            'station',
-            'nature',
+            'Chauffeur',
+            'Matricule Camion',
+            'Ville',
+            'Date',
+            'Trajet Composé (Litres)',
+            'KM Total',
+            'Consommation Camion',
+            'Statut',
+            'Prix',
+            'Numéro de Bon',
+            'Date du Bon',
+            'Quantité de Litres',
+            'Prix du Bon',
+            'KM du Bon',
+            'Station',
+            'Nature du Bon',
         ];
     }
 }

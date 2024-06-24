@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\facture;
 use App\Models\Station;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class FactureGeneraleExport implements FromCollection
+class FactureGeneraleExport implements FromCollection, WithHeadings
 {
     protected $date_debut, $date_fin;
     public function __construct($date_debut, $date_fin)
@@ -40,5 +41,19 @@ class FactureGeneraleExport implements FromCollection
                     "type" => $type_word,
                 ];
             });;
+    }
+
+    /**
+     * @return array
+     */
+    public function headings(): array
+    {
+        return [
+            'Date',
+            'Prix',
+            'Station',
+            'Numéro de Bon',
+            'Type',
+        ];
     }
 }
