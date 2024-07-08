@@ -92,7 +92,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         //
         Route::get("CreateReparationInfo/{id}", "CreateReparationInfo")->name("CreateReparationInfo");
         Route::post("AddInfoToReparation/{id}", "AddInfoToReparation")->name("AddInfoToReparation")->middleware('ValidateReparationSoldeInfo');
-        Route::put("EditInfoReparation/{id}", "EditInfoReparation")->name("EditInfoReparation")->middleware('ValidateReparationSoldeInfo');
+        Route::put("EditInfoReparation/{id}", "EditInfoReparation")->name("EditInfoReparation");
         //
         Route::get("getStation", "getStations")->name("getStations");
         Route::get("factureStatistiques", "facturesStatistiques")->name("facture.statistiques");
