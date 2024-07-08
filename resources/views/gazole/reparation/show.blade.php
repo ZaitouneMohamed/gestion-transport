@@ -26,16 +26,17 @@
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
                         <div class="card-body font-weight-bold text-center">
-                            <form action="" method="post">
+                            <form action="{{ route('EditInfoReparation', $item->id) }}" method="post">
                                 @csrf
-                                @method('post')
-                                <select name="camion" id="citySelect" class="form-select">
+                                @method('PUT')
+                                <input type="hidden" name="reparation_id" value="{{ $data->id }}">
+                                <select name="camion_id" id="citySelect" class="form-select">
                                     @foreach (\App\Models\Camion::all() as $camion)
                                         <option @if ($item->camion->id === $camion->id) selected @endif
                                             value="{{ $camion->id }}">{{ $camion->matricule }}</option>
                                     @endforeach
                                 </select><br>
-                                <select name="Chaufeur" class="form-select">
+                                <select name="chaufeur_id" class="form-select">
                                     @foreach (\App\Models\Chaufeur::all() as $chaufeur)
                                         <option @if ($item->chaufeur->id === $chaufeur->id) selected @endif
                                             value="{{ $chaufeur->id }}">{{ $chaufeur->full_name }}</option>
@@ -49,7 +50,7 @@
                                 <p>Nature</p><input type="text" name="nature" value="{{ $item->nature }}"
                                     class="form-control" id=""><br>
                                 {{--  --}}
-                                <select name="nature" class="form-select">
+                                <select name="type_id" class="form-select">
                                     @foreach (\App\Models\Natures::all() as $nature)
                                         <option @if ($item->type->id === $nature->id) selected @endif
                                             value="{{ $nature->id }}">{{ $nature->name }}</option>

@@ -250,6 +250,30 @@ class HomeController extends Controller
             "success" => "reparation info added successfly"
         ]);
     }
+    public function EditInfoReparation(Request $request, $id)
+    {
+        $reparation = ReparationInfo::find($id);
+        $this->validate($request, [
+            'camion_id' => "required",
+            'chaufeur_id' => "required",
+            'prix' => "required",
+            'date' => "required",
+            'nature' => "required",
+            'type_id' => "required",
+        ]);
+        $reparation->update([
+            "camion_id" => $request->camion_id,
+            "chaufeur_id" => $request->chaufeur_id,
+            "prix" => $request->prix,
+            "date" => $request->date,
+            "nature" => $request->nature,
+            "type_id" => $request->type_id,
+        ]);
+
+        return redirect()->back()->with([
+            "success" => "reparation info Edit successfly"
+        ]);
+    }
     public function getStations(Request $request)
     {
         $city = $request->city;
