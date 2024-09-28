@@ -21,7 +21,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ App\Models\Camion::Active()->Aej()->count() }}</h3>
+                                <h3>{{ $Counts['camion_aej_count'] }}</h3>
                                 <p>Camion</p>
                             </div>
                             <div class="icon">
@@ -36,7 +36,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ App\Models\Chaufeur::Active()->count() }}</h3>
+                                <h3>{{ $Counts['active_chauffeurs'] }}</h3>
                                 <p>Chaufeur</p>
                             </div>
                             <div class="icon">
@@ -51,7 +51,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ App\Models\Station::count() }}</h3>
+                                <h3>{{ $Counts['station_count_index'] }}</h3>
 
                                 <p>Station</p>
                             </div>
@@ -66,7 +66,7 @@
                         <!-- small box -->
                         <div class="small-box bg-secondary">
                             <div class="inner">
-                                <h3>{{ $consomationsCount }}</h3>
+                                <h3>{{ $Counts['consomationsCountIndex'] }}</h3>
                                 <p>Trajet</p>
                             </div>
                             <div class="icon">
@@ -79,15 +79,35 @@
                     <!-- ./col -->
                 </div>
                 <!-- /.row -->
+                <h5 class="mt-4 mb-2">4 papiers near to end</h5>
+                <div class="row">
+                    @forelse ($nearestFourPapiersToEnd as $item)
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box text-bg-primary bg-gradient">
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{ $item->Camion->matricule }}</span>
+                                    <span class="info-box-number">{{ $item->title }}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: {{ $item->progress_percentage }}%"></div>
+                                    </div> <span class="progress-description">
+                                        {{ $item->days_until_fin }}
+                                    </span>
+                                </div> <!-- /.info-box-content -->
+                            </div> <!-- /.info-box -->
+                        </div>
+                    @empty
+                        No Papier Found
+                    @endforelse
+                </div> <!--end::Row-->
             </div><!-- /.container-fluid -->
         </section>
         <div class="row">
             <div class="col-lg-12 col-12">
-                <canvas id="myColumnChart" width="400" height="400"></canvas>
+                <canvas id="myColumnChart" width="400" height="150"></canvas>
             </div>
             <div class="col-lg-6 col-6">
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
-                <canvas id="myPieChart" width="200" height="200"></canvas>
+                <canvas id="myPieChart" width="200" height="150"></canvas>
             </div>
             <div class="col-lg-6 col-6">
                 {{-- <div id="piechart" style="height: 400px;"></div> --}}
@@ -137,8 +157,8 @@
                     <tbody>
                         @foreach ($stationsData as $item)
                             <!--@php-->
-                                                                                            <!--    $totalStatue = 0;-->
-                                                                                    <!--@endphp ?> ?>-->
+                                                                                                                                                                                                                                                            <!--    $totalStatue = 0;-->
+                                                                                                                                                                                                                                <!--@endphp ?> ?> ?> ?> ?> ?> ?>-->
                             <!--@if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')
     -->
                             <tr>
@@ -156,6 +176,27 @@
                             </tr>
                             <!--
     @endif-->
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6 col-6">
+                {{-- <div id="piechart" style="height: 400px;"></div> --}}
+                <table class="table table-striped table-valign-middle">
+                    <thead>
+                        <tr>
+                            <th>Camion</th>
+                            <th>Papier</th>
+                            <th>Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($nearestPapiers as $item)
+                            <tr>
+                                <td>{{ $item->Camion->matricule }}</td>
+                                <td>{{ $item->title }}</td>
+                                <td>{{ $item->days_until_fin }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

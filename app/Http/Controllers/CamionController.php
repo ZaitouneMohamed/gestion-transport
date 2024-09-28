@@ -8,6 +8,7 @@ use App\Models\Chaufeur;
 use App\Models\Natures;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class CamionController extends Controller
 {
@@ -54,6 +55,8 @@ class CamionController extends Controller
             "puissanse_fiscale" => $request->pupuissanse_fiscale,
             "premier_mise" => $request->premier_mise,
         ]);
+        Cache::forget('camion_count');
+        Cache::forget('camion_aej_count');
         return redirect()->route('camions.index')->with([
             "success" => "camion added successly"
         ]);
@@ -68,7 +71,7 @@ class CamionController extends Controller
     public function show($id)
     {
         $currentMonth = Carbon::now()->month;
-        $camion = Camion::with(['Charge', 'Consomations' => function ($query) use ($currentMonth) {
+        $camion = Camion::with(['Charge','Papiers', 'Consomations' => function ($query) use ($currentMonth) {
             $query->whereMonth('date', $currentMonth);
         }])->find($id);
         $chaufeurs = Chaufeur::active()->get();
@@ -112,6 +115,8 @@ class CamionController extends Controller
             "puissanse_fiscale" => $request->pupuissanse_fiscale,
             "premier_mise" => $request->premier_mise,
         ]);
+        Cache::forget('camion_count');
+        Cache::forget('camion_aej_count');
         return redirect()->route('camions.index')->with([
             "success" => "camion added successly"
         ]);
@@ -126,6 +131,8 @@ class CamionController extends Controller
     public function destroy($id)
     {
         Camion::find($id)->delete();
+        Cache::forget('camion_count');
+        Cache::forget('camion_aej_count');
         return redirect()->route('camions.index')->with([
             "success" => "camion deleted successly"
         ]);

@@ -8,6 +8,7 @@ use App\Models\Bons;
 use App\Models\Chaufeur;
 use App\Models\Consomation;
 use App\Models\facture;
+use App\Models\Papier;
 use App\Models\ReparationInfo;
 use App\Models\Station;
 use App\Models\User;
@@ -92,9 +93,6 @@ class HomeController extends Controller
 
         $currentMonth = Carbon::now()->month;
 
-        $consomationsCount = Consomation::whereMonth('date', $currentMonth)->count();
-
-
 
         // Get the start and end dates of the current month
         $currentMonthStart = Carbon::now()->startOfMonth();
@@ -104,7 +102,19 @@ class HomeController extends Controller
         $stationsData = Station::with(['factures' => function ($query) use ($currentMonthStart, $currentMonthEnd) {
             $query->whereBetween('date', [$currentMonthStart, $currentMonthEnd]);
         }])->get();
-        return view('gazole.index', compact("results", "results_2", "chaufeursWithSumStatues", "consomationsCount", "stationsData"));
+
+        $nearestPapiers = Papier::where('date_fin', '>=', Carbon::today())
+            ->orderBy('date_fin')
+            ->get();
+
+        $nearestFourPapiersToEnd = Papier::where('date_fin', '>=', Carbon::today())
+            ->orderBy('date_fin')
+            ->take(4)
+            ->get();
+
+
+
+        return view('gazole.index', compact("results", "nearestFourPapiersToEnd", "nearestPapiers", "results_2", "chaufeursWithSumStatues",  "stationsData"));
     }
 
     public function SuiviGazoleParChaufeur($id)

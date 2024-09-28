@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Station;
 use App\Models\Stations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class StationController extends Controller
 {
@@ -50,6 +51,8 @@ class StationController extends Controller
             "gerant_rep_name" => $request->gerant_rep_name,
             "gerant_rep_phone" => $request->gerant_rep_phone,
         ]);
+        Cache::forget('station_count');
+        Cache::forget('station_count_index');
         return redirect()->route('stations.index')->with([
             "success" => "station added successfly"
         ]);
@@ -101,6 +104,8 @@ class StationController extends Controller
             "gerant_rep_name" => $request->gerant_rep_name,
             "gerant_rep_phone" => $request->gerant_rep_phone,
         ]);
+        Cache::forget('station_count');
+        Cache::forget('station_count_index');
         return redirect()->route('stations.index')->with([
             "success" => "station updated successfly"
         ]);
@@ -116,6 +121,8 @@ class StationController extends Controller
     {
         $station = Station::find($id);
         $station->delete();
+        Cache::forget('station_count');
+        Cache::forget('station_count_index');
         return redirect()->route('stations.index')->with([
             "success" => "station deleted successfly"
         ]);

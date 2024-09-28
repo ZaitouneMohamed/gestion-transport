@@ -28,6 +28,10 @@ class Camion extends Model
     {
         return $this->hasMany(CamionCharge::class);
     }
+    public function Papiers()
+    {
+        return $this->hasMany(Papier::class);
+    }
     public function scopeActive($query)
     {
         return $query->where("statue", 1);

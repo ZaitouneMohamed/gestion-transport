@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateConsomationRequest;
 use App\Models\Consomation;
 use App\Models\Ville;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ConsomationController extends Controller
 {
@@ -59,6 +60,8 @@ class ConsomationController extends Controller
             "n_magasin" => $request->nombre_magasin,
             "statue" => 0
         ]);
+        Cache::forget('consomation_count');
+        Cache::forget('consomationsCountIndex');
         return redirect()->route('consomations.index')->with([
             "success" => "consomation created sucssesfly"
         ]);
@@ -105,6 +108,8 @@ class ConsomationController extends Controller
             "description" => $request->description,
             "date" => $request->date,
         ]);
+        Cache::forget('consomation_count');
+        Cache::forget('consomationsCountIndex');
         return redirect()->route('consomations.index')->with([
             "success" => "consomation updated sucssesfly"
         ]);
@@ -120,6 +125,8 @@ class ConsomationController extends Controller
     {
         $conso = Consomation::find($id);
         $conso->delete();
+        Cache::forget('consomation_count');
+        Cache::forget('consomationsCountIndex');
         return redirect()->route('consomations.index')->with([
             "success" => "consomation deleted sucssesfly"
         ]);

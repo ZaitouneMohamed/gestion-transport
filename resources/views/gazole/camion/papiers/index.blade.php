@@ -2,26 +2,33 @@
 
 @section('content')
     <br>
-    <h1 class="text-center">{{ $camion->matricule }} - {{ $camion->Consomations->count() }}</h1>
-    <a class="btn btn-success " href="{{route('papiers.create')}}">Add Papier</a>
-    <br>
+    <a href="{{ route('papiers.create') }}" class="btn btn-success">Create New Papier</a>
+    <br><br>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">Titre</th>
+                <th scope="col">Camion</th>
                 <th scope="col">Date Debut</th>
                 <th scope="col">Date Fin</th>
-                <th scope="col">Difference</th>
+                <th scope="col">Difference</th> <!-- New column for difference -->
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-            @forelse ($camion->Papiers as $item)
+            @foreach ($data as $item)
                 <tr>
                     <td>{{ $item->title }}</td>
+                    <td>{{ $item->Camion->matricule }}</td>
                     <td>{{ $item->date_debut }}</td>
                     <td>{{ $item->date_fin }}</td>
-                    <td>{{ $item->date_fin }}</td>
+                    <td>
+                        @if ($item->difference < 0)
+                            <span class="text-danger">Expired</span>
+                        @else
+                            {{ $item->difference }} days
+                        @endif
+                    </td>
                     <td class="d-flex">
                         <a href="{{ route('papiers.edit', $item->id) }}" class="btn btn-warning mr-1">
                             <i class="fa fa-pen"></i>
@@ -36,9 +43,18 @@
                         </form>
                     </td>
                 </tr>
-            @empty
-                <h1 class="text-center">no Papier Found</h1>
-            @endforelse
+            @endforeach
         </tbody>
     </table>
+    {{ $data->links() }}
+@endsection
+
+@section('scripts')
+<script>
+    function confirmDelete(button) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            button.closest('form').submit(); // Submit the form if confirmed
+        }
+    }
+</script>
 @endsection

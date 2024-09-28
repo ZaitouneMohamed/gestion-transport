@@ -56,6 +56,9 @@
                                 <i class="fa-solid fa-xmark"></i>
                             </a>
                         @endif
+                        <a href="#" class="btn btn-warning mr-1">
+                            <i class="fa fa-file" aria-hidden="true"></i>
+                        </a>
                         @if ($item->Consomations->count() == 0)
                             <form action="{{ route('camions.destroy', $item->id) }}" method="post">
                                 @csrf

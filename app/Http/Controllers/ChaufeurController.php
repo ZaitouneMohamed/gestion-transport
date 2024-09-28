@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chaufeur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ChaufeurController extends Controller
 {
@@ -51,6 +52,8 @@ class ChaufeurController extends Controller
             "cnss" => $request->cnss,
             "cni"   => $request->cni,
         ]);
+        Cache::forget('chauffeur_count');
+        Cache::forget('active_chauffeurs');
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur added successly"
         ]);
@@ -103,6 +106,8 @@ class ChaufeurController extends Controller
             "cnss" => $request->cnss,
             "cni"   => $request->cni,
         ]);
+        Cache::forget('chauffeur_count');
+        Cache::forget('active_chauffeurs');
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur updated successly"
         ]);
@@ -117,6 +122,8 @@ class ChaufeurController extends Controller
     public function destroy($id)
     {
         Chaufeur::find($id)->delete();
+        Cache::forget('chauffeur_count');
+        Cache::forget('active_chauffeurs');
         return redirect()->route('chaufeur.index')->with([
             "success" => "chaufeur deleted successly"
         ]);

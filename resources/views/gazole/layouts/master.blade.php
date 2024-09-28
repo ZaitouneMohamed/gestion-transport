@@ -98,7 +98,7 @@
                                 <i class="fa-solid fa-user"></i>
                                 <p>
                                     Chauffeur
-                                    <span class="right badge badge-success">{{ App\Models\Chaufeur::count() }}</span>
+                                    <span class="right badge badge-success">{{ $cachedCounts['chauffeur'] }}</span>
                                 </p>
                             </a>
                         </li>
@@ -107,7 +107,16 @@
                                 <i class="fa-solid fa-truck"></i>
                                 <p>
                                     Camions
-                                    <span class="right badge badge-success">{{ App\Models\Camion::count() }}</span>
+                                    <span class="right badge badge-success">{{ $cachedCounts['camion'] }}</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('papiers.index') }}" class="nav-link">
+                                <i class="fa-solid fa-file"></i>
+                                <p>
+                                    Papiers
+                                    <span class="right badge badge-success">{{ $cachedCounts['papier'] }}</span>
                                 </p>
                             </a>
                         </li>
@@ -116,7 +125,7 @@
                                 <i class="fa-solid fa-charging-station"></i>
                                 <p>
                                     Station
-                                    <span class="right badge badge-success">{{ App\Models\Station::count() }}</span>
+                                    <span class="right badge badge-success">{{ $cachedCounts['station'] }}</span>
                                 </p>
                             </a>
                         </li>
@@ -125,11 +134,11 @@
                                 <i class="fa-solid fa-map-location-dot"></i>
                                 <p>
                                     Trajet
-                                    <span
-                                        class="right badge badge-success">{{ App\Models\Consomation::count() }}</span>
+                                    <span class="right badge badge-success">{{ $cachedCounts['consomation'] }}</span>
                                 </p>
                             </a>
                         </li>
+
                         {{-- <li class="nav-item">
                             <a href="{{ route('missions.index') }}" class="nav-link">
                                 <i class="fa-solid fa-truck-fast"></i>

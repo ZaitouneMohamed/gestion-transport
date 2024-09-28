@@ -11,6 +11,7 @@ use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NaturesController;
 use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PapierController;
 use App\Http\Controllers\ReparationController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\SwitchController;
@@ -76,6 +77,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("pieces", PieceController::class);
     Route::resource("factures", FactureController::class);
     Route::resource("natures", NaturesController::class);
+    Route::resource("papiers", PapierController::class);
 
     Route::controller(ExcelController::class)->name('excel.')->group(function () {
         Route::post("exportTrajet", "exportTrajet")->name("exportTrajet");
