@@ -53,7 +53,7 @@ class PapierController extends Controller
             "description" => "nullable"
         ]);
 
-        $papier = Papier::create($validatedData);
+        Papier::create($validatedData);
         Cache::forget('papier_count');
 
         return redirect()->route('papiers.index')->with('success', 'papier added with success');
@@ -95,6 +95,7 @@ class PapierController extends Controller
             'date_debut' => 'sometimes|required|date',
             'date_fin' => 'sometimes|required|date|after_or_equal:date_debut', // Ensures date_fin is after or equal to date_debut
             'camion_id' => 'sometimes|required|exists:camions,id', // Ensure camion_id exists in camions table
+            'description' => 'sometimes|', // Ensure camion_id exists in camions table
         ]);
         Cache::forget('papier_count');
         $papier->update($validatedData);
