@@ -9,6 +9,7 @@ use App\Http\Controllers\FactureController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MissionController;
 use App\Http\Controllers\NaturesController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PapierController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\StationController;
 use App\Http\Controllers\SwitchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VilleController;
 use App\Models\Consomation;
 use Illuminate\Support\Facades\Artisan;
@@ -41,7 +43,7 @@ use Illuminate\Support\Facades\Route;
 Route::permanentRedirect('/', 'login');
 Route::permanentRedirect('/home', 'admin');
 
-Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
+Route::prefix("admin")->middleware(["auth"])->group(function () {
     Route::get("/", [HomeController::class, 'Home']);
 
     Route::get("/chauffeur/{id}/chart-data", [HomeController::class, 'SuiviGazoleParChaufeur'])->name("chauffeur.SuiviGazoleParChaufeur");
@@ -78,6 +80,7 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
     Route::resource("factures", FactureController::class);
     Route::resource("natures", NaturesController::class);
     Route::resource("papiers", PapierController::class);
+    Route::resource("users", UsersController::class);
 
     Route::controller(ExcelController::class)->name('excel.')->group(function () {
         Route::post("exportTrajet", "exportTrajet")->name("exportTrajet");
@@ -121,6 +124,13 @@ Route::prefix("admin")->middleware(["auth", "role:gazole"])->group(function () {
         Route::get('SwitchIsForAejModeForCamion/{id}', 'SwitchIsForAejModeForCamion')->name("SwitchIsForAejModeForCamion");
         Route::get('SwitchActiveModeForTrajet/{id}', 'SwitchActiveModeForTrajet')->name("SwitchActiveModeForTrajet");
     });
+
+    // web.php
+    Route::get('notifications' , [NotificationController::class, 'index'])->name("notifications.index");
+    Route::delete('/notifications/deleteAll', [NotificationController::class, 'deleteAll'])->name('notifications.deleteAll');
+    Route::patch('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'delete'])->name('notifications.delete');
+
 });
 
 Route::POST("AddUser", UserController::class)->name("add.users")->middleware("auth");

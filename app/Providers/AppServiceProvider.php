@@ -10,6 +10,7 @@ use App\Models\Station;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 
@@ -73,5 +74,11 @@ class AppServiceProvider extends ServiceProvider
             ];
             $view->with('Counts', $Counts);
         });
+        View::composer('components.notifications', function ($view) {
+            $latest_notifications = Auth::user()->notifications();
+
+            $view->with('latest_notifications', $latest_notifications); // Send variable directly
+        });
+
     }
 }

@@ -11,34 +11,23 @@ class PapierDueNotification extends Notification
 {
     use Queueable;
 
-    protected $papers;
+    protected $papier;
 
-    public function __construct($papers)
+    public function __construct($papier)
     {
-        $this->papers = $papers;
+        $this->papier = $papier;
     }
     public function via($notifiable)
     {
-        return ['mail', 'database'];
-    }
-
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->subject('Upcoming Papier Due Dates')
-            ->line("Hello {$notifiable->name},") // Use user's name
-            ->line('The following Papier entries are due soon:')
-            ->line($this->papers->pluck('title')->implode(', '))
-            ->action('View Papier', url('/papier'));
+        return ['database'];
     }
 
 
     public function toDatabase($notifiable)
     {
         return [
-            'papers' => $this->papers,
-            'user_id' => $notifiable->id,
-            'message' => 'You have upcoming Papier entries due soon.',
+            'paper_id' => $this->papier->id,
+            'message' => 'You have a Papier entry due soon: ' . $this->papier->title,
         ];
     }
 }

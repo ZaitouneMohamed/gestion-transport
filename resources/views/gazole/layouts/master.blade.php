@@ -43,39 +43,10 @@
             </ul>
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        {{-- {{ Auth::user()->name }} --}}
-
-                        {{-- <i class="far fa-comments"></i> --}}
-                        {{-- <span class="badge badge-danger navbar-badge">3</span> --}}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item text-center">
-                            profile
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        {{-- <form method="POST" action="{{ route('logout') }}" id="frm">
-                            @csrf
-                            <button type="submit" class="dropdown-item text-center">log out </button>
-                        </form> --}}
-                    </div>
-                </li>
+                @include("components.notifications")
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -234,15 +205,14 @@
                                 </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('gazole.users') }}" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <p>
                                     Users List
-                                    <span class="right badge badge-success">5</span>
                                 </p>
                             </a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
