@@ -57,6 +57,7 @@
     </form>
 @endsection
 
+@section("style")
 <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
 @endsection
 @section('scripts')
