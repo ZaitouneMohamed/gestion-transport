@@ -75,10 +75,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('Counts', $Counts);
         });
         View::composer('components.notifications', function ($view) {
-            $latest_notifications = Auth::user()->notifications();
+            $latest_notifications = Auth::user()->notifications()->latest()->take(10)->get(); // Adjust limit as per your requirement
 
             $view->with('latest_notifications', $latest_notifications); // Send variable directly
         });
-
     }
 }
