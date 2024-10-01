@@ -85,13 +85,19 @@
                             @if ($item->statue > 0) bg-danger
                             @else
                             bg-success @endif
-                            ">{{ number_format($item->Statue, 2) }}</span>
+                            ">
+                            @if ($item->statue > 0)
+                            {{ number_format($item->Statue, 2) }}
+                            @else
+                            {{ number_format($item->Statue, 2) * (-1)}}
+                            @endif
+                        </span>
                         @endif
                     </td>
                     <td style="width: 35%">
                         @if ($item->status === 1)
                             @if ($item->km_proposer - $item->KmTotal < 0)
-                                <span class="badge bg-danger">{{ $item->km_proposer - $item->KmTotal }}</span>
+                                <span class="badge bg-danger">{{ ($item->km_proposer - $item->KmTotal) * (-1) }}</span>
                             @else
                                 <span class="badge bg-success">{{ $item->km_proposer - $item->KmTotal }}</span>
                             @endif

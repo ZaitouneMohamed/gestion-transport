@@ -22,7 +22,7 @@ class PapierDueMail extends Mailable
     }
     public function build()
     {
-        return $this->view('emails.papier_due')
+        return $this->view('Mail.papierNearToEnd')
             ->with(['papier' => $this->papier]);
     }
 }

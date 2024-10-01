@@ -25,7 +25,7 @@ class ConsomationController extends Controller
             $query->where('date', $date);
         }
 
-        $consomations = $query->paginate(15);
+        $consomations = $query->with(["Bons","chaufeur","Station","Camion"])->paginate(15);
 
         return view('gazole.consomation.index', compact('consomations'));
     }

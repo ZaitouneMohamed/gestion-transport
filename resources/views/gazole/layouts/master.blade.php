@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>AdminLTE 3 | Dashboard 3</title>
+    <title>A&j Transport et Logistique | @yield("title")</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -266,7 +266,8 @@
         <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
+        {{-- <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script> --}}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/pages/dashboard3.js') }}"></script>
         @yield('scripts')
