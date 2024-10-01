@@ -33,7 +33,7 @@ class CheckPapierDueDates extends Command
 
                 // Send email for this specific Papier to all users
                 foreach (User::all() as $user) {
-                    Mail::to($user->email)->send(new PapierDueMail($papier)); // Ensure you have a Mailable for this
+                    Mail::to($user->email)->send(new PapierDueMail($user->name , $papier)); // Ensure you have a Mailable for this
                 }
             }
             $this->info('Users notified about upcoming Papier entries.');

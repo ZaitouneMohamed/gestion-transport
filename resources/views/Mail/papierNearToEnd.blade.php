@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upcoming Papier Due Date</title>
+    <title>Date d'échéance à venir pour votre Papier</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -30,14 +30,14 @@
 
 <body>
     <div class="container">
-        <h2>Upcoming Due Date for Your Papier</h2>
-        <p>Hello {{ $papier->user->name ?? 'User' }},</p>
-        <p>The following Papier entry is due soon:</p>
+        <h2>Date d'échéance à venir pour votre Papier</h2>
+        <p>Bonjour {{ $username ?? 'Utilisateur' }},</p>
+        <p>Le papier suivant est bientôt dû :</p>
         <h3>{{ $papier->title }}</h3>
-        <p><strong>Due Date:</strong> {{ $papier->date_fin->format('F j, Y') }}</p>
-        <p>Please make sure to complete it before the due date.</p>
+        <p><strong>Date d'échéance :</strong> {{ $papier->date_fin->format('j F, Y') }}</p>
+        <p>Veuillez vous assurer de le compléter avant la date d'échéance.</p>
         <div class="footer">
-            <p>Thank you!</p>
+            <p>Merci !</p>
             <p>{{ env('APP_NAME') }}</p>
         </div>
     </div>
