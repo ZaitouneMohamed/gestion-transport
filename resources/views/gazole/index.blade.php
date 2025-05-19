@@ -158,11 +158,7 @@
                     </thead>
                     <tbody>
                         @foreach ($stationsData as $item)
-                            <!--@php-->
-                                                                                                                                                                                                                                                            <!--    $totalStatue = 0;-->
-                                                                                                                                                                                                                                <!--@endphp ?> ?> ?> ?> ?> ?> ?>-->
-                            <!--@if ($item->full_name != 'M.SAYAH' || $item->full_name != 'YOUCEF STATION' || $item->full_name != 'HAKIM')
-    -->
+
                             <tr>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->factures->sum('prix') }}</td>
@@ -176,8 +172,7 @@
                                     @endif
                                 </td>
                             </tr>
-                            <!--
-    @endif-->
+                            
                         @endforeach
                     </tbody>
                 </table>

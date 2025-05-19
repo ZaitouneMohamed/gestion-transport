@@ -6,6 +6,7 @@ use App\Mail\PapierDueMail;
 use App\Models\Papier;
 use App\Models\User;
 use App\Notifications\PapierDueNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Console\Command;
@@ -22,21 +23,29 @@ class CheckPapierDueDates extends Command
      */
     public function handle()
     {
-        $papers = Papier::where('date_fin', '<=', now()->addDays(10))
-            ->where('date_fin', '>=', now())
-            ->get();
+        $data = Papier::all();
 
-        if ($papers->isNotEmpty()) {
-            foreach ($papers as $papier) {
-                Notification::send(User::all(), new PapierDueNotification($papier));
+        foreach ($data as $item) {
+            $lastdate = Carbon::parse($item->date_debut);
+            $todaydate = Carbon::today();
+
+            $diff = $todaydate->diffInDays($lastdate);
+
+            if ($diff > 10) {
+
+                Notification::send(User::all(), new PapierDueNotification($item));
 
                 foreach (User::all() as $user) {
-                    Mail::to($user->email)->send(new PapierDueMail($papier, $user->name));
+                    Mail::to($user->email)->send(new PapierDueMail($item, $user->name));
                 }
+
+                if ($diff === 0) {
+                    $item->update([
+                        "date_debut" => Carbon::today()->addDays($diff)
+                    ]);
+                }
+
             }
-            Log::info('Users notified about upcoming Papier entries.');
-        } else {
-            Log::info('No Papier entries due in the next 10 days.');
         }
     }
 }

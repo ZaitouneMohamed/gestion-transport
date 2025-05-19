@@ -21,6 +21,8 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VilleController;
 use App\Models\Consomation;
+use App\Models\Papier;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -161,3 +163,17 @@ Route::get('send-mail', function () {
         "success" => "email send with success"
     ]);
 })->name("email");
+
+Route::get('update-days-count' , function() {
+    $data = Papier::all();
+    foreach ($data as $item) {
+        $datedebut = Carbon::parse($item->date_debut);
+        $datefin = Carbon::parse($item->date_fin);
+
+        $diff = $datefin->diffInDays($datedebut);
+
+        $item->update([
+            "days_count" => $diff
+        ]);
+    }
+});

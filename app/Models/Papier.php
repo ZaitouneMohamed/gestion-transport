@@ -16,6 +16,7 @@ class Papier extends Model
         "date_fin",
         "description",
         "camion_id",
+        "days_count"
     ];
 
     protected $casts = [
