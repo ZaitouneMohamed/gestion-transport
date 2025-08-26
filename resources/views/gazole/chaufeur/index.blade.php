@@ -79,7 +79,7 @@
                                                     <i class="fa-solid fa-xmark"></i>
                                                 </a>
                                             @endif
-                                            @if ($item->Consomations->count() == 0)
+                                            @if ($item->consomations_count == 0)
                                                 <form action="{{ route('chaufeur.destroy', $item->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')

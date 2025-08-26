@@ -159,13 +159,15 @@
                         @csrf
                         @method('POST')
                         <img src="{{ asset('images/logo.png') }}" style="width: 60%;margin-left:50px" alt="">
-                        <input type="text" placeholder="EMAIL" name="email">
+                        <input type="text" placeholder="EMAIL" name="email" value="{{ old('email') }}" required
+                            autofocus>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <input type="password" placeholder="PASSWORD" name="password">
+                        <input type="password" placeholder="PASSWORD" name="password" required
+                            autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

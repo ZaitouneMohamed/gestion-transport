@@ -16,7 +16,7 @@ class ReparationController extends Controller
      */
     public function index(Request $request)
     {
-        $reparations = Reparation::latest();
+        $reparations = Reparation::latest()->with(['Chaufeur:id,full_name' , "Camion:id,matricule" , "Info:id,prix"]);
         if ($request->has('date')) {
             $reparations->whereDate('date', $request->date);
         }

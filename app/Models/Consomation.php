@@ -20,96 +20,194 @@ class Consomation extends Model
         "n_magasin"
     ];
 
-    // protected $casts = ['date' => 'date'];
+    protected $casts = [
+        'date' => 'date'
+    ];
 
-    public function Bons()
+    // Relationships
+    public function bons()
     {
         return $this->hasMany(Bons::class);
     }
+
     public function chaufeur()
     {
         return $this->belongsTo(Chaufeur::class);
     }
-    public function Station()
+
+    public function station()
     {
         return $this->belongsTo(Station::class);
     }
-    public function Camion()
+
+    public function camion()
     {
         return $this->belongsTo(Camion::class);
     }
+
+    // Scopes for better query building
+    public function scopeWithCalculatedValues($query)
+    {
+        return $query->with([
+            'chaufeur:id,full_name',
+            'camion:id,matricule,consommation',
+            'station:id,name',
+            'bons' => function ($query) {
+                $query->where('nature', 'gazole')
+                      ->select('id', 'consomation_id', 'km', 'qte_litre', 'prix', 'nature')
+                      ->orderBy('id');
+            }
+        ]);
+    }
+
+    public function scopeForDate($query, $date)
+    {
+        return $query->where('date', $date);
+    }
+
+    public function scopeLatest($query)
+    {
+        return $query->orderBy('date', 'desc');
+    }
+
+    // Keep legacy accessors for backward compatibility but mark as deprecated
+    // These should be replaced with the calculated values from controller
+
+    /**
+     * @deprecated Use calculated_values from controller instead
+     */
     public function getQtyLittreAttribute()
     {
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $last_bon = $bons->first();
-        $first_bon = $bons->last();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $first = $first_bon->qte_litre;
-            $qte_littre = $bons->sum('qte_litre') - $first;
-            return $qte_littre;
+        if (isset($this->calculated_values['qty_littre'])) {
+            return $this->calculated_values['qty_littre'];
         }
-        return null;
+
+        // Fallback to old logic (should be avoided)
+        $bons = $this->bons()->where('nature', 'gazole')->orderBy('id')->get();
+
+        if ($bons->count() < 2) {
+            return null;
+        }
+
+        $firstBon = $bons->first();
+        $lastBon = $bons->last();
+
+        if (!$firstBon->km || !$lastBon->km) {
+            return null;
+        }
+
+        return $bons->sum('qte_litre') - $firstBon->qte_litre;
     }
+
+    /**
+     * @deprecated Use calculated_values from controller instead
+     */
     public function getKmTotalAttribute()
     {
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $first_bon = $bons->last();
-        $last_bon = $bons->first();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $kmdepart = $first_bon->km;
-            $kmreturn = $last_bon->km;
-            $KmTotal = $kmreturn - $kmdepart;
-            return $KmTotal;
+        if (isset($this->calculated_values['km_total'])) {
+            return $this->calculated_values['km_total'];
         }
+
+        // Fallback to old logic
+        $bons = $this->bons()->where('nature', 'gazole')->orderBy('id')->get();
+
+        if ($bons->count() < 2) {
+            return null;
+        }
+
+        $firstBon = $bons->first();
+        $lastBon = $bons->last();
+
+        if (!$firstBon->km || !$lastBon->km) {
+            return null;
+        }
+
+        return $lastBon->km - $firstBon->km;
     }
 
+    /**
+     * @deprecated Use calculated_values from controller instead
+     */
     public function getTauxAttribute()
     {
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $first_bon = $bons->last();
-        $last_bon = $bons->first();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $qtylittre = $this->getQtyLittreAttribute();
-            $KmTotal = $this->getKmTotalAttribute();
-            if ($KmTotal > 0) {
-                return $qtylittre  / $KmTotal * 100;
-            }
+        if (isset($this->calculated_values['taux'])) {
+            return $this->calculated_values['taux'];
         }
+
+        // Fallback to old logic
+        $qtyLittre = $this->getQtyLittreAttribute();
+        $kmTotal = $this->getKmTotalAttribute();
+
+        if (!$qtyLittre || !$kmTotal || $kmTotal <= 0) {
+            return null;
+        }
+
+        return $qtyLittre / $kmTotal * 100;
     }
 
+    /**
+     * @deprecated Use calculated_values from controller instead
+     */
     public function getPrixAttribute()
     {
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $first_bon = $bons->last();
-        $last_bon = $bons->first();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            $bons = $this->Bons()->gazole();
-            $first = $bons->first()->prix;
-            $prix = $bons->sum('prix') - $first;
-            return $prix;
-        }else{
+        if (isset($this->calculated_values['prix'])) {
+            return $this->calculated_values['prix'];
+        }
+
+        // Fallback to old logic
+        $bons = $this->bons()->where('nature', 'gazole')->orderBy('id')->get();
+
+        if ($bons->count() < 2) {
             return 0;
         }
+
+        $firstBon = $bons->first();
+        $lastBon = $bons->last();
+
+        if (!$firstBon->km || !$lastBon->km) {
+            return 0;
+        }
+
+        return $bons->sum('prix') - $firstBon->prix;
     }
 
-    public function getFullPrixAttribute(){
-        $bons = $this->Bons();
-        return $bons->sum('prix');
-    }
-
+    /**
+     * @deprecated Use calculated_values from controller instead
+     */
     public function getStatueAttribute()
     {
-        $bons = $this->Bons()->gazole()->orderByDesc('id')->get();
-        $first_bon = $bons->last();
-        $last_bon = $bons->first();
-        if ($bons->count() > 1 && $first_bon->km > 0 && $last_bon->km > 0) {
-            if ($bons->count() > 1) {
-                $taux = $this->getTauxAttribute();
-                $camionconsomation = $this->Camion->consommation;
-                $statue = $taux - $camionconsomation;
-                return $statue;
-            }
+        if (isset($this->calculated_values['statue'])) {
+            return $this->calculated_values['statue'];
         }
-        // return '<span class="badge bg-secondary">New</span>';
+
+        // Fallback to old logic
+        $taux = $this->getTauxAttribute();
+
+        if (!$taux || !$this->camion->consommation) {
+            return null;
+        }
+
+        return $taux - $this->camion->consommation;
+    }
+
+    public function getFullPrixAttribute()
+    {
+        return $this->bons()->sum('prix');
+    }
+
+    // Helper methods for cleaner code
+    public function hasCompleteBons(): bool
+    {
+        return $this->bons()->where('nature', 'gazole')->count() >= 2;
+    }
+
+    public function isComplete(): bool
+    {
+        return $this->status === 1;
+    }
+
+    public function getGazoleBons()
+    {
+        return $this->bons()->where('nature', 'gazole')->orderBy('id')->get();
     }
 }

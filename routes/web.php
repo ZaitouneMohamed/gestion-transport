@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Route;
 Route::permanentRedirect('/', 'login');
 Route::permanentRedirect('/home', 'admin');
 
-Route::prefix("admin")->middleware(["auth"])->group(function () {
+Route::prefix("admin")->middleware("auth")->group(function () {
     Route::get("/", [HomeController::class, 'Home']);
 
     Route::get("/chauffeur/{id}/chart-data", [HomeController::class, 'SuiviGazoleParChaufeur'])->name("chauffeur.SuiviGazoleParChaufeur");
@@ -142,11 +142,11 @@ Route::post("login_c", [AuthController::class, 'login'])->name('login_c');
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/addcache', function () {
-    $command = Artisan::call("route:cache");
+    Artisan::call("route:cache");
     dd("route cache with success");
 });
 Route::get('/clearcache', function () {
-    $command = Artisan::call("route:clear");
+    Artisan::call("route:clear");
     dd("route clear with success");
 });
 
@@ -163,17 +163,3 @@ Route::get('send-mail', function () {
         "success" => "email send with success"
     ]);
 })->name("email");
-
-Route::get('update-days-count' , function() {
-    $data = Papier::all();
-    foreach ($data as $item) {
-        $datedebut = Carbon::parse($item->date_debut);
-        $datefin = Carbon::parse($item->date_fin);
-
-        $diff = $datefin->diffInDays($datedebut);
-
-        $item->update([
-            "days_count" => $diff
-        ]);
-    }
-});

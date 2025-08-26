@@ -7,6 +7,7 @@ use App\Models\Chaufeur;
 use App\Models\Consomation;
 use App\Models\Papier;
 use App\Models\Station;
+use App\Observers\PapierObserver;
 use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -34,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        Papier::observe(PapierObserver::class);
 
         View::composer('gazole.layouts.master', function ($view) {
             $cachedCounts = [

@@ -26,12 +26,14 @@ class CheckPapierDueDates extends Command
         $data = Papier::all();
 
         foreach ($data as $item) {
-            $lastdate = Carbon::parse($item->date_debut);
+
+            $targetDate = Carbon::parse($item->last_notification)->copy()->addDays($item->days_count);
+            //
             $todaydate = Carbon::today();
 
-            $diff = $todaydate->diffInDays($lastdate);
+            $diff = $todaydate->diffInDays($targetDate);
 
-            if ($diff > 10) {
+            if ($diff <= 10) {
 
                 Notification::send(User::all(), new PapierDueNotification($item));
 
@@ -41,7 +43,7 @@ class CheckPapierDueDates extends Command
 
                 if ($diff === 0) {
                     $item->update([
-                        "date_debut" => Carbon::today()->addDays($diff)
+                        "last_notification" => Carbon::today()
                     ]);
                 }
 

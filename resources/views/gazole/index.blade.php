@@ -90,7 +90,6 @@
                                     <span class="info-box-text">{{ $item->Camion->matricule }}</span>
                                     <span class="info-box-number">{{ $item->title }}</span>
                                     <div class="progress">
-                                        <div class="progress-bar" style="width: {{ $item->progress_percentage }}%"></div>
                                     </div> <span class="progress-description">
                                         {{ $item->days_until_fin }}
                                     </span>
@@ -172,7 +171,7 @@
                                     @endif
                                 </td>
                             </tr>
-                            
+
                         @endforeach
                     </tbody>
                 </table>

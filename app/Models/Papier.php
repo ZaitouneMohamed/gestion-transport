@@ -12,11 +12,11 @@ class Papier extends Model
 
     protected $fillable = [
         "title",
-        "date_debut",
-        "date_fin",
         "description",
         "camion_id",
-        "days_count"
+        "days_count",
+        "last_notification",
+        "date_fin"
     ];
 
     protected $casts = [
@@ -31,16 +31,26 @@ class Papier extends Model
 
     public function getDaysUntilFinAttribute()
     {
-        return $this->date_fin->diffForHumans(Carbon::today());
+        $last_notification = Carbon::parse($this->last_notification);
+        $daysCount = $this->days_count;
+        //
+        $targetDate = $last_notification->copy()->addDays($daysCount);
+
+        return $targetDate->diffForHumans(Carbon::today());
     }
 
-    public function getProgressPercentageAttribute()
+    public function getTargetDateAttribute()
     {
-        $totalDuration = $this->date_debut->diffInDays($this->date_fin);
-        $elapsedDuration = $this->date_debut->diffInDays(Carbon::today());
-
-        // Calculate progress percentage, ensuring it does not exceed 100%
-        $percentage = ($elapsedDuration / $totalDuration) * 100;
-        return min(max($percentage, 0), 100); // Clamp between 0 and 100
+        $last_notification = Carbon::parse($this->last_notification);
+        $daysCount = $this->days_count;
+        return $last_notification->copy()->addDays($daysCount);
     }
+
+
+    public function getTargetDateFormattedAttribute()
+    {
+        return $this->target_date?->format('Y-m-d'); // or any other format
+    }
+
+
 }

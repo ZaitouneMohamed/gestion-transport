@@ -9,9 +9,9 @@
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Camion</th>
-                <th scope="col">Date Debut</th>
-                <th scope="col">Date Fin</th>
-                <th scope="col">Difference</th> <!-- New column for difference -->
+                <th scope="col">Last notification</th>
+                <th scope="col">notification at</th>
+                <th scope="col">Days count</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -20,15 +20,9 @@
                 <tr>
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->Camion->matricule }}</td>
-                    <td>{{ $item->date_debut }}</td>
-                    <td>{{ $item->date_fin }}</td>
-                    <td>
-                        @if ($item->difference < 0)
-                            <span class="text-danger">Expired</span>
-                        @else
-                            {{ $item->difference }} days
-                        @endif
-                    </td>
+                    <td>{{ $item->last_notification }}</td>
+                    <td>{{ $item->target_date_formatted }}</td>
+                    <td>{{ $item->DaysUntilFin }}</td>
                     <td class="d-flex">
                         <a href="{{ route('papiers.edit', $item->id) }}" class="btn btn-warning mr-1">
                             <i class="fa fa-pen"></i>

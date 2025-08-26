@@ -7,8 +7,11 @@ use Livewire\Component;
 
 class Trajet extends Component
 {
-    public $ville, $datedebut, $datefin;
-    function mount()
+    public $ville;
+    public $datedebut;
+    public $datefin;
+
+    public function mount()
     {
         $this->datedebut = date('Y-m-d');
         $this->datefin = date('Y-m-d');

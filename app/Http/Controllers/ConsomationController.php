@@ -18,38 +18,91 @@ class ConsomationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Consomation::orderBy('date', 'desc');
+        $query = Consomation::with([
+            'chaufeur:id,full_name', // Select only needed fields
+            'camion:id,matricule,consommation',
+            'station:id,name',
+            'bons' => function ($query) {
+                $query->where('nature', 'gazole')
+                      ->select('id', 'consomation_id', 'km', 'qte_litre', 'prix', 'nature')
+                      ->orderBy('id');
+            }
+        ])->orderBy('date', 'desc');
 
         if ($request->has('date')) {
             $date = $request->input('date');
             $query->where('date', $date);
         }
 
-        $consomations = $query->with(["Bons","chaufeur","Station","Camion"])->paginate(15);
+        $consomations = $query->paginate(15);
+
+        // Pre-calculate computed values to avoid N+1 in view
+        $consomations->getCollection()->transform(function ($consomation) {
+            $consomation->calculated_values = $this->calculateTrajetValues($consomation);
+            return $consomation;
+        });
 
         return view('gazole.consomation.index', compact('consomations'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Calculate all trajet values in one method to avoid multiple queries
      */
-    public function create()
+    private function calculateTrajetValues(Consomation $consomation): array
     {
-        return view('gazole.consomation.create');
+        $gazoleBons = $consomation->bons->where('nature', 'gazole')->sortBy('id');
+
+        if ($gazoleBons->count() < 2) {
+            return [
+                'qty_littre' => null,
+                'km_total' => null,
+                'taux' => null,
+                'prix' => 0,
+                'statue' => null,
+            ];
+        }
+
+        $firstBon = $gazoleBons->first();
+        $lastBon = $gazoleBons->last();
+
+        if (!$firstBon->km || !$lastBon->km) {
+            return [
+                'qty_littre' => null,
+                'km_total' => null,
+                'taux' => null,
+                'prix' => 0,
+                'statue' => null,
+            ];
+        }
+
+        // Calculate values
+        $qtyLittre = $gazoleBons->sum('qte_litre') - $firstBon->qte_litre;
+        $kmTotal = $lastBon->km - $firstBon->km;
+        $prix = $gazoleBons->sum('prix') - $firstBon->prix;
+        $taux = $kmTotal > 0 ? ($qtyLittre / $kmTotal * 100) : null;
+
+        // Calculate statue - match original logic exactly
+        $statue = null;
+        if ($taux !== null && $consomation->camion->consommation) {
+            $statue = $taux - $consomation->camion->consommation;
+        }
+
+        return [
+            'qty_littre' => $qtyLittre,
+            'km_total' => $kmTotal,
+            'taux' => $taux,
+            'prix' => $prix,
+            'statue' => $statue,
+        ];
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreConsomationRequest $request)
     {
-        // dd($request->all());
         $ville = Ville::find($request->ville);
+
         Consomation::create([
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
@@ -60,46 +113,30 @@ class ConsomationController extends Controller
             "n_magasin" => $request->nombre_magasin,
             "statue" => 0
         ]);
-        Cache::forget('consomation_count');
-        Cache::forget('consomationsCountIndex');
-        return redirect()->route('consomations.index')->with([
-            "success" => "consomation created sucssesfly"
-        ]);
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        // Clear cache
+        $this->clearConsomationCache();
+
+        return redirect()->route('consomations.index')
+            ->with('success', 'Consomation created successfully');
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $consomation = Consomation::find($id);
+        $consomation = Consomation::findOrFail($id);
         return view('gazole.consomation.edit', compact('consomation'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(UpdateConsomationRequest $request, $id)
     {
-        $consomation = Consomation::find($id);
+        $consomation = Consomation::findOrFail($id);
+
         $consomation->update([
             "chaufeur_id" => $request->chaufeur_id,
             "camion_id" => $request->camion_id,
@@ -108,27 +145,33 @@ class ConsomationController extends Controller
             "description" => $request->description,
             "date" => $request->date,
         ]);
-        Cache::forget('consomation_count');
-        Cache::forget('consomationsCountIndex');
-        return redirect()->route('consomations.index')->with([
-            "success" => "consomation updated sucssesfly"
-        ]);
+
+        $this->clearConsomationCache();
+
+        return redirect()->route('consomations.index')
+            ->with('success', 'Consomation updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $conso = Consomation::find($id);
-        $conso->delete();
+        $consomation = Consomation::findOrFail($id);
+        $consomation->delete();
+
+        $this->clearConsomationCache();
+
+        return redirect()->route('consomations.index')
+            ->with('success', 'Consomation deleted successfully');
+    }
+
+    /**
+     * Clear related cache keys
+     */
+    private function clearConsomationCache(): void
+    {
         Cache::forget('consomation_count');
         Cache::forget('consomationsCountIndex');
-        return redirect()->route('consomations.index')->with([
-            "success" => "consomation deleted sucssesfly"
-        ]);
     }
 }

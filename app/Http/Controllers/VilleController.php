@@ -14,7 +14,7 @@ class VilleController extends Controller
      */
     public function index()
     {
-        $villes = Ville::latest()->paginate(15);
+        $villes = Ville::latest()->withCount("Missions")->paginate(15);
         return view('gazole.ville.index', compact("villes"));
     }
 

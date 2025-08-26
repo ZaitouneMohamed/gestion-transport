@@ -13,15 +13,10 @@ use Illuminate\Queue\SerializesModels;
 
 class PapierDueMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
 
-    public $papier;
-    public $username;
-
-    public function __construct(Papier $papier , $username)
+    public function __construct(public Papier $papier ,public $username)
     {
-        $this->papier = $papier;
-        $this->username = $username;
     }
     public function build()
     {

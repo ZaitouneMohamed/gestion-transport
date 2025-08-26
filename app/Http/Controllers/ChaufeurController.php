@@ -15,7 +15,7 @@ class ChaufeurController extends Controller
      */
     public function index()
     {
-        $chaufeurs = Chaufeur::with('Consomations')->latest()->paginate(12);
+        $chaufeurs = Chaufeur::withCount('Consomations')->latest()->paginate(12);
         return view('gazole.chaufeur.index', compact('chaufeurs'));
     }
 

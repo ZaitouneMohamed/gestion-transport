@@ -14,8 +14,9 @@ class PapierController extends Controller
         $today = Carbon::today();
 
         // Fetch papers with differences
-        $data = Papier::with("Camion")
-            ->select('id', 'camion_id', 'date_debut', 'date_fin',  'title') // Make sure to select relevant fields
+        $data = Papier::with("Camion:id,matricule")
+            ->select('id', 'camion_id', 'last_notification' , 'days_count', 'title')
+            ->latest()
             ->paginate(10);
 
         // Calculate the difference after pagination
@@ -47,9 +48,9 @@ class PapierController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date|after_or_equal:date_debut', // Ensures date_fin is after or equal to date_debut
-            'camion_id' => 'required|exists:camions,id', // Ensure camion_id exists in camions table
+            'last_notification' => 'required|date',
+            'camion_id' => 'required|exists:camions,id',
+            "days_count" => "required|numeric",
             "description" => "nullable"
         ]);
 
@@ -92,14 +93,14 @@ class PapierController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'sometimes|required|string|max:255',
-            'date_debut' => 'sometimes|required|date',
-            'date_fin' => 'sometimes|required|date|after_or_equal:date_debut', // Ensures date_fin is after or equal to date_debut
-            'camion_id' => 'sometimes|required|exists:camions,id', // Ensure camion_id exists in camions table
-            'description' => 'sometimes|', // Ensure camion_id exists in camions table
+            'camion_id' => 'sometimes|required|exists:camions,id',
+            "days_count" => "required|numeric",
+            'last_notification' => 'required|date',
+            'description' => 'sometimes',
         ]);
-        Cache::forget('papier_count');
         $papier->update($validatedData);
-        return redirect()->route('papiers.index')->with('success', 'papier added with success');
+        Cache::forget('papier_count');
+        return redirect()->route('papiers.index')->with('success', 'papier update with success');
     }
 
     /**
@@ -112,6 +113,6 @@ class PapierController extends Controller
     {
         $papier->delete();
         Cache::forget('papier_count');
-        return redirect()->route('papiers.index')->with('success', 'papier added with success');
+        return redirect()->route('papiers.index')->with('success', 'papier deeted with success');
     }
 }

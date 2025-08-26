@@ -7,12 +7,15 @@ use Livewire\Component;
 
 class Chaufeur extends Component
 {
-    function mount()
+    public $chaufeur;
+    public $datedebut;
+    public $datefin;
+
+    public function mount()
     {
         $this->datedebut = date('Y-m-d');
         $this->datefin = date('Y-m-d');
     }
-    public $chaufeur, $datedebut, $datefin;
     public function render()
     {
         return view('livewire.statistiques.chaufeur', [

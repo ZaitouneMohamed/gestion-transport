@@ -7,7 +7,14 @@ use Livewire\Component;
 
 class Bons extends Component
 {
-    public $date , $numero;
+    public $date;
+    public $numero;
+
+    public function mount()
+    {
+        $this->date = date('Y-m-d');
+    }
+
     public function render()
     {
         return view('livewire.statistiques.bons', [
@@ -17,9 +24,5 @@ class Bons extends Component
                 // ->where('date', $this->date)
                 ->get()
         ]);
-    }
-    function mount()
-    {
-        $this->date = date('Y-m-d');
     }
 }

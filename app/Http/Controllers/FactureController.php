@@ -14,7 +14,7 @@ class FactureController extends Controller
      */
     public function index(Request $request)
     {
-        $query = facture::orderBy('date', 'desc');
+        $query = facture::orderBy('date', 'desc')->with(['station:id,name']);
 
         if ($request->has('date')) {
             $date = $request->input('date');

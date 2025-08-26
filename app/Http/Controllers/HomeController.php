@@ -103,13 +103,13 @@ class HomeController extends Controller
             $query->whereBetween('date', [$currentMonthStart, $currentMonthEnd]);
         }])->get();
 
-        $nearestPapiers = Papier::where('date_fin', '>=', Carbon::today())
-            ->orderBy('date_fin')
+        $nearestPapiers = Papier::orderBy('last_notification')
+            ->with('Camion')
             ->get();
 
-        $nearestFourPapiersToEnd = Papier::where('date_fin', '>=', Carbon::today())
-            ->orderBy('date_fin')
+        $nearestFourPapiersToEnd = Papier::orderBy('date_fin')
             ->take(4)
+            ->with('Camion')
             ->get();
 
 

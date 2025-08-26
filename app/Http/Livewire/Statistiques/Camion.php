@@ -7,12 +7,15 @@ use Livewire\Component;
 
 class Camion extends Component
 {
-    function mount()
+    public $camion;
+    public $datedebut;
+    public $datefin;
+
+    public function mount()
     {
         $this->datedebut = date('Y-m-d');
         $this->datefin = date('Y-m-d');
     }
-    public $camion , $datedebut , $datefin;
     public function render()
     {
         return view('livewire.statistiques.camion', [
