@@ -1,9 +1,12 @@
 @extends('gazole.layouts.master')
 
 @section('content')
-    <div x-data="{ page: 'chaufeur' }">
+    <div x-data="{ page: 'all' }">
         <br>
         <div class="row">
+            <div class="col-md-2    ">
+                <button class="btn btn-primary" x-on:click="page = 'all'">all</button>
+            </div>
             <div class="col-md-2">
                 <button class="btn btn-primary" x-on:click="page = 'chaufeur'">chauffeur</button>
             </div>
@@ -22,6 +25,9 @@
             <div class="col-md-2">
                 <button class="btn btn-primary" x-on:click="page = 'mission'">mission</button>
             </div>
+        </div>
+        <div x-show="page === 'all'" x-transition>
+            <livewire:statistiques.all />
         </div>
         <div x-show="page === 'chaufeur'" x-transition>
             <livewire:statistiques.chaufeur />

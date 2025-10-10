@@ -3,42 +3,128 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Date d'échéance à venir</title>
+    <title>Alertes de papiers en cours d'expiration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007BFF;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .header img {
+            max-height: 40px;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .content h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .papier {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007BFF;
+            margin-bottom: 20px;
+        }
+
+        .papier h3 {
+            margin: 0 0 5px;
+            color: #007BFF;
+        }
+
+        .papier p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .content, .footer {
+                padding: 20px;
+            }
+
+            .papier p {
+                font-size: 13px;
+            }
+        }
+    </style>
 </head>
 
-<body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+<body>
 
-    <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4; padding: 20px 0;">
-        <tr>
-            <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-                    <tr>
-                        <td style="padding: 30px;">
-                            <h2 style="color:#333333; margin-bottom: 10px;">📅 Date d'échéance à venir</h2>
-                            <p style="margin: 0 0 20px; font-size: 16px; color: #555;">Bonjour {{ $username ?? 'Utilisateur' }},</p>
+    <div class="container">
+        <div class="header">
+            {{-- Optional logo --}}
+            <!-- <img src="{{ asset('logo.png') }}" alt="Logo"> -->
+            <h1>🔔 Rappel de papiers</h1>
+        </div>
 
-                            <p style="font-size: 16px; color: #555;">Le papier suivant est bientôt dû :</p>
+        <div class="content">
+            <p>Bonjour {{ $user ?? 'Utilisateur' }},</p>
+            <p>Voici la liste des papiers dont la date d'échéance est proche :</p>
 
-                            <div style="padding: 15px; background-color: #f9f9f9; border-left: 4px solid #007BFF; margin-bottom: 20px;">
-                                <h3 style="margin: 0 0 5px; color: #007BFF;">{{ $papier->title }}</h3>
-                                <p style="margin: 0; font-size: 14px;"><strong>📌 Date d'échéance :</strong> {{ $papier->target_date->format('j F, Y') }}</p>
-                            </div>
+            @foreach ($papiers as $papier)
+                @php
+                    $dueDate = \Carbon\Carbon::parse($papier->last_notification)->addDays($papier->days_count)->format('d F Y');
+                @endphp
+                <div class="papier">
+                    <h3>📄 {{ $papier->title }}</h3>
+                    <p><strong>📅 Date d'échéance :</strong> <span style="color: #c0392b;">{{ $dueDate }}</span></p>
+                    <p><strong>🚚 Camion :</strong> {{ $papier->camion->matricule ?? 'Non spécifié' }}</p>
+                </div>
+            @endforeach
 
-                            <p style="font-size: 15px; color: #555;">Veuillez vous assurer de le compléter avant la date limite.</p>
+            <a href="{{ url('/') }}" class="cta-button">Accéder à la plateforme</a>
 
-                            <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+            <p style="margin-top: 30px;">Merci de prendre les mesures nécessaires avant la date limite.</p>
+        </div>
 
-                            <p style="font-size: 13px; color: #999; text-align: center;">
-                                Merci !<br>
-                                {{ env('APP_NAME') }}
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+        <div class="footer">
+            Merci !<br>
+            {{ config('app.name') }}<br>
+            <small>Ce message a été envoyé automatiquement. Ne pas répondre à cet email.</small>
+        </div>
+    </div>
 
 </body>
 

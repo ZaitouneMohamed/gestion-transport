@@ -35,13 +35,10 @@
             </div>
 
             <div class="col-6">
-                <label for="inputAddress" class="form-label">Days count</label>
-                <input type="number" min="1" value="{{ old('days_count', $papier->days_count ) }}"
-                       name="days_count" class="form-control" id="days_count"
-                       placeholder="insert the number as days not month : 3 month insert it like 90 (days) just number ">
+                <label for="inputAddress" class="form-label">Date fin</label>
+                <input type="date" value="{{ old('date_fin' , $papier->date_fin) }}" name="date_fin" required id="date_fin" class="form-control">
             </div>
 
-            <p id="calculatedDate" class="mt-2 text-success fw-bold text-center"></p>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">description</label>
                 <textarea class="form-control" id="body" placeholder="Enter the Description" name="description">{{ $papier->description }}</textarea>
@@ -65,35 +62,6 @@
         .catch(error => {
             console.error(error);
         });
-
-    // Script to calculate and display the future date dynamically
-    document.addEventListener('DOMContentLoaded', function() {
-        const lastNotificationInput = document.getElementById('last_notification');
-        const daysCountInput = document.getElementById('days_count');
-        const resultElement = document.getElementById('calculatedDate');
-
-        function calculateDate() {
-            const dateValue = lastNotificationInput.value;
-            const days = parseInt(daysCountInput.value);
-
-            if (dateValue && !isNaN(days)) {
-                let selectedDate = new Date(dateValue);
-                selectedDate.setDate(selectedDate.getDate() + days);
-
-                const formattedDate = selectedDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
-                resultElement.textContent = `Date after ${days} days: ${formattedDate}`;
-            } else {
-                resultElement.textContent = '';
-            }
-        }
-
-        // Listen to changes in both fields
-        lastNotificationInput.addEventListener('change', calculateDate);
-        daysCountInput.addEventListener('input', calculateDate);
-
-        // Calculate initially when editing (prefilled values)
-        calculateDate();
-    });
 </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

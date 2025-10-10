@@ -14,6 +14,7 @@ use App\Models\Station;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,13 +28,17 @@ class HomeController extends Controller
 
     public function Home()
     {
-        $results = Station::join('factures as f', 'stations.id', '=', 'f.station_id')
-            ->select('stations.name', DB::raw('COUNT(f.id) as total_factures'), DB::raw('SUM(f.prix) as total_prix'))
-            ->whereMonth('f.date', now()->month)
-            ->whereYear('f.date', now()->year)
-            ->groupBy('stations.id', 'stations.name')
-            ->get();
+        // In tinker or a new migration
+   Papier::all()->each(function ($papier) {
+       if ( $papier->date_fin) {
+           $dateDebut = Carbon::parse($papier->date_debut);
+           $dateFin = Carbon::parse($papier->date_fin);
 
+           $papier->days_count = $dateFin->diffInDays($dateDebut, false);
+           $papier->last_notification = $papier->date_debut;
+           $papier->save();
+       }
+   });
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
@@ -55,11 +60,9 @@ class HomeController extends Controller
             ->groupBy('stations.id', 'stations.name')
             ->get();
 
-
         foreach ($results as $result) {
             $result->percentage_prix = $total_factures_current_month > 0 ? ($result->total_prix / $total_factures_current_month) * 100 : 0;
         }
-
 
         $results_2 = facture::select(
             DB::raw('YEAR(date) AS year'),
@@ -72,50 +75,87 @@ class HomeController extends Controller
             ->groupBy(DB::raw('YEAR(date), MONTH(date)'))
             ->get();
 
-        $chaufeursWithSumStatues = Chaufeur::with(['consomations' => function ($query) {
-            $query->whereMonth('date', now()->month)
-                ->whereYear('date', now()->year)
-                ->where('status', 1);
-        }])
-            ->where('statue', 1)
-            ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
-            ->get();
-        // Calculate the sum of statues for each Chauffeur in PHP
+        $chaufeursWithSumStatues = \App\Models\Chaufeur::with([
+            'consomations' => function ($query) {
+                $query->whereMonth('date', now()->month)
+                    ->whereYear('date', now()->year)
+                    ->where('status', 1)
+                    ->with([
+                        'bons' => function ($q) {
+                            $q->where('nature', 'gazole')->orderBy('id');
+                        },
+                        'camion'
+                    ]);
+            }
+        ])
+        ->where('statue', 1)
+        ->whereNotIn('full_name', ['YOUCEF STATION', 'M.SAYAH', 'HAKIM'])
+        ->get();
+
+        // Add sum_statues per chauffeur
         $chaufeursWithSumStatues->each(function ($chauffeur) {
             $chauffeur->sum_statues = $chauffeur->consomations->sum(function ($consomation) {
-                return $consomation->getStatueAttribute();
+                if (isset($consomation->calculated_values['statue'])) {
+                    $statue = $consomation->calculated_values['statue'];
+                } else {
+                    $bons = $consomation->bons;
+
+                    if ($bons->count() < 2) return 0;
+
+                    $firstBon = $bons->first();
+                    $lastBon = $bons->last();
+
+                    if (!$firstBon->km || !$lastBon->km) return 0;
+
+                    $kmTotal = $lastBon->km - $firstBon->km;
+                    $qtyLittre = $bons->sum('qte_litre') - $firstBon->qte_litre;
+
+                    if (!$qtyLittre || !$kmTotal || $kmTotal <= 0) return 0;
+
+                    $taux = $qtyLittre / $kmTotal * 100;
+
+                    $camion = $consomation->camion;
+
+                    if (!$camion || !$camion->consommation) return 0;
+
+                    $statue = $taux - $camion->consommation;
+                }
+
+                $statue = round($statue, 2);
+                $consomation->calculated_statue = $statue;
+
+                return $statue;
             });
         });
 
-        // Order the collection by sum_statues in ascending order
-        $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues');
+        // ✅ Sort by smallest to largest sum_statues
+        $chaufeursWithSumStatues = $chaufeursWithSumStatues->sortBy('sum_statues')->values();
 
 
-        $currentMonth = Carbon::now()->month;
+                $currentMonthStart = Carbon::now()->startOfMonth();
 
 
-        // Get the start and end dates of the current month
-        $currentMonthStart = Carbon::now()->startOfMonth();
-        $currentMonthEnd = Carbon::now()->endOfMonth();
+                $currentMonthEnd = Carbon::now()->endOfMonth();
 
-        // Retrieve stations with factures for the current month
-        $stationsData = Station::with(['factures' => function ($query) use ($currentMonthStart, $currentMonthEnd) {
-            $query->whereBetween('date', [$currentMonthStart, $currentMonthEnd]);
-        }])->get();
+            $stationsData = Station::withSum(['factures as factures_prix_sum' => function ($query) use ($currentMonthStart, $currentMonthEnd) {
+                $query->whereBetween('date', [$currentMonthStart, $currentMonthEnd]);
+            }],'prix')->get();
 
-        $nearestPapiers = Papier::orderBy('last_notification')
-            ->with('Camion')
-            ->get();
+            $nearestPapiers = Cache::remember('nearest_papiers', 60 * 24, function () {
+                return Papier::orderBy('date_fin')
+                    ->with('Camion:id,matricule')
+                    ->get();
+            });
 
-        $nearestFourPapiersToEnd = Papier::orderBy('date_fin')
-            ->take(4)
-            ->with('Camion')
-            ->get();
+            $nearestFourPapiersToEnd = Cache::remember('nearest_four_papiers_to_end', 60 * 24, function () {
+                return Papier::orderBy('date_fin')
+                    ->take(4)
+                    ->with('Camion:id,matricule')
+                    ->get();
+            });
 
-
-
-        return view('gazole.index', compact("results", "nearestFourPapiersToEnd", "nearestPapiers", "results_2", "chaufeursWithSumStatues",  "stationsData"));
-    }
+            return view('gazole.index', compact("results", "nearestFourPapiersToEnd", "nearestPapiers", "results_2", "chaufeursWithSumStatues", "stationsData"));
+        }
 
     public function SuiviGazoleParChaufeur($id)
     {
@@ -241,7 +281,7 @@ class HomeController extends Controller
             'reparation_id' => "required",
             'camion_id' => "required",
             'chaufeur_id' => "required",
-            'prix' => "required",
+            'prix' => "required|numeric",
             'date' => "required",
             'nature' => "required",
             'type_id' => "required",

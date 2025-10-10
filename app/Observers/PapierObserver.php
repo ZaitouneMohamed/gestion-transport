@@ -13,7 +13,7 @@ final class PapierObserver
      */
     public function creating(Papier $papier): void
     {
-        $this->calculateDateFin($papier);
+        $this->calculateDaysCount($papier);
     }
 
     /**
@@ -22,16 +22,21 @@ final class PapierObserver
     public function updating(Papier $papier): void
     {
         Log::info('Updating Papier: ', $papier->toArray());
-        $this->calculateDateFin($papier);
+        $this->calculateDaysCount($papier);
     }
 
     /**
-     * Calculate date_fin based on last_notification + days_count.
+     * Calculate days_count based on difference between date_fin and last_notification.
      */
-    protected function calculateDateFin(Papier $papier): void
+    protected function calculateDaysCount(Papier $papier): void
     {
-        if (!empty($papier->last_notification) && !empty($papier->days_count)) {
-            $papier->date_fin = Carbon::parse($papier->last_notification)->addDays( intval($papier->days_count))->format('Y-m-d');
+        if (!empty($papier->last_notification) && !empty($papier->date_fin)) {
+            $lastNotification = Carbon::parse($papier->last_notification);
+            $dateFin = Carbon::parse($papier->date_fin);
+
+            // This gives signed difference (negative if date_fin is before last_notification)
+            $papier->days_count = $lastNotification->diffInDays($dateFin, false);
         }
     }
 }
+

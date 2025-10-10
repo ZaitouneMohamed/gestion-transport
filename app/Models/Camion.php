@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Camion extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         "matricule",
         "statue",

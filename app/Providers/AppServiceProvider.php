@@ -9,6 +9,7 @@ use App\Models\Papier;
 use App\Models\Station;
 use App\Observers\PapierObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -82,5 +83,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('latest_notifications', $latest_notifications); // Send variable directly
         });
+        //Model::preventLazyLoading(!app()->isProduction());
+
     }
 }

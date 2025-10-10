@@ -1,5 +1,4 @@
 <?php
-
 use App\Models\Papier;
 use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
@@ -19,38 +18,27 @@ return new class extends Migration
             $table->integer("days_count")->nullable();
             $table->date('last_notification')->nullable();
         });
-         $data = Papier::all();
-        foreach ($data as $item) {
+
+        foreach (Papier::all() as $item) {
             $datedebut = Carbon::parse($item->date_debut);
             $datefin = Carbon::parse($item->date_fin);
 
             $diff = $datefin->diffInDays($datedebut);
 
-            $lasnNotif = null;
-
+            // Ensure that lastNotif is a Carbon instance
             if ($item->date_fin > Carbon::now()) {
-                $lastNotif = $item->date_debut;
-            } else{
-                $lastNotif = $item->date_fin;
+                $lastNotif = Carbon::parse($item->date_debut);
+            } else {
+                $lastNotif = Carbon::parse($item->date_fin);
             }
 
+            // Ensure nextNotif is a Carbon instance before using copy() and addDays()
+            $nextNotif = $lastNotif->copy()->addDays($diff);
+
             $item->update([
-                "days_count" => $diff * (-1),
-                "last_notification" => $lastNotif
+                "days_count" => $diff,
+                "last_notification" => $lastNotif,
             ]);
         }
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('papiers', function (Blueprint $table) {
-            $table->dropColumn("days_count");
-            $table->dropColumn("last_notification");
-        });
     }
 };

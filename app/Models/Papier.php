@@ -20,7 +20,6 @@ class Papier extends Model
     ];
 
     protected $casts = [
-        'date_fin' => 'datetime',
         'date_debut' => 'datetime', // If needed
     ];
 
@@ -29,23 +28,23 @@ class Papier extends Model
         return $this->belongsTo(Camion::class);
     }
 
-    public function getDaysUntilFinAttribute()
-    {
-        $last_notification = Carbon::parse($this->last_notification);
-        $daysCount = $this->days_count;
-        //
-        $targetDate = $last_notification->copy()->addDays($daysCount);
-
-        return $targetDate->diffForHumans(Carbon::today());
-    }
-
     public function getTargetDateAttribute()
     {
-        $last_notification = Carbon::parse($this->last_notification);
-        $daysCount = $this->days_count;
-        return $last_notification->copy()->addDays($daysCount);
+        if (!$this->last_notification) {
+            return null;
+        }
+
+        return Carbon::parse($this->last_notification);
     }
 
+    public function getDaysUntilFinAttribute()
+    {
+        if (!$this->target_date) {
+            return 'N/A';
+        }
+
+        return $this->target_date->diffForHumans(Carbon::today());
+    }
 
     public function getTargetDateFormattedAttribute()
     {

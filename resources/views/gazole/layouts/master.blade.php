@@ -12,11 +12,9 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- IonIcons -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Theme style -->
     @yield('head_links')
     @yield('style')
-    @livewireStyles
 
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
@@ -271,7 +269,6 @@
         <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
         <script src="{{ asset('adminlte/dist/js/pages/dashboard3.js') }}"></script>
         @yield('scripts')
-        @livewireScripts
 
 </body>
 

@@ -11,23 +11,13 @@ class PapierController extends Controller
 {
     public function index()
     {
-        $today = Carbon::today();
-
-        // Fetch papers with differences
         $data = Papier::with("Camion:id,matricule")
-            ->select('id', 'camion_id', 'last_notification' , 'days_count', 'title')
+            ->select('id', 'camion_id', 'last_notification', 'days_count', 'title')
             ->latest()
             ->paginate(10);
 
-        // Calculate the difference after pagination
-        $data->getCollection()->transform(function ($papier) use ($today) {
-            $papier->difference = $today->diffInDays($papier->date_fin, false);
-            return $papier;
-        });
-
         return view("gazole.camion.papiers.index", compact('data'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,8 +39,8 @@ class PapierController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'last_notification' => 'required|date',
+            "date_fin" => "required|date|after:last_notification",
             'camion_id' => 'required|exists:camions,id',
-            "days_count" => "required|numeric",
             "description" => "nullable"
         ]);
 
@@ -94,7 +84,7 @@ class PapierController extends Controller
         $validatedData = $request->validate([
             'title' => 'sometimes|required|string|max:255',
             'camion_id' => 'sometimes|required|exists:camions,id',
-            "days_count" => "required|numeric",
+            "date_fin" => "required|date|after:last_notification",
             'last_notification' => 'required|date',
             'description' => 'sometimes',
         ]);

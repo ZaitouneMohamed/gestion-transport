@@ -134,7 +134,7 @@
                                     @endphp
                                     <td>
                                         @if ($item->sum_statues < 0)
-                                            <span class="badge bg-success">{{ $item->sum_statues }}</span>
+                                            <span class="badge bg-success">{{ $item->sum_statues * -1 }}</span>
                                         @else
                                             <span class="badge bg-danger">{{ $item->sum_statues }}</span>
                                         @endif
@@ -157,22 +157,19 @@
                     </thead>
                     <tbody>
                         @foreach ($stationsData as $item)
-
                             <tr>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->factures->sum('prix') }}</td>
+                                <td>{{ $item->factures_prix_sum ?? 0 }}</td>
                                 <td>
-                                    @if ($item->factures->sum('prix') > $item->solde)
-                                        <span
-                                            class="badge bg-danger">{{ $item->factures->sum('prix') > $item->solde }}</span>
+                                    @if (($item->factures_prix_sum ?? 0) > $item->solde)
+                                        <span class="badge bg-danger">{{ ($item->factures_prix_sum ?? 0) - $item->solde }}</span>
                                     @else
-                                        <span
-                                            class="badge bg-success">{{ $item->solde - $item->factures->sum('prix') }}</span>
+                                        <span class="badge bg-success">{{ $item->solde - ($item->factures_prix_sum ?? 0) }}</span>
                                     @endif
                                 </td>
                             </tr>
-
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
