@@ -10,8 +10,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('papiers', function (Blueprint $table) {
-           // $table->integer("days_count")->nullable();
-           // $table->date('last_notification')->nullable();
+           $table->integer("days_count")->nullable();
+           $table->date('last_notification')->nullable();
         });
 
         $today = Carbon::today();
