@@ -81,6 +81,7 @@
                     <!-- ./col -->
                 </div>
                 <!-- /.row -->
+                <!-- /.row -->
                 <h5 class="mt-4 mb-2">4 papiers near to end</h5>
                 <div class="row">
                     @forelse ($nearestFourPapiersToEnd as $item)
@@ -90,14 +91,46 @@
                                     <span class="info-box-text">{{ $item->Camion->matricule }}</span>
                                     <span class="info-box-number">{{ $item->title }}</span>
                                     <div class="progress">
-                                    </div> <span class="progress-description">
-                                        {{ $item->days_until_fin }}
+                                        @php
+                                            $daysUntil = $item->days_until_next_notification;
+                                            // Calculate progress percentage (assuming 365 days cycle)
+                                            $totalDays = $item->days_count ?? 365;
+                                            $daysPassed = $totalDays - ($daysUntil ?? 0);
+                                            $percentage = $totalDays > 0 ? min(100, max(0, ($daysPassed / $totalDays) * 100)) : 0;
+
+                                            // Determine progress bar color based on days remaining
+                                            if ($daysUntil <= 10) {
+                                                $progressColor = 'bg-danger';
+                                            } elseif ($daysUntil <= 30) {
+                                                $progressColor = 'bg-warning';
+                                            } else {
+                                                $progressColor = 'bg-success';
+                                            }
+                                        @endphp
+                                        <div class="progress-bar {{ $progressColor }}" style="width: {{ $percentage }}%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        @if($daysUntil === null)
+                                            N/A
+                                        @elseif($daysUntil < 0)
+                                            {{ abs($daysUntil) }} days overdue
+                                        @elseif($daysUntil == 0)
+                                            Due today!
+                                        @elseif($daysUntil == 1)
+                                            Due tomorrow
+                                        @else
+                                            {{ $daysUntil }} days remaining
+                                        @endif
                                     </span>
                                 </div> <!-- /.info-box-content -->
                             </div> <!-- /.info-box -->
                         </div>
                     @empty
-                        No Papier Found
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                No Papiers Found
+                            </div>
+                        </div>
                     @endforelse
                 </div> <!--end::Row-->
             </div><!-- /.container-fluid -->
@@ -174,25 +207,87 @@
                 </table>
             </div>
             <div class="col-lg-6 col-6">
-                {{-- <div id="piechart" style="height: 400px;"></div> --}}
-                <table class="table table-striped table-valign-middle">
-                    <thead>
-                        <tr>
-                            <th>Camion</th>
-                            <th>Papier</th>
-                            <th>Difference</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($nearestPapiers as $item)
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Papiers Status</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
                             <tr>
-                                <td>{{ $item->Camion->matricule }}</td>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->days_until_fin }}</td>
+                                <th>Camion</th>
+                                <th>Papier</th>
+                                <th>Status</th>
+                                <th>Days</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                            @forelse ($nearestPapiers as $item)
+                                @php
+                                    $daysUntil = $item->days_until_next_notification;
+
+                                    // Determine badge color
+                                    if ($daysUntil === null) {
+                                        $badgeClass = 'badge-secondary';
+                                        $statusText = 'N/A';
+                                    } elseif ($daysUntil < 0) {
+                                        $badgeClass = 'badge-danger';
+                                        $statusText = 'Overdue';
+                                    } elseif ($daysUntil == 0) {
+                                        $badgeClass = 'badge-danger';
+                                        $statusText = 'Due Today';
+                                    } elseif ($daysUntil <= 10) {
+                                        $badgeClass = 'badge-warning';
+                                        $statusText = 'Urgent';
+                                    } elseif ($daysUntil <= 30) {
+                                        $badgeClass = 'badge-info';
+                                        $statusText = 'Soon';
+                                    } else {
+                                        $badgeClass = 'badge-success';
+                                        $statusText = 'OK';
+                                    }
+                                @endphp
+                                <tr>
+                                    <td>
+                                        <strong>{{ $item->Camion->matricule }}</strong>
+                                    </td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>
+                                        <span class="badge {{ $badgeClass }}">{{ $statusText }}</span>
+                                    </td>
+                                    <td>
+                                        @if($daysUntil === null)
+                                            <span class="text-muted">N/A</span>
+                                        @elseif($daysUntil < 0)
+                                            <span class="text-danger">
+                                        <i class="fas fa-exclamation-triangle"></i> {{ abs($daysUntil) }} days overdue
+                                    </span>
+                                        @elseif($daysUntil == 0)
+                                            <span class="text-danger">
+                                        <i class="fas fa-bell"></i> Today
+                                    </span>
+                                        @elseif($daysUntil == 1)
+                                            <span class="text-warning">
+                                        <i class="fas fa-clock"></i> Tomorrow
+                                    </span>
+                                        @else
+                                            <span class="text-{{ $daysUntil <= 10 ? 'warning' : 'success' }}">
+                                        {{ $daysUntil }} days
+                                    </span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">
+                                        <i class="fas fa-info-circle"></i> No Papiers Found
+                                    </td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="col-lg6 col-6">
                 <div id="barchart_values" style="width: 900px; height: 300px;"></div>

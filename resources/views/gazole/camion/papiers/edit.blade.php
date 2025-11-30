@@ -30,13 +30,22 @@
 
             <div class="col-6">
                 <label for="inputAddress" class="form-label">date last used</label>
-                <input type="date" value="{{ old('last_notification', $papier->last_notification ) }}"
-                       name="last_notification" class="form-control" id="last_notification">
+                <input type="date"
+                    name="last_notification"
+                    class="form-control"
+                    id="last_notification"
+                    value="{{ old('last_notification', optional($papier->last_notification)->format('Y-m-d')) }}">
+
             </div>
 
             <div class="col-6">
                 <label for="inputAddress" class="form-label">Date fin</label>
-                <input type="date" value="{{ old('date_fin' , $papier->date_fin) }}" name="date_fin" required id="date_fin" class="form-control">
+                <input type="date"
+                    name="date_fin"
+                    class="form-control"
+                    id="date_fin"
+                    required
+                    value="{{ old('date_fin', optional($papier->date_fin)->format('Y-m-d')) }}">
             </div>
 
             <div class="col-12">

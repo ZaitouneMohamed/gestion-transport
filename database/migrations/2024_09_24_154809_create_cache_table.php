@@ -25,15 +25,4 @@ return new class extends Migration
             $table->integer('expiration');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('cache');
-        Schema::dropIfExists('cache_locks');
-    }
 };

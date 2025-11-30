@@ -16,11 +16,14 @@ class Papier extends Model
         "camion_id",
         "days_count",
         "last_notification",
-        "date_fin"
+        "date_fin",
+        "date_debut"
     ];
 
     protected $casts = [
-        'date_debut' => 'datetime', // If needed
+        'date_debut' => 'datetime',
+        'date_fin' => 'datetime',
+        'last_notification' => 'datetime',
     ];
 
     public function Camion()
@@ -28,28 +31,28 @@ class Papier extends Model
         return $this->belongsTo(Camion::class);
     }
 
-    public function getTargetDateAttribute()
+    /**
+     * Get formatted date_fin for display
+     */
+    public function getTargetDateFormattedAttribute()
     {
-        if (!$this->last_notification) {
-            return null;
-        }
-
-        return Carbon::parse($this->last_notification);
-    }
-
-    public function getDaysUntilFinAttribute()
-    {
-        if (!$this->target_date) {
+        if (!$this->date_fin) {
             return 'N/A';
         }
 
-        return $this->target_date->diffForHumans(Carbon::today());
+        return $this->date_fin->format('Y-m-d');
     }
 
-    public function getTargetDateFormattedAttribute()
+    /**
+     * Get days until date_fin (always positive since date_fin is rolled forward)
+     */
+    public function getDaysUntilNextNotificationAttribute()
     {
-        return $this->target_date?->format('Y-m-d'); // or any other format
+        if (!$this->date_fin) {
+            return null;
+        }
+
+        $today = Carbon::today();
+        return $today->diffInDays($this->date_fin, false);
     }
-
-
 }

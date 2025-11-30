@@ -78,6 +78,37 @@ class AppServiceProvider extends ServiceProvider
             ];
             $view->with('Counts', $Counts);
         });
+        // Papier Statistics for Index Page
+        View::composer('gazole.camion.papiers.index', function ($view) {
+            $papierStats = Cache::remember('papier_statistics', 60 * 24, function () {
+                $today = Carbon::today();
+
+                $allPapiers = Papier::whereNotNull('date_fin')
+                    ->whereNotNull('days_count')
+                    ->get();
+
+                $urgent = $allPapiers->filter(function ($item) use ($today) {
+                    $daysUntil = $item->days_until_next_notification;
+                    return $daysUntil !== null && $daysUntil >= 0 && $daysUntil <= 10;
+                })->count();
+
+                $overdue = $allPapiers->filter(function ($item) {
+                    $daysUntil = $item->days_until_next_notification;
+                    return $daysUntil !== null && $daysUntil < 0;
+                })->count();
+
+                $total = Papier::count();
+
+                return [
+                    'total' => $total,
+                    'urgent' => $urgent,
+                    'overdue' => $overdue,
+                    'upToDate' => $total - $urgent - $overdue,
+                ];
+            });
+
+            $view->with('papierStats', $papierStats);
+        });
         View::composer('components.notifications', function ($view) {
             $latest_notifications = Auth::user()->notifications()->latest()->take(10)->get(); // Adjust limit as per your requirement
 

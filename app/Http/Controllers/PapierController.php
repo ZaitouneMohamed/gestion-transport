@@ -12,7 +12,6 @@ class PapierController extends Controller
     public function index()
     {
         $data = Papier::with("Camion:id,matricule")
-            ->select('id', 'camion_id', 'last_notification', 'days_count', 'title')
             ->latest()
             ->paginate(10);
 

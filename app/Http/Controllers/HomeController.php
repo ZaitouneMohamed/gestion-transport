@@ -142,16 +142,24 @@ class HomeController extends Controller
             }],'prix')->get();
 
             $nearestPapiers = Cache::remember('nearest_papiers', 60 * 24, function () {
-                return Papier::orderBy('date_fin')
+                return Papier::whereNotNull('date_fin')
+                    ->whereNotNull('days_count')
+                    ->orderBy('date_fin', 'asc')
                     ->with('Camion:id,matricule')
                     ->get();
             });
-
             $nearestFourPapiersToEnd = Cache::remember('nearest_four_papiers_to_end', 60 * 24, function () {
-                return Papier::orderBy('date_fin')
-                    ->take(4)
+                $today = Carbon::today();
+
+                return Papier::whereNotNull('date_fin')
+                    ->whereNotNull('days_count')
                     ->with('Camion:id,matricule')
-                    ->get();
+                    ->get()
+                    ->sortBy(function ($papier) use ($today) {
+                        // Sort by days remaining (ascending)
+                        return $today->diffInDays($papier->date_fin, false);
+                    })
+                    ->take(4);
             });
 
             return view('gazole.index', compact("results", "nearestFourPapiersToEnd", "nearestPapiers", "results_2", "chaufeursWithSumStatues", "stationsData"));
