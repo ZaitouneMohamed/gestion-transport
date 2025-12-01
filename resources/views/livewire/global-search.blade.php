@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <label for="inputState" class="form-label">Chaufeur</label>
-            <select id="inputState" wire:model="chaufeur" class="form-select">
+            <select id="inputState" wire:model.live="chaufeur" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Chaufeur::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->full_name }}</option>
@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-4">
             <label for="inputState" class="form-label">Camion</label>
-            <select id="inputState" wire:model="camion" class="form-select">
+            <select id="inputState" wire:model.live="camion" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Camion::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->matricule }}</option>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-4">
             <label for="inputState" class="form-label">ville</label>
-            <select wire:model="destination" class="form-select">
+            <select wire:model.live="destination" class="form-select">
                 <option value=""></option>
                 <option value="Agadir">Agadir</option>
                 <option value="Al Hoceima">Al Hoceima</option>
@@ -65,11 +65,11 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     <table class="table">

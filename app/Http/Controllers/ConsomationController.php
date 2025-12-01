@@ -96,6 +96,10 @@ class ConsomationController extends Controller
         ];
     }
 
+    public function create()
+    {
+        return view('gazole.consomation.create');
+    }
     /**
      * Store a newly created resource in storage.
      */

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <label for="inputState" class="form-label">ville</label>
-            <select name="ville" wire:model="ville" class="form-select">
+            <select name="ville" wire:model.live="ville" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Ville::all() as $item)
                     <option value="{{ $item->name }}">{{ $item->name }}</option>
@@ -12,11 +12,11 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     <div wire:loading>

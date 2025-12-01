@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Factures;
 
-use App\Exports\FactureExport;
 use App\Models\facture;
 use Livewire\Component;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Search extends Component
 {

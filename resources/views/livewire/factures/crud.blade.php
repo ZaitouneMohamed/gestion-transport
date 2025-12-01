@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">N bon</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" wire:model="n_bon"
+                <input type="text" class="form-control" id="exampleInputEmail1" wire:model.live="n_bon"
                     aria-describedby="emailHelp">
                 @error('n_bon')
                     <span class="text text-danger">{{ $message }}</span>
@@ -17,7 +17,7 @@
             </div>
             <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">date</label>
-                <input type="date" class="form-control" id="exampleInputEmail1" wire:model="date"
+                <input type="date" class="form-control" id="exampleInputEmail1" wire:model.live="date"
                     aria-describedby="emailHelp">
                 @error('date')
                     <span class="text text-danger">{{ $message }}</span>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">station</label>
-                <select wire:model="station_id" id="citySelect"class="form-select">
+                <select wire:model.live="station_id" id="citySelect"class="form-select">
                     <option>shoose</option>
                     @foreach (\App\Models\Station::all() as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">total</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" wire:model="prix"
+                <input type="text" class="form-control" id="exampleInputEmail1" wire:model.live="prix"
                     aria-describedby="emailHelp">
                 @error('prix')
                     <span class="text text-danger">{{ $message }}</span>
@@ -52,7 +52,7 @@
         @endif
     </form>
     <br><br>
-    <input type="date" name="" wire:model="dateFilter" id="">
+    <input type="date" name="" wire:model.live.live="dateFilter" id="">
     <button wire:click="search" class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
     <table class="table">
         <thead>

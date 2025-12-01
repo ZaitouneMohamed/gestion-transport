@@ -3,11 +3,11 @@
     <div class="row">
         {{-- <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="date" class="form-control" id="">
+            <input type="date" wire:model.live="date" class="form-control" id="">
         </div> --}}
         <div class="col-6">
             <label for="inputState" class="form-label">numero</label>
-            <input type="text" wire:model="numero" class="form-control" id="">
+            <input type="text" wire:model.live="numero" class="form-control" id="">
         </div>
     </div><br>
     <div wire:loading>

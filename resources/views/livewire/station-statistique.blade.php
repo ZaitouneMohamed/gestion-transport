@@ -2,8 +2,8 @@
     <h1 class="text text-center">statistiques of Station</h1>
     <div class="row">
         <div class="col">
-            {{-- <input type="number" name="" wire:model="camion" id=""> --}}
-            <select wire:model="station" class="form-select" aria-label="Default select example">
+            {{-- <input type="number" name="" wire:model.live="camion" id=""> --}}
+            <select wire:model.live="station" class="form-select" aria-label="Default select example">
                     <option></option>
                 @foreach (\App\Models\Station::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -11,10 +11,10 @@
             </select>
         </div>
         <div class="col">
-            <input type="date" class="form-control" wire:model="date_debut">
+            <input type="date" class="form-control" wire:model.live="date_debut">
         </div>
         <div class="col">
-            <input type="date" class="form-control" wire:model="date_fin" >
+            <input type="date" class="form-control" wire:model.live="date_fin" >
         </div>
     </div>
 

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-12">
             <label for="inputState" class="form-label">Camion</label>
-            <select id="inputState" wire:model="camion" class="form-select">
+            <select id="inputState" wire:model.live="camion" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Camion::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->matricule }}</option>
@@ -12,20 +12,20 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     @if ($camion && $datedebut && $datefin)
         <form action="{{ route('excel.ExportCamionSearch') }}" method="post">
             @csrf
             @method('POST')
-            <input type="hidden" name="date_debut" wire:model="datedebut">
-            <input type="hidden" name="date_fin" wire:model="datefin">
-            <input type="hidden" name="camion_id" wire:model="camion">
+            <input type="hidden" name="date_debut" wire:model.live="datedebut">
+            <input type="hidden" name="date_fin" wire:model.live="datefin">
+            <input type="hidden" name="camion_id" wire:model.live="camion">
             <button class="btn btn-success">excel</button>
         </form>
     @endif

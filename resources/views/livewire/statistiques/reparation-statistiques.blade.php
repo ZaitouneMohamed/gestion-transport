@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     <div wire:loading>

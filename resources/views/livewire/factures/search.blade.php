@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6">
             <label for="inputState" class="form-label">Station</label>
-            <select id="inputState" wire:model="station" class="form-select">
+            <select id="inputState" wire:model.live="station" class="form-select">
                 <option value=""></option>
                 @foreach (\App\Models\Station::all() as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-6">
             <label for="inputType" class="form-label">Type</label>
-            <select id="inputType" wire:model="type" class="form-select">
+            <select id="inputType" wire:model.live="type" class="form-select">
                 <option></option>
                 <option value="0">facture</option>
                 <option value="1">Espéce</option>
@@ -22,11 +22,11 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     <div wire:loading>
@@ -40,9 +40,9 @@
             <form action="{{ route('excel.exportFacture') }}" method="POST">
                 @csrf
                 @method('POST')
-                <input type="hidden" name="datedebut" wire:model="datedebut">
-                <input type="hidden" name="datefin" wire:model="datefin">
-                <input type="hidden" name="station" wire:model="station">
+                <input type="hidden" name="datedebut" wire:model.live="datedebut">
+                <input type="hidden" name="datefin" wire:model.live="datefin">
+                <input type="hidden" name="station" wire:model.live="station">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>

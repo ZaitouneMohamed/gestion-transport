@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <label for="inputState" class="form-label">Type</label>
-            <select wire:model="type" id="" class="form-control">
+            <select wire:model.live="type" id="" class="form-control">
                 <option value="0">facture</option>
                 <option value="1">Espéce</option>
                 <option value="2">Caisse</option>
@@ -12,11 +12,11 @@
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Debut</label>
-            <input type="date" wire:model="datedebut" class="form-control" id="">
+            <input type="date" wire:model.live="datedebut" class="form-control" id="">
         </div>
         <div class="col-6">
             <label for="inputState" class="form-label">Date Fin</label>
-            <input type="date" wire:model="datefin" class="form-control" id="">
+            <input type="date" wire:model.live="datefin" class="form-control" id="">
         </div>
     </div><br>
     <div wire:loading>
@@ -30,8 +30,8 @@
             <form action="{{ route('excel.exportFactureTotalGenerale') }}" method="POST">
                 @csrf
                 @method('POST')
-                <input type="hidden" name="datedebut" wire:model="datedebut">
-                <input type="hidden" name="datefin" wire:model="datefin">
+                <input type="hidden" name="datedebut" wire:model.live="datedebut">
+                <input type="hidden" name="datefin" wire:model.live="datefin">
                 <input type="submit" value="submit" class="btn btn-success">
             </form>
         </div>
