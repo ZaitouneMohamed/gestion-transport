@@ -104,13 +104,26 @@
             <p>Voici la liste des papiers dont la date d'échéance est proche :</p>
 
             @foreach ($papiers as $papier)
-                @php
-                    $dueDate = \Carbon\Carbon::parse($papier->last_notification)->addDays($papier->days_count)->format('d F Y');
-                @endphp
                 <div class="papier">
                     <h3>📄 {{ $papier->title }}</h3>
-                    <p><strong>📅 Date d'échéance :</strong> <span style="color: #c0392b;">{{ $dueDate }}</span></p>
+                    <p><strong>📅 Date d'échéance :</strong> <span style="color: #c0392b;">{{ $papier->date_fin->format('d F Y') }}</span></p>
                     <p><strong>🚚 Camion :</strong> {{ $papier->camion->matricule ?? 'Non spécifié' }}</p>
+
+                    @php
+                        $daysRemaining = $papier->days_until_next_notification;
+                    @endphp
+
+                    @if($daysRemaining === null)
+                        <span class="days-remaining">ℹ️ Date non disponible</span>
+                    @elseif($daysRemaining < 0)
+                        <span class="days-remaining overdue">⚠️ En retard de {{ abs($daysRemaining) }} jour(s)</span>
+                    @elseif($daysRemaining == 0)
+                        <span class="days-remaining overdue">⚠️ Expire aujourd'hui !</span>
+                    @elseif($daysRemaining == 1)
+                        <span class="days-remaining">⏰ Expire demain</span>
+                    @else
+                        <span class="days-remaining">⏰ {{ $daysRemaining }} jour(s) restant(s)</span>
+                    @endif
                 </div>
             @endforeach
 
