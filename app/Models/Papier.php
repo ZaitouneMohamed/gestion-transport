@@ -48,11 +48,16 @@ class Papier extends Model
      */
     public function getDaysUntilNextNotificationAttribute()
     {
-        if (!$this->date_fin) {
+        try {
+            if (!$this->date_fin) {
+                return null;
+            }
+
+            return Carbon::today()->diffInDays($this->date_fin, false);
+
+        } catch (\Exception $e) {
             return null;
         }
-
-        $today = Carbon::today();
-        return $today->diffInDays($this->date_fin, false);
     }
+
 }

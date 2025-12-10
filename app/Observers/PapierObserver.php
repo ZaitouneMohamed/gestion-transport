@@ -21,7 +21,6 @@ final class PapierObserver
      */
     public function updating(Papier $papier): void
     {
-        Log::info('Updating Papier: ', $papier->toArray());
         $this->calculateDaysCount($papier);
     }
 

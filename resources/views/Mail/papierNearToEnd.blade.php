@@ -94,8 +94,6 @@
 
     <div class="container">
         <div class="header">
-            {{-- Optional logo --}}
-            <!-- <img src="{{ asset('logo.png') }}" alt="Logo"> -->
             <h1>🔔 Rappel de papiers</h1>
         </div>
 
@@ -107,7 +105,7 @@
                 <div class="papier">
                     <h3>📄 {{ $papier->title }}</h3>
                     <p><strong>📅 Date d'échéance :</strong> <span style="color: #c0392b;">{{ $papier->date_fin->format('d F Y') }}</span></p>
-                    <p><strong>🚚 Camion :</strong> {{ $papier->camion->matricule ?? 'Non spécifié' }}</p>
+                    <p><strong>🚚 Camion :</strong> {{ optional($papier->camion)->matricule ?? 'Non spécifié' }}</p>
 
                     @php
                         $daysRemaining = $papier->days_until_next_notification;
