@@ -8,6 +8,7 @@ use App\Models\Consomation;
 use App\Models\Ville;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class ConsomationController extends Controller
 {
@@ -32,6 +33,8 @@ class ConsomationController extends Controller
         if ($request->has('date')) {
             $date = $request->input('date');
             $query->where('date', $date);
+        }else {
+            $query->whereYear('created_at', Carbon::now()->year);
         }
 
         $consomations = $query->paginate(15);
