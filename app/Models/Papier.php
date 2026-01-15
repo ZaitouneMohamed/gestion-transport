@@ -17,7 +17,6 @@ class Papier extends Model
         "days_count",
         "last_notification",
         "date_fin",
-        "date_debut"
     ];
 
     protected $casts = [

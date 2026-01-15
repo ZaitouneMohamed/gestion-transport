@@ -33,8 +33,7 @@ final class PapierObserver
             $lastNotification = Carbon::parse($papier->last_notification);
             $dateFin = Carbon::parse($papier->date_fin);
 
-            // This gives signed difference (negative if date_fin is before last_notification)
-            $papier->days_count = $lastNotification->diffInDays($dateFin, false);
+            $papier->days_count = $lastNotification->diffInDays($dateFin);
         }
     }
 }
