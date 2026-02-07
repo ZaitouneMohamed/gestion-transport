@@ -107,7 +107,7 @@
                                 @endif
                             </td>
                             <td>
-                                {{ $item->date->format('Y-m-d') }}
+                                {{ $item->date ? $item->date->format('Y-m-d') : 'N/A' }}
                             </td>
                             <td>
                                 <div class="d-flex gap-1">
