@@ -34,7 +34,7 @@ class ConsomationController extends Controller
             $date = $request->input('date');
             $query->where('date', $date);
         }else {
-            $query->whereYear('created_at', Carbon::now()->year);
+            $query->where('created_at', '>=', Carbon::now()->subDays(30));
         }
 
         $consomations = $query->paginate(15);
