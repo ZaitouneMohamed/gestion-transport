@@ -51,13 +51,15 @@ class FactureController extends Controller
             'prix' => 'required',
             'station_id' => 'required',
             'n_bon' => 'required|unique:factures,n_bon',
+            'km' => 'nullable|integer'
         ]);
-        $facture = facture::create([
+        facture::create([
             "date" => $request->date,
             "prix" => $request->prix,
             "station_id" => $request->station_id,
             "n_bon" => $request->n_bon,
             "type" => $request->type,
+            "km" => $request->km
         ]);
         return redirect()->route('factures.index')->with([
             "success" => "facture added with success"
@@ -101,6 +103,7 @@ class FactureController extends Controller
             'prix' => 'required',
             'station_id' => 'required',
             'n_bon' => 'required',
+            'km' => 'nullable|integer'
         ]);
         $facture = facture::find($id);
         $facture->update([
@@ -109,6 +112,7 @@ class FactureController extends Controller
             "station_id" => $request->station_id,
             "n_bon" => $request->n_bon,
             "type" => $request->type,
+            "km" => $request->km,
         ]);
         return redirect()->route('factures.index')->with([
             "success" => "facture updated with success"

@@ -15,6 +15,7 @@ class facture extends Model
         "station_id",
         "type",
         "n_bon",
+        "km"
     ];
 
     public function Station()

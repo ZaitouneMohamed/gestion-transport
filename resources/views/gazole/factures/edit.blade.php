@@ -38,10 +38,16 @@
                 </select>
             </div>
             <div class="col-6">
+                <label for="exampleInputEmail1" class="form-label">km</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="km" value="{{ $facture->km }}"
+                    aria-describedby="emailHelp">
+            </div>
+            <div class="col-6">
                 <label for="exampleInputEmail1" class="form-label">total</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" name="prix"
                     value="{{ $facture->prix }}" aria-describedby="emailHelp">
-            </div><br><br><br><br>
+            </div>
+            <br><br><br><br>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

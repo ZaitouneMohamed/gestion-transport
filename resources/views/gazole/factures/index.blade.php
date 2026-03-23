@@ -29,6 +29,11 @@
                         @endforeach
                     </select>
                 </div>
+                 <div class="col-6">
+                    <label for="exampleInputEmail1" class="form-label">km</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="km"
+                        aria-describedby="emailHelp">
+                </div>
                 <div class="col-6">
                     <label for="exampleInputEmail1" class="form-label">total</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="prix"
@@ -60,6 +65,7 @@
                     <th scope="col">numero bon</th>
                     <th scope="col">station</th>
                     <th scope="col">prix</th>
+                    <th scope="col">km</th>
                     <th scope="col">type</th>
                     <th scope="col">action</th>
                 </tr>
@@ -72,6 +78,7 @@
                         <td>{{ $item->n_bon }}</td>
                         <td>{{ $item->station->name }}</td>
                         <td>{{ $item->prix }}</td>
+                        <td>{{ $item->km }}</td>
                         <td>
                             @if ($item->type == 0)
                                 facture
